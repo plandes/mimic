@@ -1,0 +1,10 @@
+zensols.mimic package
+=====================
+
+Module contents
+---------------
+
+.. automodule:: zensols.mimic
+   :members:
+   :undoc-members:
+   :show-inheritance:
