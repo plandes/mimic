@@ -6,7 +6,12 @@
 [![Python 3.9][python39-badge]][python39-link]
 [![Build Status][build-badge]][build-link]
 
-A utility library for parsing the MIMIC III corpus.
+A utility library for parsing the [MIMIC-III] corpus.  This uses [spaCy] and
+extends the [zensols.mednlp] to parse the [MIMIC-III] medical note dataset,
+which include:
+* Re-groups pseudo tokens as a single token.
+* Modifies the [spaCy] tokenizer to deal with pseudo tokens--specifically not
+  break on syntax used in the pseudo tokens.
 
 
 ## Documentation
@@ -50,3 +55,7 @@ Copyright (c) 2022 Paul Landes
 [python39-link]: https://www.python.org/downloads/release/python-390
 [build-badge]: https://github.com/plandes/mimic/workflows/CI/badge.svg
 [build-link]: https://github.com/plandes/mimic/actions
+
+[MIMIC-III]: https://physionet.org/content/mimiciii-demo/1.4/
+[spaCy]: https://spacy.io
+[zensols.mednlp]: https://github.com/plandes/mednlp
