@@ -1,1 +1,1 @@
-zensols.nlp~=1.0.0
+zensols.nlp~=1.1.0
