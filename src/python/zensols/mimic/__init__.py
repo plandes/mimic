@@ -8,7 +8,6 @@ from dataclasses import dataclass, field
 import re
 from spacy.language import Language
 from spacy.lang.char_classes import ALPHA
-from spacy.symbols import ORTH
 from spacy.util import compile_infix_regex
 from spacy.tokens import Token
 from zensols.nlp import Component, SpacyFeatureTokenDecorator, FeatureToken
