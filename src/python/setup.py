@@ -10,5 +10,5 @@ su = SetupUtil(
     user='plandes',
     project='mimic',
     keywords=['tooling'],
-    has_entry_points=False,
+    # has_entry_points=False,
 ).setup()

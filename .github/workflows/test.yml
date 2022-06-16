@@ -29,9 +29,6 @@ jobs:
       - name: Display Python version
         run: python -c "import sys; print(sys.version)"
 
-      - name: Build dependencies
-        run: python -m pip install plac
-
       - name: Prepare tests
         run: 'make info deps'
 
