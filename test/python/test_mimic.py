@@ -2,7 +2,7 @@ import unittest
 from zensols.config import ImportIniConfig, ImportConfigFactory
 from zensols.nlp import FeatureDocument, FeatureToken
 
-FeatureToken.WRITABLE_FEATURE_IDS = list(FeatureToken.WRITABLE_FEATURE_IDS) + ['mimic_']
+FeatureToken.WRITABLE_FEATURE_IDS = tuple(list(FeatureToken.WRITABLE_FEATURE_IDS) + ['mimic_'])
 
 
 class TestParser(unittest.TestCase):
