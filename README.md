@@ -1,9 +1,8 @@
 # MIMIC III Corpus Parsing
 
 [![PyPI][pypi-badge]][pypi-link]
-[![Python 3.7][python37-badge]][python37-link]
-[![Python 3.8][python38-badge]][python38-link]
 [![Python 3.9][python39-badge]][python39-link]
+[![Python 3.10][python310-badge]][python310-link]
 [![Build Status][build-badge]][build-link]
 
 A utility library for parsing the [MIMIC-III] corpus.  This uses [spaCy] and
@@ -58,12 +57,10 @@ Copyright (c) 2022 Paul Landes
 [pypi]: https://pypi.org/project/zensols.mimic/
 [pypi-link]: https://pypi.python.org/pypi/zensols.mimic
 [pypi-badge]: https://img.shields.io/pypi/v/zensols.mimic.svg
-[python37-badge]: https://img.shields.io/badge/python-3.7-blue.svg
-[python37-link]: https://www.python.org/downloads/release/python-370
-[python38-badge]: https://img.shields.io/badge/python-3.8-blue.svg
-[python38-link]: https://www.python.org/downloads/release/python-380
 [python39-badge]: https://img.shields.io/badge/python-3.9-blue.svg
 [python39-link]: https://www.python.org/downloads/release/python-390
+[python310-badge]: https://img.shields.io/badge/python-3.10-blue.svg
+[python310-link]: https://www.python.org/downloads/release/python-3100
 [build-badge]: https://github.com/plandes/mimic/workflows/CI/badge.svg
 [build-link]: https://github.com/plandes/mimic/actions
 
