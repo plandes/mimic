@@ -8,6 +8,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 
 
+## [0.1.1] - 2022-10-02
+### Changed
+- Upgrade dependencies.
+
+
 ## [0.1.0] - 2022-10-01
 Significant feature release.
 
@@ -27,7 +32,8 @@ Significant feature release.
 
 
 <!-- links -->
-[Unreleased]: https://github.com/plandes/mimic/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/plandes/mimic/compare/v0.1.1...HEAD
+[0.1.1]: https://github.com/plandes/mimic/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/plandes/mimic/compare/v0.0.1...v0.1.0
 [0.0.1]: https://github.com/plandes/mimic/compare/v0.0.0...v0.0.1
 
