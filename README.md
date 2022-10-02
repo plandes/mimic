@@ -9,6 +9,7 @@
 A utility library for parsing the [MIMIC-III] corpus.  This uses [spaCy] and
 extends the [zensols.mednlp] to parse the [MIMIC-III] medical note dataset,
 which include:
+
 * Re-groups pseudo tokens as a single token.
 * Modifies the [spaCy] tokenizer to deal with pseudo tokens--specifically not
   break on syntax used in the pseudo tokens.
@@ -29,6 +30,16 @@ pip3 install zensols.mimic
 ```
 
 Binaries are also available on [pypi].
+
+
+## Installation
+
+1. Install the package: `pip3 install zensols.mimic`
+2. Install the database (either Postgres, which is tested, or SQLite).  For
+   Postgres, load MIMIC-III by following the [Postgres instructions].  An
+   SQLite database file can also be used, but it has not been tested and it
+   might need more configuration (resource library) work.  Refer to the [SQLite
+   instructions] to create the file if you chose to try this method.
 
 
 ## Changelog
@@ -59,3 +70,6 @@ Copyright (c) 2022 Paul Landes
 [MIMIC-III]: https://physionet.org/content/mimiciii-demo/1.4/
 [spaCy]: https://spacy.io
 [zensols.mednlp]: https://github.com/plandes/mednlp
+
+[SQLite instructions]: https://github.com/MIT-LCP/mimic-code/tree/main/mimic-iii/buildmimic/sqlite
+[Postgres instructions]: https://github.com/MIT-LCP/mimic-code/blob/main/mimic-iii/buildmimic/postgres/README.md

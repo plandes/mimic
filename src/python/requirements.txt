@@ -1,1 +1,2 @@
-zensols.nlp~=1.2.0
+zensols.mednlp~=0.1.0
+zensols.dbutilpg~=0.1.0

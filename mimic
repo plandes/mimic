@@ -2,11 +2,13 @@
 
 from zensols.cli import CliHarness
 
+# command line entry point
 if (__name__ == '__main__'):
     harness = CliHarness(
         src_dir_name='src/python',
-        package_resource='zensols.mimic',
+        app_factory_class='zensols.mimic.ApplicationFactory',
+        # prototyping arguments
         proto_args='proto',
-        proto_factory_kwargs={'reload_pattern': r'^zensols.mimic'},
+        proto_factory_kwargs={'reload_pattern': r'^zensols.mimic.(?:app)'},
     )
     harness.run()

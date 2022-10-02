@@ -1,0 +1,23 @@
+table,description
+cptevents,Procedures recorded as Current Procedural Terminology (CPT) codes.
+d_cpt,High level dictionary of Current Procedural Terminology (CPT) codes.
+d_icd_diagnoses,Dictionary of International Statistical Classification of Diseases and Related Health Problems (ICD-9) codes relating to diagnoses.
+d_icd_procedures,Dictionary of International Statistical Classification of Diseases and Related Health Problems (ICD-9) codes relating to procedures.
+d_items,"Dictionary of local codes (’ITEMIDs’) appearing in the MIMIC database, except those that relate to laboratory tests."
+d_labitems,Dictionary of local codes (’ITEMIDs’) appearing in the MIMIC database that relate to laboratory tests.
+datetimeevents,"All recorded observations which are dates, for example time of dialysis or insertion of lines."
+diagnoses_icd,"Hospital assigned diagnoses, coded using the International Statistical Classification of Diseases and Related Health Problems (ICD) system."
+drgcodes,"Diagnosis Related Groups (DRG), which are used by the hospital for billing purposes."
+icustays,Every unique ICU stay in the database (defines ICUSTAY_ID).
+inputevents_cv,"Intake for patients monitored using the Philips CareVue system while in the ICU, e.g., intravenous medications, enteral feeding, etc."
+inputevents_mv,"Intake for patients monitored using the iMDSoft MetaVision system while in the ICU, e.g., intravenous medications, enteral feeding, etc."
+outputevents,Output information for patients while in the ICU.
+labevents,Laboratory measurements for patients both within the hospital and in outpatient clinics.
+microbiologyevents,Microbiology culture results and antibiotic sensitivities from the hospital database.
+noteevents,"Deidentified notes, including nursing and physician notes, ECG reports, radiology reports, and discharge summaries."
+patients,Every unique patient in the database (defines SUBJECT_ID).
+prescriptions,Medications ordered for a given patient.
+procedureevents_mv,Patient procedures for the subset of patients who were monitored in the ICU using the iMDSoft MetaVision system.
+procedures_icd,"Patient procedures, coded using the International Statistical Classification of Diseases and Related Health Problems (ICD) system."
+services,The clinical service under which a patient is registered.
+transfers,"Patient movement from bed to bed within the hospital, including ICU admission and discharge."
