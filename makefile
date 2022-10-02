@@ -5,7 +5,7 @@
 # type of project
 PROJ_TYPE =		python
 PROJ_MODULES =		git python-resources python-cli python-doc python-doc-deploy
-PY_DEP_POST_DEPS +=	modeldeps
+#PY_DEP_POST_DEPS +=	modeldeps
 ADD_CLEAN +=		feature.csv data
 CLEAN_DEPS +=		example-clean
 
