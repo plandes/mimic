@@ -1,8 +1,15 @@
 import unittest
+import warnings
 from zensols.config import ImportIniConfig, ImportConfigFactory
 from zensols.nlp import FeatureDocument, FeatureToken
 
 FeatureToken.WRITABLE_FEATURE_IDS = tuple(list(FeatureToken.WRITABLE_FEATURE_IDS) + ['mimic_'])
+
+
+with warnings.catch_warnings():
+    warnings.simplefilter('ignore', DeprecationWarning)
+    import gensim.matutils
+    import transformers.image_utils
 
 
 class TestParser(unittest.TestCase):
