@@ -1,2 +1,2 @@
-zensols.mednlp~=0.1.0
+zensols.mednlp~=0.1.1
 zensols.dbpg~=0.1.0
