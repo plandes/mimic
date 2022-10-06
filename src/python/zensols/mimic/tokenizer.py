@@ -71,7 +71,7 @@ class MimicTokenDecorator(SpacyFeatureTokenDecorator):
     """The value name of separators defined by :obj:`SEP_REGEX`.
 
     """
-    SEP_REGEX: ClassVar[re.Pattern] = re.compile(r'(_{5,}|[*]{5,})')
+    SEP_REGEX: ClassVar[re.Pattern] = re.compile(r'(_{5,}|[*]{5,}|[-]{5,})')
     """Matches text based separators such as a long string of dashes."""
 
     UNKNOWN_ENTITY: ClassVar[str] = '<UNKNOWN>'
