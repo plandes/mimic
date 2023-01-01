@@ -219,7 +219,7 @@ class Section(PersistableContainer, Dictable):
                     self.write_sentences(depth + 1, writer, par, sent_limit)
 
     def __str__(self):
-        return f'{self.id}: body_len={len(self.body)}'
+        return f'{self.name} ({self.id}): body_len={len(self.body)}'
 
 
 @dataclass
