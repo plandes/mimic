@@ -571,7 +571,23 @@ class NoteFactory(object):
             ne_params.update(params)
         return self.config_factory.new_instance(section, **ne_params)
 
-    def __call__(self, note_event: NoteEvent) -> Note:
-        section = self.category_to_note.get(note_event.category)
-        section = self.mimic_default_note_section if section is None else section
+    def create(self, note_event: NoteEvent, section: str = None) -> Note:
+        """Create a new factory based instance of a :class:`.Note` from a
+        :class:`.NoteEvent`.
+
+        :param note_event: the source data
+
+        :param section: the configuration section to use to create the new note,
+                        which is one of the regular expression based sections or
+                        :obj:`mimic_default_note_section` for a :class:`.Note`
+
+        """
+        if section is None:
+            section = self.category_to_note.get(note_event.category)
+        if section is None:
+            section = self.mimic_default_note_section
         return self._event_to_note(note_event, section)
+
+    def __call__(self, note_event: NoteEvent, section: str = None) -> Note:
+        """See :meth:`.create`."""
+        return self.create(note_event, section)
