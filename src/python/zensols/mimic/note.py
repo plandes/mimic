@@ -294,7 +294,9 @@ class SectionContainer(Dictable, metaclass=ABCMeta):
 
     def write_human(self, depth: int = 0, writer: TextIOBase = sys.stdout,
                     normalize: bool = False):
-        """Generates a human readable version of the annotation.
+        """Generates a human readable version of the annotation.  This calls the
+        following methods in order: :meth:`write_fields` and
+        :meth:`write_sections`.
 
         :param depth: the starting indentation depth
 
@@ -309,6 +311,16 @@ class SectionContainer(Dictable, metaclass=ABCMeta):
 
     def write_sections(self, depth: int = 0, writer: TextIOBase = sys.stdout,
                        normalize: bool = False):
+        """Writes the sections of the container.
+
+        :param depth: the starting indentation depth
+
+        :param writer: the writer to dump the content of this writable
+
+        :param normalize: whether to use the paragraphs' normalized
+                          (:obj:~zensols.nlp.TokenContainer.norm`) or text
+
+        """
         for sec in self.sections.values():
             header = ' '.join(sec.headers)
             div_text: str = f'{sec.id}:{sec.name}'
