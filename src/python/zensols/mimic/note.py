@@ -335,6 +335,33 @@ class SectionContainer(Dictable, metaclass=ABCMeta):
             elif len(sec.body) > 0:
                 self._write_block(sec.body, depth, writer)
 
+    def write_markdown(self, depth: int = 0, writer: TextIOBase = sys.stdout,
+                       normalize: bool = False):
+        """Generates markdown version of the annotation.
+
+        :param depth: the starting indentation depth
+
+        :param writer: the writer to dump the content of this writable
+
+        :param normalize: whether to use the paragraphs' normalized
+                          (:obj:~zensols.nlp.TokenContainer.norm`) or text
+
+        """
+        self._write_line(f'# {self.category} ({self.row_id})', depth, writer)
+        for sec in self.sections.values():
+            header = ' '.join(sec.headers)
+            self._write_empty(writer)
+            self._write_empty(writer)
+            self._write_line(f'## {header}', depth, writer)
+            self._write_empty(writer)
+            if normalize:
+                for i, para in enumerate(sec.paragraphs):
+                    if i > 0:
+                        self._write_empty(writer)
+                    self._write_wrap(para.norm, depth, writer)
+            elif len(sec.body) > 0:
+                self._write_block(sec.body, depth, writer)
+
     def write(self, depth: int = 0, writer: TextIOBase = sys.stdout):
         self.write_human(depth, writer)
 
