@@ -1,3 +1,4 @@
 {"includes": {"named": ["numpy", "pandas", "torch", "zensols.nlp", "zensols.util"],
 	      "mapped": [["zensols.deepnlp", "{url}/deepnlp/"],
-			 ["zensols.dbutil", "{url}/dbutil/"]]}}
+			 ["zensols.dbutil", "{url}/dbutil/"],
+			 ["zensols.mednlp", "{url}/mednlp/"]]}}
