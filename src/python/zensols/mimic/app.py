@@ -69,7 +69,7 @@ class Application(object):
         """Clear the all cached admission and note parses."""
         self.corpus.clear()
 
-    def write_discharge(self, hadm_id: str = '119960'):
+    def write_discharge(self, hadm_id: str):
         """Write a discharge summary.
 
         :param hadm_id: the hospital admission ID
@@ -82,7 +82,7 @@ class Application(object):
             adm = stash[str(hadm_id)]
         adm.write()
 
-    def write_note(self, row_id: str = '1092611'):
+    def write_note(self, row_id: str):
         """Write a note.
 
         :param row_id: the unique note identifier in the NOTEEVENTS table
@@ -99,7 +99,7 @@ class Application(object):
         """
         self.corpus.write_note_event_by_categories(note_limit=note_limit)
 
-    def write_note_categories(self, hadm_id: str = '119960'):
+    def write_note_categories(self, hadm_id: str):
         """Write note categories of an admission.
 
         :param hadm_id: the hospital admission ID
@@ -110,8 +110,7 @@ class Application(object):
         for note in adm:
             print(f'{note.row_id},{note.category}')
 
-    def unmatched_tokens(self, hadm_id: str = '119960',
-                         no_ents: bool = False):
+    def unmatched_tokens(self, hadm_id: str, no_ents: bool = False):
         """Find all unmatched tokens for an admission.
 
         :param hadm_id: the hospital admission ID
