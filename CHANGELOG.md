@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+### Changed
+- Updated [zensols.mednlp] to 1.0.0.
+
 
 ## [0.1.1] - 2022-10-02
 ### Changed
