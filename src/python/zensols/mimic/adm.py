@@ -265,6 +265,11 @@ class HospitalAdmission(PersistableContainer, Dictable):
 
 @dataclass
 class HospitalAdmissionDbStash(ReadOnlyStash):
+    """A stash that creates :class:`.HospitalAdmission` instances.  This
+    instance is used by caching stashes per the default resource library
+    configuration for this package.
+
+    """
     config_factory: ConfigFactory = field()
     """The factory used to create domain objects (ie hospital admission).
 
