@@ -432,6 +432,7 @@ class Note(NoteEvent, SectionContainer):
                 sec.write(depth + 3, writer,
                           id_name=False,
                           body_line_limit=section_line_limit,
+                          norm_line_limit=section_line_limit,
                           sent_limit=section_sent_limit)
                 self._write_divider(depth + 3, writer)
         self._write_divider(depth, writer, '=')
