@@ -373,11 +373,63 @@ class SectionContainer(Dictable, metaclass=ABCMeta):
             elif len(sec.body) > 0:
                 self._write_block(sec.body, depth, writer)
 
+    def __getitem__(self, id: int):
+        return self.sections[id]
+
     def write(self, depth: int = 0, writer: TextIOBase = sys.stdout):
         self.write_human(depth, writer)
 
-    def __getitem__(self, id: int):
-        return self.sections[id]
+    def write_full(self, depth: int = 0, writer: TextIOBase = sys.stdout,
+                   note_line_limit: int = sys.maxsize,
+                   section_line_limit: int = sys.maxsize,
+                   section_sent_limit: int = sys.maxsize,
+                   include_section_header: bool = True,
+                   sections: Set[str] = None,
+                   include_fields: bool = True,
+                   include_note_divider: bool = True,
+                   include_section_divider: bool = True):
+        """Write the custom parts of the note.
+
+        :param note_line_limit: the number of lines to write from the note text
+
+        :param section_line_limit: the number of line of the section's body and
+                                   number of sentences to output
+
+        :param par_limit: the number of paragraphs to output
+
+        :param sections: the sections, by name, to write
+
+        :param include_section_header: whether to include the header
+
+        :param include_fields: whether to write the note fields
+
+        :param include_note_divider: whether to write dividers between notes
+
+        :param include_section_divider: whether to write dividers between
+                                        sections
+
+        """
+        secs: Sequence[Section] = self.sections.values()
+        if sections is not None:
+            secs = tuple(filter(lambda s: s.name in sections, secs))
+        if len(secs) > 0:
+            self._write_line('sections:', depth + 1, writer)
+            sec: Section
+            for sec in secs:
+                aft: str = ''
+                if section_line_limit == 0 and include_section_header:
+                    aft = ':'
+                self._write_line(f'{sec.name}{aft}', depth + 2, writer)
+                sec.write(depth + 3, writer,
+                          include_id_name=False,
+                          body_line_limit=section_line_limit,
+                          norm_line_limit=section_line_limit,
+                          sent_limit=section_sent_limit,
+                          include_header=include_section_header)
+                if include_section_divider:
+                    self._write_divider(depth + 3, writer)
+        if include_note_divider:
+            self._write_divider(depth, writer, '=')
 
 
 @dataclass
@@ -417,51 +469,19 @@ class Note(NoteEvent, SectionContainer):
                    include_fields: bool = True,
                    include_note_divider: bool = True,
                    include_section_divider: bool = True):
-        """Write the custom parts of the note.
-
-        :param note_line_limit: the number of lines to write from the note text
-
-        :param section_line_limit: the number of line of the section's body and
-                                   number of sentences to output
-
-        :param par_limit: the number of paragraphs to output
-
-        :param sections: the sections, by name, to write
-
-        :param include_section_header: whether to include the header
-
-        :param include_fields: whether to write the note fields
-
-        :param include_note_divider: whether to write dividers between notes
-
-        :param include_section_divider: whether to write dividers between
-                                        sections
-
-        """
         super().write(depth, writer,
                       line_limit=note_line_limit,
                       include_fields=include_fields)
-        secs: Sequence[Section] = self.sections.values()
-        if sections is not None:
-            secs = tuple(filter(lambda s: s.name in sections, secs))
-        if len(secs) > 0:
-            self._write_line('sections:', depth + 1, writer)
-            sec: Section
-            for sec in secs:
-                aft: str = ''
-                if section_line_limit == 0 and include_section_header:
-                    aft = ':'
-                self._write_line(f'{sec.name}{aft}', depth + 2, writer)
-                sec.write(depth + 3, writer,
-                          include_id_name=False,
-                          body_line_limit=section_line_limit,
-                          norm_line_limit=section_line_limit,
-                          sent_limit=section_sent_limit,
-                          include_header=include_section_header)
-                if include_section_divider:
-                    self._write_divider(depth + 3, writer)
-        if include_note_divider:
-            self._write_divider(depth, writer, '=')
+        super().write_full(
+            depth, writer,
+            note_line_limit=note_line_limit,
+            section_line_limit=section_line_limit,
+            section_sent_limit=section_sent_limit,
+            include_section_header=include_section_header,
+            sections=sections,
+            include_fields=include_fields,
+            include_note_divider=include_note_divider,
+            include_section_divider=include_section_divider)
 
 
 @dataclass
