@@ -164,7 +164,7 @@ class HospitalAdmission(PersistableContainer, Dictable):
     def write_notes(self, depth: int = 0, writer: TextIOBase = sys.stdout,
                     note_limit: int = sys.maxsize,
                     note_line_limit: int = sys.maxsize,
-                    body_line_limit: int = sys.maxsize,
+                    section_line_limit: int = sys.maxsize,
                     sent_limit: int = sys.maxsize,
                     categories: Set[str] = None,
                     sections: Set[str] = None):
@@ -174,8 +174,8 @@ class HospitalAdmission(PersistableContainer, Dictable):
 
         :param note_line_limit: the number of lines to write from the note text
 
-        :param body_line_limit: the number of line of the section's body to
-                                output
+        :param section_line_limit: the number of line of the section's body to
+                                   output
 
         :param sent_limit: the number of section and admission note sentences to
                            output
@@ -192,7 +192,7 @@ class HospitalAdmission(PersistableContainer, Dictable):
         for note in it.islice(notes, note_limit):
             note.write_full(depth, writer,
                             note_line_limit=note_line_limit,
-                            section_line_limit=body_line_limit,
+                            section_line_limit=section_line_limit,
                             section_sent_limit=sent_limit,
                             sections=sections)
 
