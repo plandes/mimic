@@ -226,6 +226,11 @@ class HospitalAdmission(PersistableContainer, Dictable):
 
     def write_full(self, depth: int = 0, writer: TextIOBase = sys.stdout,
                    **kwargs):
+        """Write a verbose output of the admission.
+
+        :param kwargs: the keyword arguments given to meth:`write`
+
+        """
         wkwargs = dict(note_line_limit=sys.maxsize,
                        section_line_limit=sys.maxsize,
                        include_fields=True,
