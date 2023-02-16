@@ -3,17 +3,14 @@
 """
 __author__ = 'Paul Landes'
 
-from typing import Tuple
 from dataclasses import dataclass, field
 import logging
 import sys
-import re
 from pathlib import Path
-import shutil
 from io import TextIOBase
 from zensols.config import Dictable
 from . import (
-    NoteEvent, HospitalAdmission, HospitalAdmissionDbStash,
+    HospitalAdmission, HospitalAdmissionDbStash,
     PatientPersister, AdmissionPersister, DiagnosisPersister,
     NoteEventPersister,
 )
@@ -49,7 +46,8 @@ class Corpus(Dictable):
 
     """
     temporary_results_dir: Path = field()
-    """The path to create the output results."""
+    """The path to create the output results.  This is not used, but needs to
+    stay until the next :mod:`zensols.mimicsid` is retrained."""
 
     def __post_init__(self):
         # allow pass through method delegation from any configured cache
@@ -94,57 +92,6 @@ class Corpus(Dictable):
         fac: HospitalAdmissionDbStash = self.hospital_adm_stash
         hadm: HospitalAdmission = fac.get(hadm_id)
         hadm.write(depth, writer, note_line_limit=note_line_limit)
-
-    def write_note_event_by_categories(self, note_limit: int = 10):
-        """Write a certain number of notes across each category to directory
-        :obj:`temporary_results_dir`.  Each notes file is named by the
-        ``hadm_id`` field.
-
-        :param note_limit: the number of notes to write for each category.
-
-        """
-        np: NoteEventPersister = self.note_event_persister
-        tmpdir: Path = self.temporary_results_dir / 'by_category'
-        if tmpdir.exists():
-            shutil.rmtree(tmpdir)
-        tmpdir.mkdir(parents=True, exist_ok=True)
-        cat: str
-        ntevt_cnt = 0
-        for i, cat in enumerate(self.note_event_persister.categories):
-            ntevts: Tuple[NoteEvent] = np.get_notes_by_category(cat, note_limit)
-            name = re.sub(r'[ \t/_-]+', '-', cat).lower()
-            if name.endswith('-'):
-                name = name[0:-1]
-            for ntevt in ntevts:
-                path = tmpdir / f'{name}-{ntevt.hadm_id}.txt'
-                with open(path, 'w') as f:
-                    ntevt.write(writer=f)
-                if logger.isEnabledFor(logging.INFO):
-                    logger.info(f'wrote {len(ntevts)} ntevts to {path}')
-            ntevt_cnt += len(ntevts)
-        if logger.isEnabledFor(logging.INFO):
-            logger.info(f'wrote {ntevt_cnt} ntevts')
-
-    def write_discharge_reports(self, note_limit: int = 10):
-        """Format and write a certain number of discharge notes to the file
-        system.  These are written to the path configured with
-        :obj:`temporary_results_dir` in subdirectory ``discharge-reports``.
-
-        :param note_limit: the numbe
-
-        """
-        np: NoteEventPersister = self.note_event_persister
-        tmpdir: Path = self.temporary_results_dir / 'discharge-reports'
-        if tmpdir.exists():
-            shutil.rmtree(tmpdir)
-        tmpdir.mkdir(parents=True, exist_ok=True)
-        notes: Tuple[NoteEvent] = np.get_discharge_reports(note_limit)
-        for note in notes:
-            path = tmpdir / f'{note.hadm_id}.txt'
-            with open(path, 'w') as f:
-                note.write(writer=f)
-        if logger.isEnabledFor(logging.INFO):
-            logger.info(f'wrote {len(notes)} notes to {tmpdir}')
 
     def write(self, depth: int = 0, writer: TextIOBase = sys.stdout):
         n_notes: int = self.note_event_persister.get_count()
