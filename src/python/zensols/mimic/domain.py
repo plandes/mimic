@@ -404,7 +404,8 @@ class NoteEvent(MimicContainer):
 
     def write(self, depth: int = 0, writer: TextIOBase = sys.stdout,
               line_limit: int = sys.maxsize, write_divider: bool = True,
-              indent_fields: bool = True, note_indent: int = 1):
+              indent_fields: bool = True, note_indent: int = 1,
+              include_fields: bool = True):
         """Write the note event.
 
         :param line_limit: the number of lines to write from the note text
@@ -416,11 +417,12 @@ class NoteEvent(MimicContainer):
         :param note_indent: how many indentation to indent the note fields
 
         """
-        dct = self._writable_dict()
-        if indent_fields:
-            super().write(depth, writer, dct)
-        else:
-            self._write_object(dct, depth, writer)
+        if include_fields:
+            dct = self._writable_dict()
+            if indent_fields:
+                super().write(depth, writer, dct)
+            else:
+                self._write_object(dct, depth, writer)
         if line_limit is not None and line_limit > 0:
             text = '\n'.join(
                 filter(lambda s: len(s.strip()) > 0, self.text.split('\n')))

@@ -438,8 +438,9 @@ class Note(NoteEvent, SectionContainer):
                                         sections
 
         """
-        if include_fields:
-            super().write(depth, writer, line_limit=note_line_limit)
+        super().write(depth, writer,
+                      line_limit=note_line_limit,
+                      include_fields=include_fields)
         secs: Sequence[Section] = self.sections.values()
         if sections is not None:
             secs = tuple(filter(lambda s: s.name in sections, secs))
