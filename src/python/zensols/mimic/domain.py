@@ -405,6 +405,17 @@ class NoteEvent(MimicContainer):
     def write(self, depth: int = 0, writer: TextIOBase = sys.stdout,
               line_limit: int = sys.maxsize, write_divider: bool = True,
               indent_fields: bool = True, note_indent: int = 1):
+        """Write the note event.
+
+        :param line_limit: the number of lines to write from the note text
+
+        :param write_divider: whether to write a divider before the note text
+
+        :param indent_fields: whether to indent the fields of the note
+
+        :param note_indent: how many indentation to indent the note fields
+
+        """
         dct = self._writable_dict()
         if indent_fields:
             super().write(depth, writer, dct)

@@ -4,7 +4,9 @@ from __future__ import annotations
 """
 __author__ = 'Paul Landes'
 
-from typing import Dict, Iterable, Set, Tuple, List, Any, Optional, ClassVar
+from typing import (
+    Dict, Iterable, Set, Tuple, List, Any, Optional, ClassVar, Sequence
+)
 from dataclasses import dataclass, field, fields
 from abc import ABCMeta, abstractmethod
 import sys
@@ -186,7 +188,7 @@ class Section(PersistableContainer, Dictable):
     def write(self, depth: int = 0, writer: TextIOBase = sys.stdout,
               body_line_limit: int = sys.maxsize,
               norm_line_limit: int = sys.maxsize,
-              par_limit: int = 0, sent_limit: int = 0):
+              par_limit: int = 0, sent_limit: int = 0, id_name: bool = True):
         """Write a note section's name, original body, normalized body and
         sentences with respective sentence entities.
 
@@ -196,13 +198,17 @@ class Section(PersistableContainer, Dictable):
         :param norm_line_limit: the number of line of the section's normalized
                                 (parsed) body to output
 
-        :param sent_limit: the number of paragraphs to output
+        :param par_limit: the number of paragraphs to output
 
         :param sent_limit: the number of sentences to output
 
+        :param id_name: whether to write the section ID and name
+
         """
         header = ' '.join(self.headers)
-        self._write_line(f'id: {self.id}', depth, writer)
+        if id_name:
+            self._write_line(f'id: {self.id}', depth, writer)
+            self._write_line(f'name: {self.name}', depth, writer)
         self._write_line(f'headers: {header}', depth, writer)
         if not self.is_empty:
             if body_line_limit > 0:
@@ -402,15 +408,29 @@ class Note(NoteEvent, SectionContainer):
                    section_line_limit: int = sys.maxsize,
                    section_sent_limit: int = sys.maxsize,
                    sections: Set[str] = None):
+        """Write the custom parts of the note.
+
+        :param note_line_limit: the number of lines to write from the note text
+
+        :param section_line_limit: the number of line of the section's body and
+                                   number of sentences to output
+
+        :param par_limit: the number of paragraphs to output
+
+        :param sections: the sections, by name, to write
+
+        """
         super().write(depth, writer, line_limit=note_line_limit)
-        secs = tuple(filter(lambda s: sections is None or s[0] in sections,
-                            self.sections.items()))
+        secs: Sequence[Section] = self.sections.values()
+        if sections is not None:
+            secs = tuple(filter(lambda s: s.name in sections, secs))
         if len(secs) > 0:
             self._write_line('sections:', depth + 1, writer)
             sec: Section
-            for name, sec in secs:
-                self._write_line(f'{name}:', depth + 2, writer)
+            for sec in secs:
+                self._write_line(f'{sec.name}:', depth + 2, writer)
                 sec.write(depth + 3, writer,
+                          id_name=False,
                           body_line_limit=section_line_limit,
                           sent_limit=section_sent_limit)
                 self._write_divider(depth + 3, writer)

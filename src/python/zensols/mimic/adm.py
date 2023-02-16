@@ -168,6 +168,23 @@ class HospitalAdmission(PersistableContainer, Dictable):
                     sent_limit: int = sys.maxsize,
                     categories: Set[str] = None,
                     sections: Set[str] = None):
+        """Write the notes of the admission.
+
+        :param note_limit: the number of notes to write
+
+        :param note_line_limit: the number of lines to write from the note text
+
+        :param body_line_limit: the number of line of the section's body to
+                                output
+
+        :param sent_limit: the number of section and admission note sentences to
+                           output
+
+        :param categories: the note categories to write
+
+        :param sections: the sections, by name, to write
+
+        """
         notes = self.notes
         if categories is not None:
             notes = filter(lambda c: c.category in categories, notes)
@@ -181,6 +198,11 @@ class HospitalAdmission(PersistableContainer, Dictable):
 
     def write(self, depth: int = 0, writer: TextIOBase = sys.stdout,
               **note_kwargs):
+        """Write the admission and the notes of the admission.
+
+        :param note_kwargs: the keyword arguments gtiven to :meth:`write_notes`
+
+        """
         self._write_line(f'hadm_id: {self.admission.hadm_id}', depth, writer)
         self._write_line('admission:', depth + 1, writer)
         self._write_object(self.admission, depth + 2, writer)
