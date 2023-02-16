@@ -188,7 +188,9 @@ class Section(PersistableContainer, Dictable):
     def write(self, depth: int = 0, writer: TextIOBase = sys.stdout,
               body_line_limit: int = sys.maxsize,
               norm_line_limit: int = sys.maxsize,
-              par_limit: int = 0, sent_limit: int = 0, id_name: bool = True):
+              par_limit: int = 0, sent_limit: int = 0,
+              include_header: bool = True,
+              include_id_name: bool = True):
         """Write a note section's name, original body, normalized body and
         sentences with respective sentence entities.
 
@@ -202,14 +204,17 @@ class Section(PersistableContainer, Dictable):
 
         :param sent_limit: the number of sentences to output
 
-        :param id_name: whether to write the section ID and name
+        :param include_header: whether to include the header
+
+        :param include_id_name: whether to write the section ID and name
 
         """
         header = ' '.join(self.headers)
-        if id_name:
+        if include_id_name:
             self._write_line(f'id: {self.id}', depth, writer)
             self._write_line(f'name: {self.name}', depth, writer)
-        self._write_line(f'headers: {header}', depth, writer)
+        if include_header:
+            self._write_line(f'headers: {header}', depth, writer)
         if not self.is_empty:
             if body_line_limit > 0:
                 self._write_line('body:', depth, writer)
@@ -407,7 +412,11 @@ class Note(NoteEvent, SectionContainer):
                    note_line_limit: int = sys.maxsize,
                    section_line_limit: int = sys.maxsize,
                    section_sent_limit: int = sys.maxsize,
-                   sections: Set[str] = None):
+                   include_section_header: bool = True,
+                   sections: Set[str] = None,
+                   include_fields: bool = True,
+                   include_note_divider: bool = True,
+                   include_section_divider: bool = True):
         """Write the custom parts of the note.
 
         :param note_line_limit: the number of lines to write from the note text
@@ -419,8 +428,18 @@ class Note(NoteEvent, SectionContainer):
 
         :param sections: the sections, by name, to write
 
+        :param include_section_header: whether to include the header
+
+        :param include_fields: whether to write the note fields
+
+        :param include_note_divider: whether to write dividers between notes
+
+        :param include_section_divider: whether to write dividers between
+                                        sections
+
         """
-        super().write(depth, writer, line_limit=note_line_limit)
+        if include_fields:
+            super().write(depth, writer, line_limit=note_line_limit)
         secs: Sequence[Section] = self.sections.values()
         if sections is not None:
             secs = tuple(filter(lambda s: s.name in sections, secs))
@@ -428,14 +447,20 @@ class Note(NoteEvent, SectionContainer):
             self._write_line('sections:', depth + 1, writer)
             sec: Section
             for sec in secs:
-                self._write_line(f'{sec.name}:', depth + 2, writer)
+                aft: str = ''
+                if section_line_limit == 0 and include_section_header:
+                    aft = ':'
+                self._write_line(f'{sec.name}{aft}', depth + 2, writer)
                 sec.write(depth + 3, writer,
-                          id_name=False,
+                          include_id_name=False,
                           body_line_limit=section_line_limit,
                           norm_line_limit=section_line_limit,
-                          sent_limit=section_sent_limit)
-                self._write_divider(depth + 3, writer)
-        self._write_divider(depth, writer, '=')
+                          sent_limit=section_sent_limit,
+                          include_header=include_section_header)
+                if include_section_divider:
+                    self._write_divider(depth + 3, writer)
+        if include_note_divider:
+            self._write_divider(depth, writer, '=')
 
 
 @dataclass

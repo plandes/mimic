@@ -80,7 +80,7 @@ class Application(object):
             adm = next(iter(stash.values()))
         else:
             adm = stash[str(hadm_id)]
-        adm.write()
+        adm.write_full()
 
     def write_note(self, row_id: str):
         """Write a note.

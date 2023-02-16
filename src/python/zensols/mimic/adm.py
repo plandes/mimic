@@ -163,26 +163,17 @@ class HospitalAdmission(PersistableContainer, Dictable):
 
     def write_notes(self, depth: int = 0, writer: TextIOBase = sys.stdout,
                     note_limit: int = sys.maxsize,
-                    note_line_limit: int = sys.maxsize,
-                    section_line_limit: int = sys.maxsize,
-                    sent_limit: int = sys.maxsize,
                     categories: Set[str] = None,
-                    sections: Set[str] = None):
+                    include_row_ids: bool = False,
+                    **note_kwargs):
         """Write the notes of the admission.
 
         :param note_limit: the number of notes to write
 
-        :param note_line_limit: the number of lines to write from the note text
-
-        :param section_line_limit: the number of line of the section's body to
-                                   output
-
-        :param sent_limit: the number of section and admission note sentences to
-                           output
+        :param note_kwargs: the keyword arguments gtiven to
+                            :meth:`.Note.write_full`
 
         :param categories: the note categories to write
-
-        :param sections: the sections, by name, to write
 
         """
         notes = self.notes
@@ -190,30 +181,64 @@ class HospitalAdmission(PersistableContainer, Dictable):
             notes = filter(lambda c: c.category in categories, notes)
         note: Note
         for note in it.islice(notes, note_limit):
-            note.write_full(depth, writer,
-                            note_line_limit=note_line_limit,
-                            section_line_limit=section_line_limit,
-                            section_sent_limit=sent_limit,
-                            sections=sections)
+            if include_row_ids:
+                self._write_line(f'row_id: {note.row_id}', depth, writer)
+                note.write_full(depth, writer, **note_kwargs)
+            else:
+                note.write_full(depth, writer, **note_kwargs)
 
     def write(self, depth: int = 0, writer: TextIOBase = sys.stdout,
+              include_admission: bool = False,
+              include_patient: bool = False,
+              include_diagnoses: bool = False,
+              include_procedures: bool = False,
               **note_kwargs):
         """Write the admission and the notes of the admission.
 
-        :param note_kwargs: the keyword arguments gtiven to :meth:`write_notes`
+        :param note_kwargs: the keyword arguments gtiven to
+                            :meth:`.Note.write_full`
 
         """
+        nkwargs = dict(note_line_limit=0,
+                       section_line_limit=0,
+                       include_fields=False,
+                       include_section_divider=False,
+                       include_note_divider=False,
+                       include_section_header=False,
+                       include_row_ids=True)
+        nkwargs.update(note_kwargs)
         self._write_line(f'hadm_id: {self.admission.hadm_id}', depth, writer)
-        self._write_line('admission:', depth + 1, writer)
-        self._write_object(self.admission, depth + 2, writer)
-        self._write_line('patient:', depth + 1, writer)
-        self._write_object(self.patient, depth + 2, writer)
-        self._write_line('diagnoses:', depth + 1, writer)
-        self._write_object(self.diagnoses, depth + 2, writer)
-        self._write_line('procedures:', depth + 1, writer)
-        self._write_object(self.procedures, depth + 2, writer)
-        self._write_line('notes:', depth + 1, writer)
-        self.write_notes(depth + 2, writer, **note_kwargs)
+        if include_admission:
+            self._write_line('admission:', depth + 1, writer)
+            self._write_object(self.admission, depth + 2, writer)
+        if include_patient:
+            self._write_line('patient:', depth + 1, writer)
+            self._write_object(self.patient, depth + 2, writer)
+        if include_diagnoses:
+            self._write_line('diagnoses:', depth + 1, writer)
+            self._write_object(self.diagnoses, depth + 2, writer)
+        if include_procedures:
+            self._write_line('procedures:', depth + 1, writer)
+            self._write_object(self.procedures, depth + 2, writer)
+        if 'note_limit' not in nkwargs or nkwargs['note_limit'] > 0:
+            self._write_line('notes:', depth + 1, writer)
+            self.write_notes(depth + 2, writer, **nkwargs)
+
+    def write_full(self, depth: int = 0, writer: TextIOBase = sys.stdout,
+                   **kwargs):
+        wkwargs = dict(note_line_limit=sys.maxsize,
+                       section_line_limit=sys.maxsize,
+                       include_fields=True,
+                       include_section_divider=True,
+                       include_note_divider=True,
+                       include_section_header=True,
+                       include_row_ids=False,
+                       include_admission=True,
+                       include_patient=True,
+                       include_diagnoses=True,
+                       include_procedures=True)
+        wkwargs.update(kwargs)
+        self.write(depth, writer, **wkwargs)
 
     def __getitem__(self, row_id: int):
         return self.notes_by_id[row_id]
