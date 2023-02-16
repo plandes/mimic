@@ -164,16 +164,18 @@ class HospitalAdmission(PersistableContainer, Dictable):
     def write_notes(self, depth: int = 0, writer: TextIOBase = sys.stdout,
                     note_limit: int = sys.maxsize,
                     categories: Set[str] = None,
-                    include_row_ids: bool = False,
+                    include_note_id: bool = False,
                     **note_kwargs):
         """Write the notes of the admission.
 
         :param note_limit: the number of notes to write
 
-        :param note_kwargs: the keyword arguments gtiven to
-                            :meth:`.Note.write_full`
+        :param include_note_id: whether to include the note identification info
 
         :param categories: the note categories to write
+
+        :param note_kwargs: the keyword arguments gtiven to
+                            :meth:`.Note.write_full`
 
         """
         notes = self.notes
@@ -181,8 +183,9 @@ class HospitalAdmission(PersistableContainer, Dictable):
             notes = filter(lambda c: c.category in categories, notes)
         note: Note
         for note in it.islice(notes, note_limit):
-            if include_row_ids:
-                self._write_line(f'row_id: {note.row_id}', depth, writer)
+            if include_note_id:
+                self._write_line(f'row_id: {note.row_id} ({note.category})',
+                                 depth, writer)
                 note.write_full(depth, writer, **note_kwargs)
             else:
                 note.write_full(depth, writer, **note_kwargs)
@@ -205,7 +208,7 @@ class HospitalAdmission(PersistableContainer, Dictable):
                        include_section_divider=False,
                        include_note_divider=False,
                        include_section_header=False,
-                       include_row_ids=True)
+                       include_note_id=True)
         nkwargs.update(note_kwargs)
         self._write_line(f'hadm_id: {self.admission.hadm_id}', depth, writer)
         if include_admission:
@@ -237,7 +240,7 @@ class HospitalAdmission(PersistableContainer, Dictable):
                        include_section_divider=True,
                        include_note_divider=True,
                        include_section_header=True,
-                       include_row_ids=False,
+                       include_note_id=False,
                        include_admission=True,
                        include_patient=True,
                        include_diagnoses=True,
