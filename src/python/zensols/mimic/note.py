@@ -248,7 +248,7 @@ class SectionContainer(Dictable, metaclass=ABCMeta):
         pass
 
     @abstractmethod
-    def _get_sections(self) -> List[Section]:
+    def _get_sections(self) -> Iterable[Section]:
         """Generate the sections cached and returned in the :obj:`sections`
         property.
 
@@ -262,7 +262,7 @@ class SectionContainer(Dictable, metaclass=ABCMeta):
         in discharge notes) to a note section.
 
         """
-        secs: List[Section] = self._get_sections()
+        secs: Iterable[Section] = self._get_sections()
         return frozendict({sec.id: sec for sec in secs})
 
     @property
@@ -444,7 +444,7 @@ class Note(NoteEvent, SectionContainer):
         NoteEvent._DICTABLE_WRITE_EXCLUDES | {'sections'}
     _DICTABLE_WRITABLE_DESCENDANTS: ClassVar[bool] = True
 
-    def _get_sections(self) -> List[Section]:
+    def _get_sections(self) -> Iterable[Section]:
         sec = Section(0, 'default', self, (), LexicalSpan(0, len(self.text)))
         sec._row_id = self.row_id
         return [sec]
@@ -494,7 +494,7 @@ class RegexNote(Note, metaclass=ABCMeta):
     def _get_matches(self, text: str) -> Iterable[re.Match]:
         pass
 
-    def _get_sections(self) -> List[Section]:
+    def _get_sections(self) -> Iterable[Section]:
         # add to match on most regex's that expect two newlines between sections
         ext_text = self.text + '\n\n'
         matches: Iterable[re.Match] = self._get_matches(ext_text)
