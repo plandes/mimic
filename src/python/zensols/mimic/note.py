@@ -229,6 +229,9 @@ class Section(PersistableContainer, Dictable):
                     self._write_line('paragraph:', depth, writer)
                     self.write_sentences(depth + 1, writer, par, sent_limit)
 
+    def __len__(self) -> int:
+        return len(self.body_span) + sum(map(len, self.header_spans))
+
     def __str__(self):
         return f'{self.name} ({self.id}): body_len={len(self.body)}'
 
@@ -449,6 +452,9 @@ class Note(NoteEvent, SectionContainer):
         sec._row_id = self.row_id
         return [sec]
 
+    def _get_annotator(self) -> str:
+        return 'none'
+
     def _trans_context_update(self, trans_context: Dict[str, Any]):
         for sec in self.sections.values():
             sec.container = self
@@ -459,6 +465,7 @@ class Note(NoteEvent, SectionContainer):
     def write_fields(self, depth: int = 0, writer: TextIOBase = sys.stdout):
         self._write_line(f'row_id: {self.row_id}', depth, writer)
         self._write_line(f'category: {self.category}', depth, writer)
+        self._write_line(f'annotator: {self._get_annotator()}', depth, writer)
 
     def write_full(self, depth: int = 0, writer: TextIOBase = sys.stdout,
                    note_line_limit: int = sys.maxsize,
@@ -493,6 +500,9 @@ class RegexNote(Note, metaclass=ABCMeta):
     @abstractmethod
     def _get_matches(self, text: str) -> Iterable[re.Match]:
         pass
+
+    def _get_annotator(self) -> str:
+        return 'regular expression'
 
     def _get_sections(self) -> Iterable[Section]:
         # add to match on most regex's that expect two newlines between sections

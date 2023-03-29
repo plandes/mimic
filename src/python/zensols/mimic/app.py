@@ -3,7 +3,7 @@
 """
 __author__ = 'Paul Landes'
 
-from typing import Tuple
+from typing import Tuple, Optional
 from dataclasses import dataclass, field
 from enum import Enum, auto
 import logging
@@ -11,6 +11,7 @@ from pathlib import Path
 import re
 from zensols.persist import Stash
 from zensols.config import ConfigFactory
+from zensols.cli import ApplicationError
 from zensols.nlp import FeatureDocumentParser, FeatureDocument, FeatureToken
 from . import (
     NoteEvent, NoteEventPersister,
@@ -84,7 +85,7 @@ class Application(object):
         """Clear the all cached admission and note parses."""
         self.corpus.clear()
 
-    def write_admission(self, hadm_id: str, ):
+    def write_admission(self, hadm_id: str):
         """Write a discharge summary.
 
         :param hadm_id: the hospital admission ID
@@ -105,6 +106,19 @@ class Application(object):
         """
         note: NoteEvent = self.corpus.note_event_persister.get_by_id(row_id)
         print(note.text)
+
+    def write_hadm_id_for_note(self, row_id: int) -> int:
+        """Get the hospital admission ID (``hadm_id``) that has note ``row_id``.
+
+        :param row_id: the unique note identifier in the NOTEEVENTS table
+
+        """
+        np: NoteEventPersister = self.corpus.note_event_persister
+        hadm_id: Optional[int] = np.get_hadm_id(row_id)
+        if hadm_id is None:
+            raise ApplicationError(f'No note found: {row_id}')
+        print(hadm_id)
+        return hadm_id
 
     def _get_temporary_results_dir(self) -> Path:
         return Path(self.config_factory.config.get_option(
