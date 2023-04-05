@@ -312,11 +312,11 @@ class HospitalAdmissionDbStash(ReadOnlyStash):
             logger.debug(f'loading hospital admission: {hadm_id}')
         hadm_id = int(hadm_id)
         dp: DiagnosisPersister = self.diagnosis_persister
-        dp: ProcedurePersister = self.procedure_persister
+        pp: ProcedurePersister = self.procedure_persister
         adm: Admission = self.admission_persister.get_by_hadm_id(hadm_id)
         pat: Patient = self.patient_persister.get_by_subject_id(adm.subject_id)
         diag: Tuple[Diagnosis] = dp.get_by_hadm_id(hadm_id)
-        procds: Tuple[Procedure] = dp.get_by_hadm_id(hadm_id)
+        procds: Tuple[Procedure] = pp.get_by_hadm_id(hadm_id)
         note_events: Tuple[NoteEvent] = self.note_event_persister.\
             get_notes_by_hadm_id(hadm_id)
         notes = tuple(map(self.mimic_note_factory, note_events))
