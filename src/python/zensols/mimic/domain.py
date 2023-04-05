@@ -3,7 +3,7 @@
 """
 __author__ = 'Paul Landes'
 
-from typing import Dict, Any, Type
+from typing import Dict, Any, Type, ClassVar, Set
 from dataclasses import dataclass, field, InitVar
 import sys
 import re
@@ -280,9 +280,10 @@ class NoteEvent(MimicContainer):
     :see: `Dictionary <https://mimic.physionet.org/mimictables/noteevents/>`_
 
     """
-    _DICTABLE_WRITE_EXCLUDES = {'hadm_id', 'text'}
-    _PERSITABLE_PROPERTIES = set()
-    _PERSITABLE_TRANSIENT_ATTRIBUTES = {'_trans_context_var'}
+    _DICTABLE_WRITE_EXCLUDES: ClassVar[Set[str]] = {'hadm_id', 'text'}
+    _PERSITABLE_PROPERTIES: ClassVar[Set[str]] = set()
+    _PERSITABLE_TRANSIENT_ATTRIBUTES: ClassVar[Set[str]] = {
+        '_trans_context_var'}
 
     subject_id: int = field()
     """Foreign key. Identifies the patient.
