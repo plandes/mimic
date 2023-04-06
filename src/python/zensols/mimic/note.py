@@ -452,6 +452,11 @@ class Note(NoteEvent, SectionContainer):
         sec._row_id = self.row_id
         return [sec]
 
+    @property
+    def annotator(self) -> str:
+        """A human readable string describing who or what annotated the note."""
+        return self._get_annotator()
+
     def _get_annotator(self) -> str:
         return 'none'
 
@@ -465,7 +470,7 @@ class Note(NoteEvent, SectionContainer):
     def write_fields(self, depth: int = 0, writer: TextIOBase = sys.stdout):
         self._write_line(f'row_id: {self.row_id}', depth, writer)
         self._write_line(f'category: {self.category}', depth, writer)
-        self._write_line(f'annotator: {self._get_annotator()}', depth, writer)
+        self._write_line(f'annotator: {self.annotator}', depth, writer)
 
     def write_full(self, depth: int = 0, writer: TextIOBase = sys.stdout,
                    note_line_limit: int = sys.maxsize,
