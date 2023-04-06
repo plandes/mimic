@@ -8,6 +8,17 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 
 
+## [1.1.0] - 2023-04-05
+### Changed
+- MIMIC notes write changes
+- Move application methods from `Corpus` to the application.
+- Fixed procedure data to hospital admission class.
+
+
+### Changed
+- Admission and note write semantics.
+
+
 ## [1.0.0] - 2023-02-02
 ### Changed
 - Updated [zensols.mednlp] to 1.0.0.
@@ -37,7 +48,8 @@ Significant feature release.
 
 
 <!-- links -->
-[Unreleased]: https://github.com/plandes/mimic/compare/v1.0.0...HEAD
+[Unreleased]: https://github.com/plandes/mimic/compare/v1.1.0...HEAD
+[1.1.0]: https://github.com/plandes/mimic/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/plandes/mimic/compare/v0.1.1...v1.0.0
 [0.1.1]: https://github.com/plandes/mimic/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/plandes/mimic/compare/v0.0.1...v0.1.0
