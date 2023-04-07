@@ -9,6 +9,7 @@ from typing import (
 )
 from dataclasses import dataclass, field, fields
 from abc import ABCMeta, abstractmethod
+from enum import Enum, auto
 import sys
 import re
 import collections
@@ -22,6 +23,26 @@ from zensols.persist import PersistableContainer, persisted
 from zensols.nlp import LexicalSpan, FeatureToken, FeatureDocument
 from zensols.nlp.dataframe import FeatureDataFrameFactory
 from . import NoteEvent
+
+
+class SectionAnnotatorType(Enum):
+    """The type of :class:`.Section` annotator for :class:`.Note` instances.
+    The `MedSecId`_ project adds the :obj:`human` and :obj:`model`:
+
+    :see: `MedSecId <https://github.com/plandes/mimicsid>`_
+
+    """
+    NONE = auto()
+    """Default for those without section identifiers."""
+
+    REGULAR_EXPRESSION = auto()
+    """Sections are automatically assigned by regular expressions."""
+
+    HUMAN = auto()
+    """A `MedSecId`_ human annotator."""
+
+    MODEL = auto()
+    """Predictions are provided by a `MedSecId`_ model."""
 
 
 @dataclass
@@ -453,12 +474,12 @@ class Note(NoteEvent, SectionContainer):
         return [sec]
 
     @property
-    def annotator(self) -> str:
+    def section_annotator_type(self) -> SectionAnnotatorType:
         """A human readable string describing who or what annotated the note."""
-        return self._get_annotator()
+        return self._get_section_annotator_type()
 
-    def _get_annotator(self) -> str:
-        return 'none'
+    def _get_section_annotator_type(self) -> SectionAnnotatorType:
+        return SectionAnnotatorType.NONE
 
     def _trans_context_update(self, trans_context: Dict[str, Any]):
         for sec in self.sections.values():
@@ -506,8 +527,8 @@ class RegexNote(Note, metaclass=ABCMeta):
     def _get_matches(self, text: str) -> Iterable[re.Match]:
         pass
 
-    def _get_annotator(self) -> str:
-        return 'regular expression'
+    def _get_section_annotator_type(self) -> SectionAnnotatorType:
+        return SectionAnnotatorType.REGULAR_EXPRESSION
 
     def _get_sections(self) -> Iterable[Section]:
         # add to match on most regex's that expect two newlines between sections
