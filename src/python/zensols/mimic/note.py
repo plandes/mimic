@@ -489,9 +489,10 @@ class Note(NoteEvent, SectionContainer):
             sec._paragraph_factory = trans_context['paragraph_factory']
 
     def write_fields(self, depth: int = 0, writer: TextIOBase = sys.stdout):
+        sat: SectionAnnotatorType = self.section_annotator_type
         self._write_line(f'row_id: {self.row_id}', depth, writer)
         self._write_line(f'category: {self.category}', depth, writer)
-        self._write_line(f'annotator: {self.annotator}', depth, writer)
+        self._write_line(f'annotator: {sat.name.lower()}', depth, writer)
 
     def write_full(self, depth: int = 0, writer: TextIOBase = sys.stdout,
                    note_line_limit: int = sys.maxsize,
