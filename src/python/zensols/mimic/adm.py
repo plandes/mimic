@@ -31,7 +31,8 @@ logger = logging.getLogger(__name__)
 @dataclass
 class HospitalAdmission(PersistableContainer, Dictable):
     """Represents data collected by a patient over the course of their hospital
-    admission.
+    admission.  Note: this object keys notes using their ``row_id`` IDs used in
+    the MIMIC dataset as integers and not strings like some note stashes.
 
     """
     _DICTABLE_ATTRIBUTES = 'hadm_id notes'.split()
@@ -247,6 +248,9 @@ class HospitalAdmission(PersistableContainer, Dictable):
                        include_procedures=True)
         wkwargs.update(kwargs)
         self.write(depth, writer, **wkwargs)
+
+    def keys(self) -> Iterable[int]:
+        return self.notes_by_id.keys()
 
     def __getitem__(self, row_id: int):
         return self.notes_by_id[row_id]
