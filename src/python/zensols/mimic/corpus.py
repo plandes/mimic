@@ -10,9 +10,9 @@ from pathlib import Path
 from io import TextIOBase
 from zensols.config import Dictable
 from . import (
-    HospitalAdmission, HospitalAdmissionDbStash,
+    RecordNotFoundError, HospitalAdmission, HospitalAdmissionDbStash,
     PatientPersister, AdmissionPersister, DiagnosisPersister,
-    NoteEventPersister,
+    NoteEventPersister, Note,
 )
 
 logger = logging.getLogger(__name__)
@@ -57,6 +57,29 @@ class Corpus(Dictable):
     def clear(self):
         """Clear the all cached admission and note parses."""
         self.hospital_adm_stash.clear()
+
+    def get_hospital_adm_by_id(self, hadm_id: int) -> HospitalAdmission:
+        """Return a hospital admission by its unique identifier."""
+        return self.hospital_adm_stash[str(hadm_id)]
+
+    def get_hospital_adm_for_note(self, row_id: int) -> HospitalAdmission:
+        """Return an admission that has note ``row_id``.
+
+        :raise: RecordNotFoundError if ``row_id`` is not found in the database
+
+        """
+        hadm_id: int = self.note_event_persister.get_hadm_id(row_id)
+        if hadm_id is None:
+            raise RecordNotFoundError(self, 'hadm_id', hadm_id)
+        return self.hospital_adm_stash[str(hadm_id)]
+
+    def get_note_by_id(self, row_id: int) -> Note:
+        """Return the note (via the hospital admission) for ``row_id``.
+
+        :raise: RecordNotFoundError if ``row_id`` is not found in the database
+
+        """
+        return self.get_hospital_adm_for_note(row_id)[row_id]
 
     def write_note_event_counts(self, subject_id: int, depth: int = 0,
                                 writer: TextIOBase = sys.stdout):
