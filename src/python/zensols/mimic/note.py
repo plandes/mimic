@@ -13,6 +13,7 @@ from enum import Enum, auto
 import sys
 import re
 import collections
+import copy
 import itertools as it
 from itertools import chain
 from io import TextIOBase
@@ -101,9 +102,9 @@ class Section(PersistableContainer, Dictable):
     """The container that has this section."""
 
     header_spans: Tuple[LexicalSpan] = field()
-    """The character start offset of the section, starting with the name and the
-    character offset of the end of the body text.  This is the identifier of
-    the section.
+    """The character offsets of the section headers.  The first is usually the
+    :obj:`name` of the section.  If there are no headers, this is an 0-length
+    tuple.
 
     """
     body_span: LexicalSpan = field()
@@ -137,34 +138,55 @@ class Section(PersistableContainer, Dictable):
         """The section text."""
         return self.note_text[self.body_span.begin:self.body_span.end]
 
+    def _get_doc(self) -> FeatureDocument:
+        return self.container._get_doc()
+
     @property
     def header_tokens(self) -> Iterable[FeatureToken]:
-        doc: FeatureDocument = self.container._get_doc()
+        doc: FeatureDocument = self._get_doc()
         spans = doc.map_overlapping_tokens(self.header_spans)
         return chain.from_iterable(spans)
 
     @property
     def body_tokens(self) -> Iterable[FeatureToken]:
-        doc: FeatureDocument = self.container._get_doc()
+        doc: FeatureDocument = self._get_doc()
         return doc.get_overlapping_tokens(self.body_span)
+
+    @property
+    @persisted('_doc', transient=True)
+    def doc(self) -> FeatureDocument:
+        """A feature document of the section's body text."""
+        return self._narrow_doc(self._get_doc(), self.lexspan, False)
 
     @property
     @persisted('_body_doc', transient=True)
     def body_doc(self) -> FeatureDocument:
         """A feature document of the body of this section's body text."""
-        return self._get_body_doc()
+        return self._narrow_doc(self._get_doc(), self.body_span)
 
-    def _get_body_doc(self) -> FeatureDocument:
-        doc: FeatureDocument = self._doc_stash[str(self._row_id)]
-        doc = self._narrow_doc(doc)
+    def _narrow_doc(self, doc: FeatureDocument, span: LexicalSpan,
+                    filter_sent: bool = True) -> \
+            FeatureDocument:
+        doc = doc.get_overlapping_document(span, inclusive=False)
+        if filter_sent:
+            sreg: re.Pattern = self._SENT_FILTER_REGEX
+            doc.sents = list(filter(lambda s: sreg.match(s.text) is None,
+                                    doc.sents))
         return doc
 
-    def _narrow_doc(self, doc: FeatureDocument) -> FeatureDocument:
-        sreg: re.Pattern = self._SENT_FILTER_REGEX
-        doc = doc.get_overlapping_document(self.body_span)
-        doc.sents = list(filter(lambda s: sreg.match(s.text) is None,
-                                doc.sents))
-        return doc
+    @property
+    @persisted('_lexspan')
+    def lexspan(self) -> LexicalSpan:
+        """The widest lexical extent of the sections, including headers."""
+        return LexicalSpan.widen(
+            chain.from_iterable(((self.body_span,), self.header_spans)))
+
+    @property
+    def text(self) -> str:
+        """Get the entire text of the section, which includes the headers."""
+        span: LexicalSpan = self.lexspan
+        ntext: str = self.note_text
+        return ntext[span.begin:span.end]
 
     @property
     @persisted('_paragraphs', transient=True)
@@ -179,6 +201,16 @@ class Section(PersistableContainer, Dictable):
     def is_empty(self) -> bool:
         """Whether the content of the section is empty."""
         return len(self.body) == 0
+
+    def _copy_resources(self, target: Section):
+        for attr in self._PERSITABLE_TRANSIENT_ATTRIBUTES:
+            setattr(target, attr, getattr(self, attr))
+        target._row_id = self._row_id
+
+    def clone(self) -> Section:
+        clone = copy.copy(self)
+        self._copy_resources(clone)
+        return clone
 
     def write_sentences(self, depth: int = 0, writer: TextIOBase = sys.stdout,
                         container: FeatureDocument = None, limit: int = 0):
@@ -260,7 +292,8 @@ class Section(PersistableContainer, Dictable):
 @dataclass
 class SectionContainer(Dictable, metaclass=ABCMeta):
     """A *note like* container base class that has sections.  Note based classes
-    extend this base class.
+    extend this base class.  Sections in order of their position in the document
+    are produced when using this class as an iterable.
 
     """
     _DICTABLE_ATTRIBUTES: ClassVar[Set[str]] = {'sections'}
@@ -356,7 +389,7 @@ class SectionContainer(Dictable, metaclass=ABCMeta):
                           (:obj:~zensols.nlp.TokenContainer.norm`) or text
 
         """
-        for sec in self.sections.values():
+        for sec in self:
             header = ' '.join(sec.headers)
             div_text: str = f'{sec.id}:{sec.name}'
             if len(header) > 0:
@@ -396,9 +429,6 @@ class SectionContainer(Dictable, metaclass=ABCMeta):
                     self._write_wrap(para.norm, depth, writer)
             elif len(sec.body) > 0:
                 self._write_block(sec.body, depth, writer)
-
-    def __getitem__(self, id: int):
-        return self.sections[id]
 
     def write(self, depth: int = 0, writer: TextIOBase = sys.stdout):
         self.write_human(depth, writer)
@@ -454,6 +484,12 @@ class SectionContainer(Dictable, metaclass=ABCMeta):
                     self._write_divider(depth + 3, writer)
         if include_note_divider:
             self._write_divider(depth, writer, '=')
+
+    def __getitem__(self, id: int) -> Section:
+        return self.sections[id]
+
+    def __iter__(self) -> Iterable[Section]:
+        return iter(sorted(self.sections.values(), key=lambda s: s.lexspan))
 
 
 @dataclass
@@ -516,6 +552,47 @@ class Note(NoteEvent, SectionContainer):
             include_fields=include_fields,
             include_note_divider=include_note_divider,
             include_section_divider=include_section_divider)
+
+
+@dataclass
+class GapSectionContainer(SectionContainer):
+    """A container that fills in missing sections of text from a note with
+    additional sections.
+
+    """
+    delegate: Note = field()
+    """The note with the sections to be filled."""
+
+    def _get_doc(self) -> FeatureDocument:
+        return self.delegate._get_doc()
+
+    def _get_sections(self) -> Iterable[Section]:
+        sections: List[Section] = list(
+            map(lambda s: s.clone(), self.delegate.sections.values()))
+        if len(sections) > 0:
+            note_text: str = self.delegate.text
+            gaps: Sequence[LexicalSpan] = LexicalSpan.gaps(
+                spans=map(lambda s: s.lexspan, sections),
+                end=len(note_text))
+            ref_sec: Section = sections[0]
+            sec_cont: SectionContainer = ref_sec.container
+            gap_secs: List[Section] = []
+            for gs in gaps:
+                gsec = Section(
+                    id=-1,
+                    name=None,
+                    container=sec_cont,
+                    header_spans=(),
+                    body_span=gs)
+                ref_sec._copy_resources(gsec)
+                gap_secs.append(gsec)
+            sections.extend(gap_secs)
+            sections.sort(key=lambda s: s.lexspan)
+            sec: Section
+            for sid, sec in enumerate(sections):
+                sec.original_id = sec.id
+                sec.id = sid
+        return sections
 
 
 @dataclass
