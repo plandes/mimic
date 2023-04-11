@@ -57,6 +57,7 @@ class HospitalAdmission(PersistableContainer, Dictable):
 
     @property
     def hadm_id(self) -> int:
+        """The hospital admission unique identifier."""
         return self.admission.hadm_id
 
     @property
@@ -323,6 +324,7 @@ class HospitalAdmissionDbStash(ReadOnlyStash):
         procds: Tuple[Procedure] = pp.get_by_hadm_id(hadm_id)
         note_events: Tuple[NoteEvent] = self.note_event_persister.\
             get_notes_by_hadm_id(hadm_id)
+        # TODO: move note creation to other stash for mimicsid sec prediction
         notes = tuple(map(self.mimic_note_factory, note_events))
         return self.config_factory.new_instance(
             self.hospital_adm_name, adm, pat, diag, procds, notes)
