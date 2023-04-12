@@ -64,6 +64,13 @@ class AdmissionPersister(DataClassDbPersister):
             'select_admission_counts', params=(limit,),
             row_factory='tuple')
 
+    def uniform_sample_hadm_ids(self, limit: int) -> Iterable[int]:
+        """Return a sample from the uniform distribution of admission IDs.
+
+        """
+        return self.execute_by_name(
+            'random_hadm', params=(limit,), row_factory=lambda x: x)
+
 
 @dataclass
 class PatientPersister(DataClassDbPersister):
@@ -238,13 +245,6 @@ class NoteEventPersister(DataClassDbPersister):
 
         """
         return map(self.get_hadm_id, row_ids)
-
-    def uniform_sample_hadm_ids(self, limit: int) -> Iterable[int]:
-        """Return a sample from the uniform distribution of admission IDs.
-
-        """
-        return self.execute_by_name(
-            'random_hadm', params=(limit,), row_factory=lambda x: x)
 
     def get_notes_by_category(self, category: str,
                               limit: int = sys.maxsize) -> Tuple[NoteEvent]:
