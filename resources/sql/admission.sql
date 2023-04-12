@@ -58,3 +58,9 @@ select distinct(a.subject_id)
 
 -- test
 select * from admissions where subject_id=13033;
+
+-- name=random_hadm
+select row_id as hadm_id from admissions
+    where hadm_id is not null
+    order by random()
+    limit %s;

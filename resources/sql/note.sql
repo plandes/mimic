@@ -71,9 +71,3 @@ select count(*) from noteevents where hadm_id is null;
 
 -- name=total_count
 select count(*) from noteevents;
-
--- name=random_hadm
-select hadm_id from noteevents
-    where hadm_id is not null
-    order by random()
-    limit %s;
