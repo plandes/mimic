@@ -10,8 +10,7 @@ from frozendict import frozendict
 from spacy.language import Language
 from spacy.lang.char_classes import ALPHA
 from spacy.util import compile_infix_regex
-from spacy.tokens import Token
-from zensols.nlp import Component, SpacyFeatureTokenDecorator, FeatureToken
+from zensols.nlp import Component, FeatureTokenDecorator, FeatureToken
 
 
 @dataclass
@@ -43,7 +42,7 @@ class MimicTokenizerComponent(Component):
 
 
 @dataclass
-class MimicTokenDecorator(SpacyFeatureTokenDecorator):
+class MimicTokenDecorator(FeatureTokenDecorator):
     """Contains the MIMIC-III regular expressions and other patterns to annotate
     and normalized feature tokens.  The class finds pseudo tokens and
     separators (such as a long string of dashes or asterisks).
@@ -113,33 +112,33 @@ class MimicTokenDecorator(SpacyFeatureTokenDecorator):
                 self.onto_mapping[ent] = onto_name
         setattr(self, attr, tuple(repls))
 
-    def decorate(self, spacy_tok: Token, feature_token: FeatureToken):
+    def decorate(self, token: FeatureToken):
         pat: re.Pattern
         ent: str
         oid: str = FeatureToken.NONE
         matched: bool = False
         for pat, ent in self._REGEXES:
-            m: re.Match = pat.match(feature_token.norm)
+            m: re.Match = pat.match(token.norm)
             if m is not None:
                 matched = True
-                setattr(feature_token, self.TOKEN_FEATURE_ID, ent)
+                setattr(token, self.TOKEN_FEATURE_ID, ent)
                 if ent == self.PSEUDO_TOKEN_FEATURE:
-                    feature_token.norm = self.UNKNOWN_ENTITY
+                    token.norm = self.UNKNOWN_ENTITY
                     pseudo_val = m.group(1)
                     for regex, repl in self.token_entities:
                         if regex.match(pseudo_val) is not None:
                             oid = self.onto_mapping.get(repl, FeatureToken.NONE)
-                            feature_token.norm = repl
+                            token.norm = repl
                             break
                 break
         if not matched:
-            setattr(feature_token, self.TOKEN_FEATURE_ID,
+            setattr(token, self.TOKEN_FEATURE_ID,
                     FeatureToken.NONE)
             repl: str
             for pat, repl in self.token_replacements:
-                m: re.Match = pat.match(feature_token.norm)
+                m: re.Match = pat.match(token.norm)
                 if m is not None:
                     matched = True
-                    feature_token.norm = repl
+                    token.norm = repl
                     break
-        setattr(feature_token, self.ONTO_FEATURE_ID, oid)
+        setattr(token, self.ONTO_FEATURE_ID, oid)
