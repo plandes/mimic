@@ -56,6 +56,13 @@ select ${cols}
 -- name=select_note_count
 select count(*) from noteevents where hadm_id = %s;
 
+-- name=select_note_counts
+select hadm_id, count(hadm_id) as cnt
+    from noteevents
+    where hadm_id is not null
+    group by hadm_id
+    order by cnt desc;
+
 -- name=select_note_count_by_subject_id
 select hadm_id, count(hadm_id) as cnt
     from noteevents
