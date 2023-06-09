@@ -25,4 +25,4 @@ example-clean:
 .PHONY:			testall
 testall:		test
 			@echo "should be 7848 lines"
-			./mimic discharge 100581 | wc -l
+			./mimic adm 100581 | wc -l
