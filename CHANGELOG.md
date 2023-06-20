@@ -10,12 +10,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.3.0] - 2023-06-20
 ### Changed
-- Upgrade to [zensols..mednlp] 1.3.0.
+- Upgrade to [zensols.mednlp] 1.3.0.
 
 
 ## [1.2.0] - 2023-06-09
 ### Changed
-- Upgrade to [zensols..mednlp] 1.2.0.
+- Upgrade to [zensols.mednlp] 1.2.0.
 - Move admission sample to `Admission` persister.
 - Narrow body `FeatureDocument`s using right exclusive spans.
 
