@@ -315,8 +315,7 @@ class SectionContainer(Dictable, metaclass=ABCMeta):
     @property
     @persisted('_sections')
     def sections(self) -> Dict[int, Section]:
-        """A map from the name of a section (i.e. *history of present illness*
-        in discharge notes) to a note section.
+        """A map from the unique section identifier to a note section.
 
         """
         secs: Iterable[Section] = self._get_sections()
@@ -325,6 +324,10 @@ class SectionContainer(Dictable, metaclass=ABCMeta):
     @property
     @persisted('_by_name', transient=True)
     def sections_by_name(self) -> Dict[str, Tuple[Section]]:
+        """A map from the name of a section (i.e. *history of present illness*
+        in discharge notes) to a note section.
+
+        """
         by_name = collections.defaultdict(list)
         for s in self.sections.values():
             by_name[s.name].append(s)
