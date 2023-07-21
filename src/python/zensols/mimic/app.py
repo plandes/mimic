@@ -34,7 +34,7 @@ class Application(object):
     """The contains assets to access the MIMIC-III corpus via database."""
 
     def write_features(self, sent: str, out_file: Path = None):
-        """Dump all features available to a CSV file.
+        """Parse a sentence as MIMIC data and write features to CSV.
 
         :param sent: the sentence to parse and generate features
 
