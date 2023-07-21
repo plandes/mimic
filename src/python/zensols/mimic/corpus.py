@@ -8,8 +8,7 @@ import logging
 import sys
 from pathlib import Path
 from io import TextIOBase
-from zensols.persist import Stash
-from zensols.config import Dictable
+from zensols.config import Dictable, ConfigFactory
 from . import (
     RecordNotFoundError, HospitalAdmission, HospitalAdmissionDbStash,
     PatientPersister, AdmissionPersister, DiagnosisPersister,
@@ -28,6 +27,9 @@ class Corpus(Dictable):
     :see: `Resource Libraries <https://plandes.github.io/util/doc/config.html#resource-libraries>`_
 
     """
+    config_factory: ConfigFactory = field()
+    """Used to clear the note event cache."""
+
     patient_persister: PatientPersister = field()
     """The persister for the ``patients`` table."""
 
@@ -50,11 +52,6 @@ class Corpus(Dictable):
     """The path to create the output results.  This is not used, but needs to
     stay until the next :mod:`zensols.mimicsid` is retrained."""
 
-    note_event_persister_stash: Stash = field()
-    """The note event cache stash used by :meth:`clear` to remove cached parsed
-    files.  The nested factory stash is :class:`.NoteDocumentStash`.
-
-    """
     def __post_init__(self):
         # allow pass through method delegation from any configured cache
         # stashes on to the HospitalAdmissionDbStash such as `process_keys`
@@ -68,7 +65,9 @@ class Corpus(Dictable):
         """
         self.hospital_adm_stash.clear()
         if include_notes:
-            self.note_event_persister_stash.clear()
+            # the note event cache stash used by :meth:`clear` to remove cached
+            # parsed files; nested factory stash is :class:`.NoteDocumentStash`
+            self.config_factory('mimic_note_event_persister_stash').clear()
 
     def get_hospital_adm_by_id(self, hadm_id: int) -> HospitalAdmission:
         """Return a hospital admission by its unique identifier."""
