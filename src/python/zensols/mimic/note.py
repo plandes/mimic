@@ -1,9 +1,8 @@
-from __future__ import annotations
 """EHR related text documents.
 
 """
+from __future__ import annotations
 __author__ = 'Paul Landes'
-
 from typing import (
     Dict, Iterable, Set, Tuple, List, Any, Optional, ClassVar, Sequence
 )
@@ -24,6 +23,31 @@ from zensols.persist import PersistableContainer, persisted
 from zensols.nlp import LexicalSpan, FeatureToken, FeatureDocument
 from zensols.nlp.dataframe import FeatureDataFrameFactory
 from . import NoteEvent
+
+
+class NoteFormat(Enum):
+    """Used in :meth:`.Note.format` for a parameterized method to write a note.
+
+    """
+    text = auto()
+    raw = auto()
+    verbose = auto()
+    summary = auto()
+    json = auto()
+    yaml = auto()
+    markdown = auto()
+
+    @property
+    def ext(self) -> str:
+        return {
+            'text': 'txt',
+            'raw': 'txt',
+            'verbose': 'txt',
+            'summary': 'txt',
+            'json': 'json',
+            'yaml': 'yaml',
+            'markdown': 'md'
+        }[self.name]
 
 
 class SectionAnnotatorType(Enum):
@@ -488,6 +512,21 @@ class SectionContainer(Dictable, metaclass=ABCMeta):
         if include_note_divider:
             self._write_divider(depth, writer, '=')
 
+    def write_by_format(self, depth: int = 0, writer: TextIOBase = sys.stdout,
+                        note_format: NoteFormat = NoteFormat):
+        def summary_format(writer: TextIOBase):
+            for s in self.sections.values():
+                print(s, s.header_spans, len(s))
+
+        {NoteFormat.text: lambda: self.write_human(depth, writer),
+         NoteFormat.verbose: lambda: self.write_full(depth, writer),
+         NoteFormat.raw: lambda: print(self.text, file=writer),
+         NoteFormat.json: lambda: self.asjson(writer=writer, indent=4),
+         NoteFormat.yaml: lambda: self.asyaml(writer=writer, indent=4),
+         NoteFormat.markdown: lambda: self.write_markdown(depth, writer),
+         NoteFormat.summary: lambda: summary_format(depth, writer),
+         }[note_format]()
+
     def __getitem__(self, id: int) -> Section:
         return self.sections[id]
 
@@ -531,6 +570,7 @@ class Note(NoteEvent, SectionContainer):
         sat: SectionAnnotatorType = self.section_annotator_type
         self._write_line(f'row_id: {self.row_id}', depth, writer)
         self._write_line(f'category: {self.category}', depth, writer)
+        self._write_line(f'description: {self.description}', depth, writer)
         self._write_line(f'annotator: {sat.name.lower()}', depth, writer)
 
     def write_full(self, depth: int = 0, writer: TextIOBase = sys.stdout,

@@ -11,7 +11,7 @@ from datetime import datetime
 from io import TextIOBase
 from zensols.util import APIError
 from zensols.config import Dictable, Settings
-from zensols.persist import PersistableContainer, persisted, Stash
+from zensols.persist import PersistableContainer, persisted, Stash, FileTextUtil
 from zensols.nlp import FeatureDocument
 
 
@@ -399,6 +399,14 @@ class NoteEvent(MimicContainer):
     def doc(self) -> FeatureDocument:
         """The parsed document of the :obj:`name` of the section."""
         return self._get_doc()
+
+    @property
+    def normal_name(self) -> str:
+        """A normalized name of the note useful as a file name (sans extension).
+
+        """
+        return FileTextUtil.normalize_text(
+            f'{self.row_id}-{self.category}-{self.description}')
 
     def _get_doc(self) -> FeatureDocument:
         return self._doc_stash[str(self.row_id)]
