@@ -385,6 +385,9 @@ class SectionContainer(Dictable, metaclass=ABCMeta):
         return pd.concat(dfs, ignore_index=True, copy=False)
 
     def write_fields(self, depth: int = 0, writer: TextIOBase = sys.stdout):
+        """Write note header fields such as the ``row_id`` and ``category``.
+
+        """
         pass
 
     def write_human(self, depth: int = 0, writer: TextIOBase = sys.stdout,
@@ -514,13 +517,22 @@ class SectionContainer(Dictable, metaclass=ABCMeta):
 
     def write_by_format(self, depth: int = 0, writer: TextIOBase = sys.stdout,
                         note_format: NoteFormat = NoteFormat):
+        """Write the note in the specified format.
+
+        :param depth: the starting indentation depth
+
+        :param writer: the writer to dump the content of this writable
+
+        :param note_format: the format to use for the output
+
+        """
         def summary_format(writer: TextIOBase):
             for s in self.sections.values():
                 print(s, s.header_spans, len(s))
 
         {NoteFormat.text: lambda: self.write_human(depth, writer),
          NoteFormat.verbose: lambda: self.write_full(depth, writer),
-         NoteFormat.raw: lambda: print(self.text, file=writer),
+         NoteFormat.raw: lambda: writer.write(self.text),
          NoteFormat.json: lambda: self.asjson(writer=writer, indent=4),
          NoteFormat.yaml: lambda: self.asyaml(writer=writer, indent=4),
          NoteFormat.markdown: lambda: self.write_markdown(depth, writer),
