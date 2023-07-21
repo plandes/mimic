@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 - Feature to clear cached notes from the `Corpus` class.
+- CLI actions to write an admission to disk an to get random `hadm_ids`.
 
 
 ## [1.3.1] - 2023-06-25

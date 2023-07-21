@@ -85,9 +85,14 @@ class Application(object):
         """Print corpus statistics."""
         self.corpus.write()
 
-    def clear(self):
-        """Clear the all cached admission and note parses."""
-        self.corpus.clear()
+    def uniform_sample_hadm_ids(self, limit: int = 1):
+        """Print a uniform random sample of admission hadm_ids.x
+
+        :param limit: the number to fetch
+
+        """
+        for i in self.corpus.admission_persister.uniform_sample_hadm_ids(limit):
+            print(i)
 
     def _get_adm(self, hadm_id: str) -> HospitalAdmission:
         stash: HospitalAdmissionDbStash = self.corpus.hospital_adm_stash
@@ -105,6 +110,25 @@ class Application(object):
         """
         adm: HospitalAdmission = self._get_adm(hadm_id)
         adm.write()
+
+    def write_discharge_reports(self, limit: int = 1,
+                                out_dir: Path = Path('.')):
+        """Write discharge reports (as apposed to addendums).
+
+        :param limit: the number to fetch
+
+        :param out_dir: the output directory
+
+        """
+        np: NoteEventPersister = self.corpus.note_event_persister
+        out_dir.mkdir(parents=True, exist_ok=True)
+        notes: Tuple[NoteEvent] = np.get_discharge_reports(limit)
+        for note in notes:
+            path = out_dir / f'{note.hadm_id}.txt'
+            with open(path, 'w') as f:
+                note.write(writer=f)
+        if logger.isEnabledFor(logging.INFO):
+            logger.info(f'wrote {len(notes)} notes to {out_dir}')
 
     def write_admission(self, hadm_id: str, out_dir: Path = Path('.'),
                         output_format: _Format = _Format.meta):
@@ -161,11 +185,11 @@ class Application(object):
         return Path(self.config_factory.config.get_option(
             'temporary_results_dir', 'mimic_default'))
 
-    def write_note_by_categories(self, note_limit: int = 1,
+    def write_note_by_categories(self, limit: int = 1,
                                  output_format: _Format = _Format.meta):
         """Write a certain number of notes across each category.
 
-        :param note_limit: the number of notes to write
+        :param limit: the number to fetch
 
         :param output_format: the output format of the note
 
@@ -176,7 +200,7 @@ class Application(object):
         cat: str
         ntevt_cnt = 0
         for i, cat in enumerate(np.categories):
-            ntevts: Tuple[NoteEvent] = np.get_notes_by_category(cat, note_limit)
+            ntevts: Tuple[NoteEvent] = np.get_notes_by_category(cat, limit)
             name: str = re.sub(r'[ \t/_-]+', '-', cat).lower()
             if name.endswith('-'):
                 name = name[0:-1]
@@ -193,25 +217,6 @@ class Application(object):
         if logger.isEnabledFor(logging.INFO):
             logger.info(f'wrote {ntevt_cnt} ntevts')
 
-    def write_discharge_reports(self, note_limit: int = 1,
-                                out_dir: Path = Path('.')):
-        """Write discharge reports (as apposed to addendums).
-
-        :param note_limit: the number of notes to write
-
-        :param out_dir: the output directory
-
-        """
-        np: NoteEventPersister = self.corpus.note_event_persister
-        out_dir.mkdir(parents=True, exist_ok=True)
-        notes: Tuple[NoteEvent] = np.get_discharge_reports(note_limit)
-        for note in notes:
-            path = out_dir / f'{note.hadm_id}.txt'
-            with open(path, 'w') as f:
-                note.write(writer=f)
-        if logger.isEnabledFor(logging.INFO):
-            logger.info(f'wrote {len(notes)} notes to {out_dir}')
-
     def write_note_categories(self, hadm_id: str):
         """Write note categories of an admission.
 
@@ -221,6 +226,10 @@ class Application(object):
         adm: HospitalAdmission = self._get_adm(hadm_id)
         for note in adm:
             print(f'{note.row_id},{note.category}')
+
+    def clear(self):
+        """Clear the all cached admission and note parses."""
+        self.corpus.clear()
 
     def _unmatched_tokens(self, hadm_id: str, no_ents: bool = False):
         """Find all unmatched tokens for an admission.
