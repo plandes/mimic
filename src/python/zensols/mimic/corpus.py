@@ -8,6 +8,7 @@ import logging
 import sys
 from pathlib import Path
 from io import TextIOBase
+from zensols.persist import Stash
 from zensols.config import Dictable
 from . import (
     RecordNotFoundError, HospitalAdmission, HospitalAdmissionDbStash,
@@ -49,14 +50,25 @@ class Corpus(Dictable):
     """The path to create the output results.  This is not used, but needs to
     stay until the next :mod:`zensols.mimicsid` is retrained."""
 
+    note_event_persister_stash: Stash = field()
+    """The note event cache stash used by :meth:`clear` to remove cached parsed
+    files.  The nested factory stash is :class:`.NoteDocumentStash`.
+
+    """
     def __post_init__(self):
         # allow pass through method delegation from any configured cache
         # stashes on to the HospitalAdmissionDbStash such as `process_keys`
         self.hospital_adm_stash.delegate_attr = True
 
-    def clear(self):
-        """Clear the all cached admission and note parses."""
+    def clear(self, include_notes: bool = False):
+        """Clear the all cached admission and note parses.
+
+        :param include_notes: whether to also clear the parsed notes cache
+
+        """
         self.hospital_adm_stash.clear()
+        if include_notes:
+            self.note_event_persister_stash.clear()
 
     def get_hospital_adm_by_id(self, hadm_id: int) -> HospitalAdmission:
         """Return a hospital admission by its unique identifier."""

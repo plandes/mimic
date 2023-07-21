@@ -8,6 +8,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 
 
+### Changes
+- A cleaner CLI for MIMIC note access.
+
+### Added
+- Feature to clear cached notes from the `Corpus` class.
+
+
 ## [1.3.1] - 2023-06-25
 ### Changed
 - Add default and settings for changing the MIMIC-III database name.
