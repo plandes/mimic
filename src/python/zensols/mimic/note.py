@@ -346,6 +346,13 @@ class SectionContainer(Dictable, metaclass=ABCMeta):
         return frozendict({sec.id: sec for sec in secs})
 
     @property
+    @persisted('_sections_ordered', transient=True)
+    def sections_ordered(self) -> Tuple[Section]:
+        """Sections returned in order as they appear in the note."""
+        return tuple(map(lambda t: t[1], sorted(
+            self.sections.items(), key=lambda t: t[0])))
+
+    @property
     @persisted('_by_name', transient=True)
     def sections_by_name(self) -> Dict[str, Tuple[Section]]:
         """A map from the name of a section (i.e. *history of present illness*
