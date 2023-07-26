@@ -6,8 +6,11 @@ __author__ = 'Paul Landes'
 from typing import ClassVar, Tuple, List, Iterable, Sequence, Optional
 from dataclasses import dataclass, field
 import re
+import logging
 from zensols.nlp import LexicalSpan, FeatureSentence, FeatureDocument
 from . import SectionContainer, Section, Note
+
+logger = logging.getLogger(__name__)
 
 
 @dataclass(frozen=True)
@@ -17,11 +20,8 @@ class ListItemChunker(object):
     sentences is given if used as a callable.
 
     """
-    _LIST_PAT: ClassVar[re.Pattern] = re.compile(
-        r'^([0-9-]+[^\n]+)$', re.MULTILINE)
-
-    _ITEM_REPL: ClassVar[re.Pattern] = re.compile(
-        r'^([0-9-.]+)(\s*)([^\n]+)$')
+    DEFAULT_LIST_PATTERN: ClassVar[re.Pattern] = re.compile(
+        r'([0-9]+.+?[\r\n])$', re.MULTILINE)
 
     global_doc: FeatureDocument = field()
     """The document that contains the entire text (i.e. :class:`.Note`)."""
@@ -29,6 +29,14 @@ class ListItemChunker(object):
     sub_doc: FeatureDocument = field(default=None)
     """A lexical span of :obj:`global_doc`, which defaults to the global
     document.
+
+    """
+    global_char_offset: int = field(default=0)
+    """The 0-index absolute character offset where :obj:`sub_doc` starts."""
+
+    pattern: re.Pattern = field(default=DEFAULT_LIST_PATTERN)
+    """The list regular expression, which defaults to
+    :obj:`DEFAULT_LIST_PATTERN`.
 
     """
     def __post_init__(self):
@@ -49,22 +57,32 @@ class ListItemChunker(object):
 
         sents = []
         if self.sub_doc.token_len > 0:
-            coff: int = next(self.sub_doc.token_iter()).idx
+            coff: int = self.global_char_offset
             text: str = self.sub_doc.text
+            gtext: str = self.global_doc.text
             matches: List[LexicalSpan] = list(map(
-                match_to_span, self._LIST_PAT.finditer(text)))
+                match_to_span, self.pattern.finditer(text)))
             if len(matches) > 0:
                 tl: int = len(text) + coff
                 start: int = matches[0].begin
                 end: int = matches[-1].end
+                if logger.isEnabledFor(logging.DEBUG):
+                    logger.debug(f'coff: {coff}, start={start}, end={end}')
                 if start > coff:
-                    matches.insert(0, LexicalSpan(coff, start - 1))
+                    fms = LexicalSpan(coff, start - 1)
+                    matches.insert(0, fms)
+                    if logger.isEnabledFor(logging.DEBUG):
+                        logger.debug(f'adding offset match: {start}, {coff}: ' +
+                                     f'<<{gtext[fms[0]:fms[1]]}>>')
                 if tl > end:
                     matches.append(LexicalSpan(end, tl))
                 while len(matches) > 0:
                     span: LexicalSpan = matches.pop(0)
                     sent: FeatureSentence = None
                     empty: bool = False
+                    if logger.isEnabledFor(logging.DEBUG):
+                        logger.debug(
+                            f'match {span}: <{gtext[span[0]:span[1]]}>')
                     if span.begin > start:
                         sent = self._create_sent(
                             LexicalSpan(start, span.begin - 1))
