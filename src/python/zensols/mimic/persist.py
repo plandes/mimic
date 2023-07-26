@@ -143,7 +143,9 @@ class NoteDocumentStash(ReadOnlyStash):
             logger.debug(f'loading row ID {row_id}')
         text = self.note_db_persister.execute_by_name(
             'select_note_text_by_id', params=(row_id,), row_factory='tuple')
-        return self.doc_parser(text[0][0])
+        # many notes have trailing newlines, which may cause issues with spaCy
+        # or downstream prediction tasks
+        return self.doc_parser(text[0][0].strip())
 
     def keys(self) -> Iterable[str]:
         if logger.isEnabledFor(logging.DEBUG):
