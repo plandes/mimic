@@ -3,10 +3,93 @@
 """
 __author__ = 'Paul Landes'
 
-from typing import List, Iterable, Sequence
+from typing import ClassVar, Tuple, List, Iterable, Sequence, Optional
 from dataclasses import dataclass, field
-from zensols.nlp import LexicalSpan, FeatureDocument
+import re
+from zensols.nlp import LexicalSpan, FeatureSentence, FeatureDocument
 from . import SectionContainer, Section, Note
+
+
+@dataclass(frozen=True)
+class ListItemChunker(object):
+    """Splits list item and enumerated lists into separate sentences.  Matched
+    sentences are given if used as an iterable.  The document of all parsed
+    sentences is given if used as a callable.
+
+    """
+    _LIST_PAT: ClassVar[re.Pattern] = re.compile(
+        r'^([0-9-]+[^\n]+)$', re.MULTILINE)
+
+    _ITEM_REPL: ClassVar[re.Pattern] = re.compile(
+        r'^([0-9-.]+)(\s*)([^\n]+)$')
+
+    global_doc: FeatureDocument = field()
+    """The document that contains the entire text (i.e. :class:`.Note`)."""
+
+    sub_doc: FeatureDocument = field(default=None)
+    """A lexical span of :obj:`global_doc`, which defaults to the global
+    document.
+
+    """
+    def __post_init__(self):
+        if self.sub_doc is None:
+            self.sub_doc = self.global_doc
+
+    def _create_sent(self, span: LexicalSpan) -> Optional[FeatureSentence]:
+        sent = self.global_doc.get_overlapping_document(span).\
+            to_sentence(contiguous_i_sent='reset', delim=' ')
+        sent.strip()
+        if sent.token_len > 0:
+            return sent
+
+    def __iter__(self) -> Iterable[FeatureSentence]:
+        def match_to_span(m: re.Match) -> LexicalSpan:
+            s: Tuple[int, int] = m.span()
+            return LexicalSpan(s[0] + coff, s[1] + coff)
+
+        sents = []
+        if self.sub_doc.token_len > 0:
+            coff: int = next(self.sub_doc.token_iter()).idx
+            text: str = self.sub_doc.text
+            matches: List[LexicalSpan] = list(map(
+                match_to_span, self._LIST_PAT.finditer(text)))
+            if len(matches) > 0:
+                tl: int = len(text) + coff
+                start: int = matches[0].begin
+                end: int = matches[-1].end
+                if start > coff:
+                    matches.insert(0, LexicalSpan(coff, start - 1))
+                if tl > end:
+                    matches.append(LexicalSpan(end, tl))
+                while len(matches) > 0:
+                    span: LexicalSpan = matches.pop(0)
+                    sent: FeatureSentence = None
+                    empty: bool = False
+                    if span.begin > start:
+                        sent = self._create_sent(
+                            LexicalSpan(start, span.begin - 1))
+                        empty = sent is None
+                        if not empty:
+                            if len(sents) > 0:
+                                sdoc = FeatureDocument((sents[-1], sent))
+                                sents[-1] = sdoc.to_sentence(delim='\n')
+                            else:
+                                sents.append(sent)
+                            sent = None
+                            empty = True
+                        matches.insert(0, span)
+                    if not empty and sent is None:
+                        sent = self._create_sent(span)
+                    if sent is not None:
+                        sents.append(sent)
+                    start = span.end + 1
+        return iter(sents)
+
+    def __call__(self) -> FeatureDocument:
+        sents: Tuple[FeatureSentence] = tuple(self)
+        return FeatureDocument(
+            sents=sents,
+            text='\n'.join(map(lambda s: s.text.strip(), sents)))
 
 
 @dataclass
