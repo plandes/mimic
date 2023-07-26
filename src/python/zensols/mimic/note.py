@@ -191,8 +191,8 @@ class Section(PersistableContainer, Dictable):
     def _narrow_doc(self, doc: FeatureDocument, span: LexicalSpan,
                     filter_sent: bool = True) -> \
             FeatureDocument:
-        # this will very often leave newlines, but keep the last sentence
-        # character when the sentence chunker gets confused
+        # using inclusive=true will very often leave newlines, but keep the last
+        # sentence character when the sentence chunker gets confused
         doc = doc.get_overlapping_document(span, inclusive=True)
         if filter_sent:
             sreg: re.Pattern = self._SENT_FILTER_REGEX
