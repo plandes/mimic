@@ -5,12 +5,15 @@ __author__ = 'Paul Landes'
 
 from typing import Tuple, Union, Optional, ClassVar, List
 from dataclasses import dataclass, field
+import logging
 import re
 from frozendict import frozendict
 from spacy.language import Language
 from spacy.lang.char_classes import ALPHA
 from spacy.util import compile_infix_regex
 from zensols.nlp import Component, FeatureTokenDecorator, FeatureToken
+
+logger = logging.getLogger(__name__)
 
 
 @dataclass
@@ -123,11 +126,14 @@ class MimicTokenDecorator(FeatureTokenDecorator):
                 matched = True
                 setattr(token, self.TOKEN_FEATURE_ID, ent)
                 if ent == self.PSEUDO_TOKEN_FEATURE:
-                    token.norm = self.UNKNOWN_ENTITY
-                    pseudo_val = m.group(1)
+                    token.norm: str = self.UNKNOWN_ENTITY
+                    pseudo_val: str = m.group(1)
                     for regex, repl in self.token_entities:
                         if regex.match(pseudo_val) is not None:
                             oid = self.onto_mapping.get(repl, FeatureToken.NONE)
+                            if logger.isEnabledFor(logging.DEBUG):
+                                logger.debug(f'dec: {self.TOKEN_FEATURE_ID} ' +
+                                             f' -> {ent}, norm -> {pseudo_val}')
                             token.norm = repl
                             break
                 break
