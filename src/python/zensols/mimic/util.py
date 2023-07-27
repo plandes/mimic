@@ -7,104 +7,45 @@ from typing import ClassVar, Tuple, List, Iterable, Sequence, Optional
 from dataclasses import dataclass, field
 import re
 import logging
-from zensols.nlp import LexicalSpan, FeatureSentence, FeatureDocument
+from zensols.nlp import (
+    LexicalSpan, TokenContainer, FeatureSentence, FeatureDocument
+)
+from zensols.nlp.chunker import Chunker
 from . import SectionContainer, Section, Note
 
 logger = logging.getLogger(__name__)
 
 
-@dataclass(frozen=True)
-class ListItemChunker(object):
-    """Splits list item and enumerated lists into separate sentences.  Matched
-    sentences are given if used as an iterable.  The document of all parsed
-    sentences is given if used as a callable.
+@dataclass
+class ListItemChunker(Chunker):
+    """A :class:`.Chunker` that splits list item and enumerated lists into
+    separate sentences.  Matched sentences are given if used as an iterable.
 
     """
-    DEFAULT_LIST_PATTERN: ClassVar[re.Pattern] = re.compile(
-        r'([0-9]+.+?[\r\n])$', re.MULTILINE)
-
-    global_doc: FeatureDocument = field()
-    """The document that contains the entire text (i.e. :class:`.Note`)."""
-
-    sub_doc: FeatureDocument = field(default=None)
-    """A lexical span of :obj:`global_doc`, which defaults to the global
-    document.
+    DEFAULT_SPAN_PATTERN: ClassVar[re.Pattern] = re.compile(
+        r'^((?:[0-9+-]+|[a-zA-Z]+:)[^\n]+)$', re.MULTILINE)
+    """The default list item regular expression, which uses an initial character
+    item notation or an initial enumeration digit.
 
     """
-    global_char_offset: int = field(default=0)
-    """The 0-index absolute character offset where :obj:`sub_doc` starts."""
-
-    pattern: re.Pattern = field(default=DEFAULT_LIST_PATTERN)
+    pattern: re.Pattern = field(default=DEFAULT_SPAN_PATTERN)
     """The list regular expression, which defaults to
-    :obj:`DEFAULT_LIST_PATTERN`.
+    :obj:`DEFAULT_SPAN_PATTERN`.
 
     """
-    def __post_init__(self):
-        if self.sub_doc is None:
-            self.sub_doc = self.global_doc
-
-    def _create_sent(self, span: LexicalSpan) -> Optional[FeatureSentence]:
-        sent = self.global_doc.get_overlapping_document(span).\
+    def _create_container(self, span: LexicalSpan) -> Optional[TokenContainer]:
+        sent = self.doc.get_overlapping_document(span).\
             to_sentence(contiguous_i_sent='reset', delim=' ')
         sent.strip()
         if sent.token_len > 0:
             return sent
 
-    def __iter__(self) -> Iterable[FeatureSentence]:
-        def match_to_span(m: re.Match) -> LexicalSpan:
-            s: Tuple[int, int] = m.span()
-            return LexicalSpan(s[0] + coff, s[1] + coff)
+    def _merge_containers(self, a: TokenContainer, b: TokenContainer) -> \
+            TokenContainer:
+        return FeatureDocument((a, b)).to_sentence(delim='\n')
 
-        sents = []
-        if self.sub_doc.token_len > 0:
-            coff: int = self.global_char_offset
-            text: str = self.sub_doc.text
-            gtext: str = self.global_doc.text
-            matches: List[LexicalSpan] = list(map(
-                match_to_span, self.pattern.finditer(text)))
-            if len(matches) > 0:
-                tl: int = len(text) + coff
-                start: int = matches[0].begin
-                end: int = matches[-1].end
-                if logger.isEnabledFor(logging.DEBUG):
-                    logger.debug(f'coff: {coff}, start={start}, end={end}')
-                if start > coff:
-                    fms = LexicalSpan(coff, start - 1)
-                    matches.insert(0, fms)
-                    if logger.isEnabledFor(logging.DEBUG):
-                        logger.debug(f'adding offset match: {start}, {coff}: ' +
-                                     f'<<{gtext[fms[0]:fms[1]]}>>')
-                if tl > end:
-                    matches.append(LexicalSpan(end, tl))
-                while len(matches) > 0:
-                    span: LexicalSpan = matches.pop(0)
-                    sent: FeatureSentence = None
-                    empty: bool = False
-                    if logger.isEnabledFor(logging.DEBUG):
-                        logger.debug(
-                            f'match {span}: <{gtext[span[0]:span[1]]}>')
-                    if span.begin > start:
-                        sent = self._create_sent(
-                            LexicalSpan(start, span.begin - 1))
-                        empty = sent is None
-                        if not empty:
-                            if len(sents) > 0:
-                                sdoc = FeatureDocument((sents[-1], sent))
-                                sents[-1] = sdoc.to_sentence(delim='\n')
-                            else:
-                                sents.append(sent)
-                            sent = None
-                            empty = True
-                        matches.insert(0, span)
-                    if not empty and sent is None:
-                        sent = self._create_sent(span)
-                    if sent is not None:
-                        sents.append(sent)
-                    start = span.end + 1
-        return iter(sents)
-
-    def __call__(self) -> FeatureDocument:
-        sents: Tuple[FeatureSentence] = tuple(self)
+    def to_document(self, conts: Iterable[TokenContainer]) -> FeatureDocument:
+        sents: Tuple[FeatureSentence] = tuple(conts)
         return FeatureDocument(
             sents=sents,
             text='\n'.join(map(lambda s: s.text.strip(), sents)))
