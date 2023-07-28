@@ -40,14 +40,14 @@ class NoteFormat(Enum):
     @property
     def ext(self) -> str:
         return {
-            'text': 'txt',
-            'raw': 'txt',
-            'verbose': 'txt',
-            'summary': 'txt',
-            'json': 'json',
-            'yaml': 'yaml',
-            'markdown': 'md'
-        }[self.name]
+            self.text: 'txt',
+            self.raw: 'txt',
+            self.verbose: 'txt',
+            self.summary: 'txt',
+            self.json: 'json',
+            self.yaml: 'yaml',
+            self.markdown: 'md'
+        }[self]
 
 
 class SectionAnnotatorType(Enum):
