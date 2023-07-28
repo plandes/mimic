@@ -196,8 +196,8 @@ class Section(PersistableContainer, Dictable):
         doc = doc.get_overlapping_document(span, inclusive=True)
         if filter_sent:
             sreg: re.Pattern = self._SENT_FILTER_REGEX
-            doc.sents = list(filter(lambda s: sreg.match(s.text) is None,
-                                    doc.sents))
+            doc.sents = tuple(filter(lambda s: sreg.match(s.text) is None,
+                                     doc.sents))
         return doc
 
     @property
