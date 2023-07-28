@@ -469,9 +469,6 @@ class SectionContainer(Dictable, metaclass=ABCMeta):
             elif len(sec.body) > 0:
                 self._write_block(sec.body, depth, writer)
 
-    def write(self, depth: int = 0, writer: TextIOBase = sys.stdout):
-        self.write_human(depth, writer)
-
     def write_full(self, depth: int = 0, writer: TextIOBase = sys.stdout,
                    note_line_limit: int = sys.maxsize,
                    section_line_limit: int = sys.maxsize,
@@ -548,11 +545,55 @@ class SectionContainer(Dictable, metaclass=ABCMeta):
          NoteFormat.summary: lambda: summary_format(depth, writer),
          }[note_format]()
 
+    def write(self, depth: int = 0, writer: TextIOBase = sys.stdout):
+        self.write_human(depth, writer)
+
     def __getitem__(self, id: int) -> Section:
         return self.sections[id]
 
     def __iter__(self) -> Iterable[Section]:
         return iter(sorted(self.sections.values(), key=lambda s: s.lexspan))
+
+
+@dataclass
+class GapSectionContainer(SectionContainer):
+    """A container that fills in missing sections of text from a note with
+    additional sections.
+
+    """
+    delegate: Note = field()
+    """The note with the sections to be filled."""
+
+    def _get_doc(self) -> FeatureDocument:
+        return self.delegate._get_doc()
+
+    def _get_sections(self) -> Iterable[Section]:
+        sections: List[Section] = list(
+            map(lambda s: s.clone(), self.delegate.sections.values()))
+        if len(sections) > 0:
+            note_text: str = self.delegate.text
+            gaps: Sequence[LexicalSpan] = LexicalSpan.gaps(
+                spans=map(lambda s: s.lexspan, sections),
+                end=len(note_text))
+            ref_sec: Section = sections[0]
+            sec_cont: SectionContainer = ref_sec.container
+            gap_secs: List[Section] = []
+            for gs in gaps:
+                gsec = Section(
+                    id=-1,
+                    name=None,
+                    container=sec_cont,
+                    header_spans=(),
+                    body_span=gs)
+                ref_sec._copy_resources(gsec)
+                gap_secs.append(gsec)
+            sections.extend(gap_secs)
+            sections.sort(key=lambda s: s.lexspan)
+            sec: Section
+            for sid, sec in enumerate(sections):
+                sec.original_id = sec.id
+                sec.id = sid
+        return sections
 
 
 @dataclass
