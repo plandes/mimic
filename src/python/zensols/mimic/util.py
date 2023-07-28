@@ -23,7 +23,7 @@ class ListItemChunker(Chunker):
 
     """
     DEFAULT_SPAN_PATTERN: ClassVar[re.Pattern] = re.compile(
-        r'^((?:[0-9+-]+|[a-zA-Z]+:)[^\n]+)$', re.MULTILINE)
+        r'^((?:[0-9-+]+|[a-zA-Z]+:)[^\n]+)$', re.MULTILINE)
     """The default list item regular expression, which uses an initial character
     item notation or an initial enumeration digit.
 
@@ -34,21 +34,29 @@ class ListItemChunker(Chunker):
 
     """
     def _create_container(self, span: LexicalSpan) -> Optional[TokenContainer]:
-        sent = self.doc.get_overlapping_document(span).\
-            to_sentence(contiguous_i_sent='reset', delim=' ')
+        doc: FeatureDocument = self.doc.get_overlapping_document(span)
+        sent: FeatureSentence = doc.to_sentence()
         sent.strip()
         if sent.token_len > 0:
+            if logger.isEnabledFor(logging.DEBUG):
+                logger.debug(f'narrowed sent: <{sent.text}>')
             return sent
 
     def _merge_containers(self, a: TokenContainer, b: TokenContainer) -> \
             TokenContainer:
+        if logger.isEnabledFor(logging.DEBUG):
+            logger.debug(f'merging: {a}||{b}')
         return FeatureDocument((a, b)).to_sentence(delim='\n')
 
     def to_document(self, conts: Iterable[TokenContainer]) -> FeatureDocument:
         sents: Tuple[FeatureSentence] = tuple(conts)
+        if logger.isEnabledFor(logging.DEBUG):
+            logger.debug('creating doc from:')
+            for s in sents:
+                logger.debug(f'  {s}')
         return FeatureDocument(
             sents=sents,
-            text='\n'.join(map(lambda s: s.text.strip(), sents)))
+            text='\n'.join(map(lambda s: s.text, sents)))
 
 
 @dataclass
