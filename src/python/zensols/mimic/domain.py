@@ -3,7 +3,7 @@
 """
 __author__ = 'Paul Landes'
 
-from typing import Dict, Any, Type, ClassVar, Set
+from typing import Dict, Any, Type, ClassVar, Set, Callable
 from dataclasses import dataclass, field, InitVar
 import sys
 import re
@@ -400,13 +400,27 @@ class NoteEvent(MimicContainer):
         """The parsed document of the :obj:`name` of the section."""
         return self._get_doc()
 
+    def get_normal_name(self, include_desc: bool = True) -> str:
+        """A normalized name of the note useful as a file name (sans extension).
+
+        :param include_desc: whether or not to add the note's desc field, which
+                             adds an extra dash (``-``) for any subsequent file
+                             name parsing
+
+        """
+        nfn: Callable = FileTextUtil.normalize_text
+        if include_desc:
+            return (f'{self.row_id}--{nfn(self.category)}--' +
+                    nfn(self.description))
+        else:
+            return nfn(f'{self.row_id}-{nfn(self.category)}')
+
     @property
     def normal_name(self) -> str:
         """A normalized name of the note useful as a file name (sans extension).
 
         """
-        return FileTextUtil.normalize_text(
-            f'{self.row_id}-{self.category}-{self.description}')
+        return self.get_normal_name()
 
     def _get_doc(self) -> FeatureDocument:
         return self._doc_stash[str(self.row_id)]
