@@ -104,6 +104,7 @@ class Section(PersistableContainer, Dictable):
     *history of present illness* in a discharge note.
 
     """
+    _DICTABLE_WRITABLE_DESCENDANTS: ClassVar[bool] = True
     _PERSITABLE_TRANSIENT_ATTRIBUTES: ClassVar[Set[str]] = {
         'container', '_doc_stash', '_paragraph_factory'}
 
@@ -264,12 +265,20 @@ class Section(PersistableContainer, Dictable):
                 ents = ', '.join(map(map_ent, sent.entities))
                 self._write_line(f'entities: {ents}', depth, writer)
 
+    def write_as_item(self, depth: int = 0, writer: TextIOBase = sys.stdout):
+        """A terse output designed for list iteration."""
+        self._write_line(f'id: {self.id}', depth, writer)
+        self.write(depth + 1, writer, body_line_limit=0, norm_line_limit=0,
+                   include_header_spans=True, include_body_span=True,
+                   include_id_name=False)
+
     def write(self, depth: int = 0, writer: TextIOBase = sys.stdout,
               body_line_limit: int = sys.maxsize,
               norm_line_limit: int = sys.maxsize,
               par_limit: int = 0, sent_limit: int = 0,
-              include_header: bool = True,
-              include_id_name: bool = True):
+              include_header: bool = True, include_id_name: bool = True,
+              include_header_spans: bool = False,
+              include_body_span: bool = False):
         """Write a note section's name, original body, normalized body and
         sentences with respective sentence entities.
 
@@ -293,7 +302,12 @@ class Section(PersistableContainer, Dictable):
             self._write_line(f'id: {self.id}', depth, writer)
             self._write_line(f'name: {self.name}', depth, writer)
         if include_header:
-            self._write_line(f'headers: {header}', depth, writer)
+            self._write_line(f'header: {header}', depth, writer)
+        if include_header_spans:
+            self._write_line(f'header spans: {self.header_spans}',
+                             depth, writer)
+        if include_body_span:
+            self._write_line(f'body span: {self.body_span}', depth, writer)
         if not self.is_empty:
             if body_line_limit > 0:
                 self._write_line('body:', depth, writer)
