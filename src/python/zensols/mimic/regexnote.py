@@ -45,6 +45,8 @@ class RegexNote(Note, metaclass=ABCMeta):
                 sid += 1
         except StopIteration:
             pass
+        if len(secs) == 0:
+            secs = super()._get_sections()
         return secs
 
 

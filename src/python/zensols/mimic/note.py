@@ -337,6 +337,8 @@ class SectionContainer(Dictable, metaclass=ABCMeta):
 
     """
     _DICTABLE_ATTRIBUTES: ClassVar[Set[str]] = {'sections'}
+    DEFAULT_SECTION_NAME: ClassVar[str] = 'default'
+    """The name of the singleton section when none the note is not sectioned."""
 
     @abstractmethod
     def _get_doc(self) -> FeatureDocument:
@@ -623,7 +625,8 @@ class Note(NoteEvent, SectionContainer):
     _DICTABLE_WRITABLE_DESCENDANTS: ClassVar[bool] = True
 
     def _get_sections(self) -> Iterable[Section]:
-        sec = Section(0, 'default', self, (), LexicalSpan(0, len(self.text)))
+        sec = Section(0, self.DEFAULT_SECTION_NAME, self, (),
+                      LexicalSpan(0, len(self.text)))
         sec._row_id = self.row_id
         return [sec]
 
