@@ -19,7 +19,7 @@ logger = logging.getLogger(__name__)
 @dataclass
 class MimicTokenizerComponent(Component):
     """Modifies the spacCy tokenizer to split on colons (``:``) to capture more
-    MIMIC-III pseudo tokens.
+    MIMIC-III mask tokens.
 
     """
     def init(self, model: Language):
@@ -47,7 +47,7 @@ class MimicTokenizerComponent(Component):
 @dataclass
 class MimicTokenDecorator(FeatureTokenDecorator):
     """Contains the MIMIC-III regular expressions and other patterns to annotate
-    and normalized feature tokens.  The class finds pseudo tokens and
+    and normalized feature tokens.  The class finds mask tokens and
     separators (such as a long string of dashes or asterisks).
 
     Attribute :obj:`onto_mapping` is a mapping from the MIMIC symbol in
@@ -61,11 +61,11 @@ class MimicTokenDecorator(FeatureTokenDecorator):
     ONTO_FEATURE_ID: ClassVar[str] = 'onto_'
     """The feature ID to use for the Onto Notes 5 (:obj:`onto_mapping`)."""
 
-    PSEUDO_REGEX: ClassVar[re.Pattern] = re.compile(r'\[\*\*([^\*]+)\*\*\]')
-    """Matches pseudo tokens."""
+    MASK_REGEX: ClassVar[re.Pattern] = re.compile(r'\[\*\*([^\*]+)\*\*\]')
+    """Matches mask tokens."""
 
-    PSEUDO_TOKEN_FEATURE: ClassVar[str] = 'pseudo'
-    """The value given from entity :obj:`TOKEN_FEATURE_ID` for pseudo tokens
+    MASK_TOKEN_FEATURE: ClassVar[str] = 'mask'
+    """The value given from entity :obj:`TOKEN_FEATURE_ID` for mask tokens
     (i.e. ``[**First Name**]``).
 
     """
@@ -77,11 +77,11 @@ class MimicTokenDecorator(FeatureTokenDecorator):
     """Matches text based separators such as a long string of dashes."""
 
     UNKNOWN_ENTITY: ClassVar[str] = '<UNKNOWN>'
-    """The pseudo nromalized token form for unknown MIMIC entity text
+    """The mask nromalized token form for unknown MIMIC entity text
     (i.e. First Name).
 
     """
-    _REGEXES: ClassVar[List] = [[PSEUDO_REGEX, PSEUDO_TOKEN_FEATURE],
+    _REGEXES: ClassVar[List] = [[MASK_REGEX, MASK_TOKEN_FEATURE],
                                 [SEP_REGEX, SEPARATOR_TOKEN_FEATURE]]
 
     token_entities: Tuple[Tuple[Union[re.Pattern, str]], str, Optional[str]] = \
@@ -125,15 +125,15 @@ class MimicTokenDecorator(FeatureTokenDecorator):
             if m is not None:
                 matched = True
                 setattr(token, self.TOKEN_FEATURE_ID, ent)
-                if ent == self.PSEUDO_TOKEN_FEATURE:
+                if ent == self.MASK_TOKEN_FEATURE:
                     token.norm: str = self.UNKNOWN_ENTITY
-                    pseudo_val: str = m.group(1)
+                    mask_val: str = m.group(1)
                     for regex, repl in self.token_entities:
-                        if regex.match(pseudo_val) is not None:
+                        if regex.match(mask_val) is not None:
                             oid = self.onto_mapping.get(repl, FeatureToken.NONE)
                             if logger.isEnabledFor(logging.DEBUG):
                                 logger.debug(f'dec: {self.TOKEN_FEATURE_ID} ' +
-                                             f' -> {ent}, norm -> {pseudo_val}')
+                                             f' -> {ent}, norm -> {mask_val}')
                             token.norm = repl
                             break
                 break

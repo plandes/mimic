@@ -80,7 +80,7 @@ Attending:[**First Name3 (LF) 922**]"""
 
         should = ('-<N>-', '-<N>-', '-<N>-', '-<N>-', '-<N>-', '-<N>-',
                   '-<N>-', '-<N>-', '-<N>-', '-<N>-', '-<N>-', '-<N>-', '-<N>-',
-                  'pseudo')
+                  'mask')
         self.assertEqual(should, tuple(map(
             lambda t: t.mimic_, doc.token_iter())))
 
@@ -123,6 +123,6 @@ Attending:[**First Name3 (LF) 922**]"""
 
         should = ('-<N>-', '-<N>-', '-<N>-', '-<N>-', '-<N>-', '-<N>-',
                   '-<N>-', '-<N>-', '-<N>-', '-<N>-', '-<N>-', '-<N>-',
-                  '-<N>-', '-<N>-', '-<N>-', '-<N>-', '-<N>-', 'pseudo')
+                  '-<N>-', '-<N>-', '-<N>-', '-<N>-', '-<N>-', 'mask')
         self.assertEqual(should, tuple(map(
             lambda t: t.mimic_, doc.token_iter())))
