@@ -9,6 +9,7 @@ from typing import (
 from dataclasses import dataclass, field, fields
 from abc import ABCMeta, abstractmethod
 from enum import Enum, auto
+import logging
 import sys
 import re
 import collections
@@ -23,6 +24,8 @@ from zensols.persist import PersistableContainer, persisted
 from zensols.nlp import LexicalSpan, FeatureToken, FeatureDocument
 from zensols.nlp.dataframe import FeatureDataFrameFactory
 from . import NoteEvent
+
+logger = logging.getLogger(__name__)
 
 
 class NoteFormat(Enum):
@@ -612,7 +615,7 @@ class GapSectionContainer(SectionContainer):
         return sections
 
 
-@dataclass
+@dataclass(repr=False)
 class Note(NoteEvent, SectionContainer):
     """A container class of :class:`.Section` for each section for the
     text in the note events given by the property  :obj:`sections`.
@@ -697,6 +700,8 @@ class NoteFactory(object):
     """
     def _event_to_note(self, note_event: NoteEvent, section: str,
                        params: Dict[str, Any] = None) -> Note:
+        if logger.isEnabledFor(logging.DEBUG):
+            logger.debug(f'even to note (section={section}): {note_event}')
         ne_params = {f.name: getattr(note_event, f.name)
                      for f in fields(note_event)}
         if params is not None:
@@ -714,6 +719,8 @@ class NoteFactory(object):
                         :obj:`mimic_default_note_section` for a :class:`.Note`
 
         """
+        if logger.isEnabledFor(logging.DEBUG):
+            logger.debug(f'create note from event: {note_event}')
         if section is None:
             section = self.category_to_note.get(note_event.category)
         if section is None:

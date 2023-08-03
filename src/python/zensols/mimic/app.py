@@ -206,3 +206,29 @@ class Application(object):
                 print('norm:')
                 print(norm)
             print('_' * 120)
+
+    def proto(self):
+        if 0:
+            hadm_id = '111919'
+            adm: HospitalAdmission = self._get_adm(hadm_id)
+            for note in adm.notes:
+                note.write_fields()
+        if 0:
+            stash = self.config_factory('mimic_note_stash')
+            note = stash['59537']
+            note.doc.write()
+        if 0:
+            hadm_id = '111919'
+            adm: HospitalAdmission = self._get_adm(hadm_id)
+            note = adm['59537']
+            print(note, type(note), isinstance(note, Note))
+            note.doc.write()
+        if 1:
+            hadm_id = '111919'
+            adm: HospitalAdmission = self._get_adm(hadm_id)
+            note = adm._note_stash['105066']#'59537']
+            print(tuple(adm.keys()))
+            note.write_human()
+            for k, ns in adm.notes_by_category.items():
+                for n in ns:
+                    print(k, '||', n.id)

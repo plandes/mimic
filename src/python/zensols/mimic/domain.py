@@ -6,13 +6,15 @@ __author__ = 'Paul Landes'
 from typing import Dict, Any, Type, ClassVar, Set, Callable
 from dataclasses import dataclass, field, InitVar
 import sys
-import re
+import logging
 from datetime import datetime
 from io import TextIOBase
 from zensols.util import APIError
 from zensols.config import Dictable, Settings
 from zensols.persist import PersistableContainer, persisted, Stash, FileTextUtil
 from zensols.nlp import FeatureDocument
+
+logger = logging.getLogger(__name__)
 
 
 class MimicError(APIError):
@@ -37,7 +39,7 @@ class MimicParseError(MimicError):
         super().__init__(f'Could not parse: <{text}>')
 
 
-@dataclass
+@dataclass(repr=False)
 class MimicContainer(PersistableContainer, Dictable):
     """Abstract base class for data containers, which are plain old Python
     objects that are CRUD'd from DAO persisters.
@@ -59,8 +61,14 @@ class MimicContainer(PersistableContainer, Dictable):
         self._write_line(f'row_id: {self.row_id}', depth, writer)
         self._write_object(dct, depth + 1, writer)
 
+    def __str__(self) -> str:
+        return f'id: {self.row_id}'
 
-@dataclass
+    def __repr__(self) -> str:
+        return self.__str__()
+
+
+@dataclass(repr=False)
 class Admission(MimicContainer):
     """The ADMISSIONS table gives information regarding a patient’s admission to
     the hospital. Since each unique hospital visit for a patient is assigned a
@@ -159,7 +167,7 @@ class Admission(MimicContainer):
     """
 
 
-@dataclass
+@dataclass(repr=False)
 class Patient(MimicContainer):
     """Table source: CareVue and Metavision ICU databases.
 
@@ -202,7 +210,7 @@ class Patient(MimicContainer):
     """Flag indicating that the patient has died."""
 
 
-@dataclass
+@dataclass(repr=False)
 class HospitalAdmissionContainer(MimicContainer):
     """Any data container that has a unique identifier with an (inpatient)
     non-null identifier.
@@ -212,7 +220,7 @@ class HospitalAdmissionContainer(MimicContainer):
     """Primary key. Identifies the hospital admission."""
 
 
-@dataclass
+@dataclass(repr=False)
 class ICD9Container(MimicContainer):
     """A data container that has ICD-9 codes.
     """
@@ -226,7 +234,7 @@ class ICD9Container(MimicContainer):
     """Long title associated with the code."""
 
 
-@dataclass
+@dataclass(repr=False)
 class Diagnosis(ICD9Container):
     """Table source: Hospital database.
 
@@ -245,7 +253,7 @@ class Diagnosis(ICD9Container):
     pass
 
 
-@dataclass
+@dataclass(repr=False)
 class Procedure(ICD9Container):
     """Table source: Hospital database.
 
@@ -264,7 +272,7 @@ class Procedure(ICD9Container):
     pass
 
 
-@dataclass
+@dataclass(repr=False)
 class NoteEvent(MimicContainer):
     """Table source: Hospital database.
 
@@ -385,20 +393,22 @@ class NoteEvent(MimicContainer):
         return self._trans_context['doc_stash']
 
     @property
-    @persisted('_id')
-    def id(self) -> str:
-        return re.sub(r'[/ ]+', '-', self.category).lower()
-
-    @property
     @persisted('_truncated_text', transient=True)
     def truncted_text(self) -> str:
-        return self._trunc(self.text, 70).replace('\n', ' ').strip()
+        """A beginning substring of the note's text useful for debugging."""
+        return self._trunc(self.text.strip(), 70).replace('\n', ' ').strip()
 
     @property
     @persisted('_doc', transient=True)
     def doc(self) -> FeatureDocument:
         """The parsed document of the :obj:`name` of the section."""
         return self._get_doc()
+
+    @property
+    @persisted('_id')
+    def id(self) -> str:
+        """The unique identifier of this note event."""
+        return FileTextUtil.normalize_text(self.category).lower()
 
     def get_normal_name(self, include_desc: bool = True) -> str:
         """A normalized name of the note useful as a file name (sans extension).
@@ -423,6 +433,9 @@ class NoteEvent(MimicContainer):
         return self.get_normal_name()
 
     def _get_doc(self) -> FeatureDocument:
+        if logger.isEnabledFor(logging.DEBUG):
+            logger.debug(f'getting doc for {self.row_id} ' +
+                         f'from {type(self._doc_stash)}')
         return self._doc_stash[str(self.row_id)]
 
     def write(self, depth: int = 0, writer: TextIOBase = sys.stdout,
@@ -457,5 +470,4 @@ class NoteEvent(MimicContainer):
                 self._write_divider(depth + note_indent, writer, char='_')
 
     def __str__(self):
-        text = self.truncted_text
-        return f'{self.row_id}: ({self.category}): {text}'
+        return f'{self.row_id}: ({self.category}): {self.truncted_text}'

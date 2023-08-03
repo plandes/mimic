@@ -3,7 +3,7 @@
 """
 __author__ = 'Paul Landes'
 
-from typing import Tuple, Dict, Iterable, List, Set, Callable
+from typing import Tuple, Dict, Iterable, List, Set, Callable, ClassVar
 from dataclasses import dataclass, field
 import sys
 import logging
@@ -14,11 +14,12 @@ from frozendict import frozendict
 from io import TextIOBase
 import pandas as pd
 from zensols.persist import (
-    PersistableContainer, persisted,
-    Stash, ReadOnlyStash, FactoryStash, DirectoryStash,
+    PersistableContainer, persisted, Stash,
+    ReadOnlyStash, FactoryStash, DirectoryStash, KeySubsetStash,
 )
 from zensols.config import Dictable, ConfigFactory, Settings
 from zensols.multi import MultiProcessFactoryStash
+from zensols.db import BeanStash
 from . import (
     Admission, Patient, Diagnosis, Procedure, NoteEvent,
     DiagnosisPersister, ProcedurePersister, PatientPersister,
@@ -35,7 +36,8 @@ class HospitalAdmission(PersistableContainer, Dictable):
     the MIMIC dataset as integers and not strings like some note stashes.
 
     """
-    _DICTABLE_ATTRIBUTES = 'hadm_id notes'.split()
+    _DICTABLE_ATTRIBUTES: ClassVar[List[str]] = 'hadm_id'.split()
+    _PERSITABLE_TRANSIENT_ATTRIBUTES: ClassVar[Set[str]] = {'_note_stash'}
 
     admission: Admission = field()
     """The admission of the admission."""
@@ -49,16 +51,21 @@ class HospitalAdmission(PersistableContainer, Dictable):
     procedures: Tuple[Procedure] = field()
     """The ICD-9 procedures of the hospital admission."""
 
-    notes: Tuple[Note] = field()
-    """The notes by the care givers."""
-
     def __post_init__(self):
         super().__init__()
+
+    def _init(self, note_stash: Stash):
+        self._note_stash = note_stash
 
     @property
     def hadm_id(self) -> int:
         """The hospital admission unique identifier."""
         return self.admission.hadm_id
+
+    @property
+    def notes(self) -> Iterable[Note]:
+        """The notes by the care givers."""
+        return iter(self._note_stash.values())
 
     @property
     @persisted('_by_category', transient=True)
@@ -71,12 +78,6 @@ class HospitalAdmission(PersistableContainer, Dictable):
         for note in self.notes:
             notes[note.category].append(note)
         return frozendict({k: tuple(notes[k]) for k in notes.keys()})
-
-    @property
-    @persisted('_by_id', transient=True)
-    def notes_by_id(self) -> Dict[int, Note]:
-        """Get a note by its ``row_id``."""
-        return frozendict({f.row_id: f for f in self.notes})
 
     def get_duplicate_notes(self, text_start: int = None) -> Tuple[Set[str]]:
         """Notes with the same note text, each in their respective set.
@@ -251,21 +252,55 @@ class HospitalAdmission(PersistableContainer, Dictable):
         self.write(depth, writer, **wkwargs)
 
     def keys(self) -> Iterable[int]:
-        return self.notes_by_id.keys()
+        return map(int, self._note_stash.keys())
 
     def __getitem__(self, row_id: int):
-        return self.notes_by_id[row_id]
+        return self._note_stash[str(row_id)]
 
     def __contains__(self, row_id: int):
-        return row_id in self.notes_by_id
+        return str(row_id) in self.notes_by_id
 
     def __iter__(self) -> Iterable[Note]:
-        return iter(self.notes)
+        return iter(self._note_stash.values())
+
+    def __len__(self) -> int:
+        return len(self._note_stash)
 
     def __str__(self):
         return (f'subject: {self.admission.subject_id}, ' +
                 f'hadm: {self.admission.hadm_id}, ' +
-                f'num notes: {len(self.notes)}')
+                f'num notes: {len(self)}')
+
+
+@dataclass
+class _NoteBeanStash(BeanStash):
+    """
+    """
+    mimic_note_factory: NoteFactory = field()
+    """The factory that creates :class:`.Note` for hopsital admissions."""
+
+    def load(self, row_id: str) -> Note:
+        note_event: NoteEvent = super().load(row_id)
+        if note_event is not None:
+            logger.debug(f'creating note from {note_event}')
+            return self.mimic_note_factory.create(note_event)
+
+
+@dataclass
+class _NoteFactoryStash(FactoryStash):
+    mimic_note_context: Settings = field(default=None)
+    """Contains resources needed by new and re-hydrated notes, such as the
+    document stash.
+
+    """
+    def load(self, row_id: str) -> Note:
+        if logger.isEnabledFor(logging.DEBUG):
+            logger.debug(f'loading note: {row_id}')
+        note: Note = super().load(row_id)
+        if note is not None:
+            logger.debug(f'setting note context on {row_id}')
+            note._trans_context = self.mimic_note_context
+        return note
 
 
 @dataclass
@@ -297,6 +332,9 @@ class HospitalAdmissionDbStash(ReadOnlyStash):
     note_event_persister: NoteEventPersister = field()
     """The persister for the ``noteevents`` table."""
 
+    note_stash: Stash = field()
+    """Creates cached instances of :class:`.Note`."""
+
     hospital_adm_name: str = field()
     """The configuration section name of the :class:`.HospitalAdmission` used to
     load instances.
@@ -305,6 +343,14 @@ class HospitalAdmissionDbStash(ReadOnlyStash):
     def __post_init__(self):
         super().__post_init__()
         self.strict = True
+
+    def _create_note_stash(self, adm: Admission):
+        np: NoteEventPersister = self.note_event_persister
+        row_ids: Tuple[int] = np.get_row_ids_by_hadm_id(adm.hadm_id)
+        return KeySubsetStash(
+            delegate=self.note_stash,
+            key_subset=set(map(str, row_ids)),
+            dynamic_subset=False)
 
     def load(self, hadm_id: str) -> HospitalAdmission:
         """Create a *complete picture* of a hospital stay with admission,
@@ -322,12 +368,11 @@ class HospitalAdmissionDbStash(ReadOnlyStash):
         pat: Patient = self.patient_persister.get_by_subject_id(adm.subject_id)
         diag: Tuple[Diagnosis] = dp.get_by_hadm_id(hadm_id)
         procds: Tuple[Procedure] = pp.get_by_hadm_id(hadm_id)
-        note_events: Tuple[NoteEvent] = self.note_event_persister.\
-            get_notes_by_hadm_id(hadm_id)
-        # TODO: move note creation to other stash for mimicsid sec prediction
-        notes = tuple(map(self.mimic_note_factory, note_events))
-        return self.config_factory.new_instance(
-            self.hospital_adm_name, adm, pat, diag, procds, notes)
+        note_stash: Stash = self._create_note_stash(adm)
+        adm: HospitalAdmission = self.config_factory.new_instance(
+            self.hospital_adm_name, adm, pat, diag, procds)
+        adm._init(note_stash)
+        return adm
 
     @persisted('_keys', cache_global=True)
     def keys(self) -> Iterable[str]:
@@ -386,20 +431,6 @@ class HospitalAdmissionDbFactoryStash(FactoryStash):
     document stash.
 
     """
-    def _populate_note(self, note: Note):
-        """Add back the stash that allows the note to parse English text."""
-        note._trans_context = self.mimic_note_context
-
-    def _populate_hadm(self, hadm: HospitalAdmission):
-        """Populate notes of the admission with in memory resources.
-
-        :see: :meth:`_populate_note`
-
-        """
-        note: Note
-        for note in hadm.notes:
-            self._populate_note(note)
-
     def process_keys(self, hadm_ids: Iterable[str]):
         """Invoke the multi-processing system to preemptively parse and store
         all hospital admissions and subordinate note events for the IDs
@@ -419,13 +450,10 @@ class HospitalAdmissionDbFactoryStash(FactoryStash):
     def load(self, hadm_id: str) -> HospitalAdmission:
         if logger.isEnabledFor(logging.DEBUG):
             logger.debug(f'loading hospital admission: {hadm_id}')
-        hadm: HospitalAdmission = super().load(hadm_id)
-        if hadm is not None:
-            self._populate_hadm(hadm)
-        return hadm
-
-    def clear(self):
-        super().clear()
+        adm: HospitalAdmission = super().load(hadm_id)
+        db_stash: HospitalAdmissionDbStash = self.factory
+        adm._init(db_stash._create_note_stash(adm))
+        return adm
 
     def clear_all(self, include_admissions: bool = True,
                   include_notes: bool = True):

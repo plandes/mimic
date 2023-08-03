@@ -11,7 +11,7 @@ from zensols.nlp import LexicalSpan
 from . import Section, SectionAnnotatorType, Note
 
 
-@dataclass
+@dataclass(repr=False)
 class RegexNote(Note, metaclass=ABCMeta):
     """Base class used to collect subclass regular expressions captures and
     create sections from them.
@@ -50,7 +50,7 @@ class RegexNote(Note, metaclass=ABCMeta):
         return secs
 
 
-@dataclass
+@dataclass(repr=False)
 class DischargeSummaryNote(RegexNote):
     """Contains sections for the discharge summary.  There should be only one of
     these per hospital admission.
@@ -71,7 +71,7 @@ class DischargeSummaryNote(RegexNote):
         return re.finditer(regex, text)
 
 
-@dataclass
+@dataclass(repr=False)
 class NursingOtherNote(RegexNote):
     CATEGORY: ClassVar[str] = 'Nursing/other'
     _SECTION_REGEX: ClassVar[re.Pattern] = {
@@ -83,7 +83,7 @@ class NursingOtherNote(RegexNote):
         return re.finditer(regex, text)
 
 
-@dataclass
+@dataclass(repr=False)
 class EchoNote(RegexNote):
     CATEGORY: ClassVar[str] = 'Echo'
     _SECTION_REGEX: ClassVar[re.Pattern] = {
@@ -99,7 +99,7 @@ class EchoNote(RegexNote):
         return re.finditer(regex, text)
 
 
-@dataclass
+@dataclass(repr=False)
 class PhysicianNote(RegexNote):
     CATEGORY: ClassVar[str] = 'Physician'
     _SECTION_REGEX: ClassVar[re.Pattern] = {
@@ -114,7 +114,7 @@ class PhysicianNote(RegexNote):
         return re.finditer(regex, text)
 
 
-@dataclass
+@dataclass(repr=False)
 class RadiologyNote(RegexNote):
     CATEGORY: ClassVar[str] = 'Radiology'
     _SECTION_REGEX: ClassVar[re.Pattern] = {
@@ -126,7 +126,7 @@ class RadiologyNote(RegexNote):
         return re.finditer(regex, text)
 
 
-@dataclass
+@dataclass(repr=False)
 class ConsultNote(RegexNote):
     """Contains sections for the discharge summary.  There should be only one of
     these per hospital admission.
