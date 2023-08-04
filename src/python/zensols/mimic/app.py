@@ -14,6 +14,7 @@ from zensols.nlp import FeatureDocumentParser, FeatureDocument, FeatureToken
 from . import (
     NoteEvent, NoteEventPersister, NoteFormat, Note,
     HospitalAdmission, HospitalAdmissionDbStash, Corpus,
+    HospitalAdmissionDbFactoryStash,
 )
 
 logger = logging.getLogger(__name__)
@@ -32,6 +33,8 @@ class Application(object):
 
     corpus: Corpus = field()
     """The contains assets to access the MIMIC-III corpus via database."""
+
+    adm_fac_stash: HospitalAdmissionDbFactoryStash = field()
 
     def write_features(self, sent: str, out_file: Path = None):
         """Parse a sentence as MIMIC data and write features to CSV.
@@ -177,6 +180,25 @@ class Application(object):
             raise ApplicationError(f'No note found: {row_id}')
         print(hadm_id)
         return hadm_id
+
+    def preempt_notes(self, input_file: Path, workers: int = 0):
+        """Preemptively document parse notes across multiple threads.
+
+        :param input_file: a file of ``hadm_id``s for each admission's notes
+
+        :param workers: the number of processes to use to parse notes
+
+        """
+        if logger.isEnabledFor(logging.INFO):
+            logger.info(f'preemting admissions from {input_file} ' +
+                        f'for {workers} workers')
+        try:
+            with open(input_file) as f:
+                hadm_ids = tuple(map(str.strip, f.readlines()))
+        except OSError as e:
+            raise ApplicationError(
+                f'Could not preempt notes from file {input_file}: {e}') from e
+        self.adm_fac_stash.process_keys(hadm_ids)
 
     def _get_temporary_results_dir(self) -> Path:
         return Path(self.config_factory.config.get_option(

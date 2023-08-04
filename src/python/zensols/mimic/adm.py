@@ -400,13 +400,13 @@ class NoteDocumentPreemptiveStash(MultiProcessFactoryStash):
         """
         self._hadm_ids = set(map(str, hadm_ids))
         if logger.isEnabledFor(logging.DEBUG):
-            logger.debug(f'processing {len(hadm_ids)} up to notes')
+            logger.debug(f'processing {len(hadm_ids)} admissions')
         self.prime()
 
     def _create_data(self) -> Iterable[HospitalAdmission]:
         assert isinstance(self.delegate, DirectoryStash)
-        dir_keys = set(self.delegate.keys())
-        keys = self._hadm_ids - dir_keys
+        dir_keys: Set[str] = set(self.delegate.keys())
+        keys: Set[str] = self._hadm_ids - dir_keys
         if logger.isEnabledFor(logging.DEBUG):
             logger.debug(f'directory keys: {len(dir_keys)}')
             logger.debug(f'keys to process: {len(keys)}')
@@ -443,8 +443,8 @@ class HospitalAdmissionDbFactoryStash(FactoryStash):
         """
         row_ids = set()
         for hadm_id in hadm_ids:
-            hadm: HospitalAdmission = self[hadm_id]
-            row_ids.update(map(lambda n: n.row_id, hadm.notes))
+            adm: HospitalAdmission = self[hadm_id]
+            row_ids.update(map(lambda n: n.row_id, adm.notes))
         self.preempt_stash.process_keys(tuple(row_ids))
 
     def load(self, hadm_id: str) -> HospitalAdmission:
