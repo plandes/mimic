@@ -34,11 +34,31 @@ Binaries are also available on [pypi].
 ## Installation
 
 1. Install the package: `pip3 install zensols.mimic`
-2. Install the database (either Postgres, which is tested, or SQLite).  For
-   Postgres, load MIMIC-III by following the [Postgres instructions].  An
-   SQLite database file can also be used, but it has not been tested and it
-   might need more configuration (resource library) work.  Refer to the [SQLite
-   instructions] to create the file if you chose to try this method.
+2. Install the database (either Postgres or SQLite).  For Postgres, load
+   MIMIC-III by following the [Postgres instructions] or consider the [Postgres
+   Docker image].  See also [SQLite](#sqlite-configuration)
+
+
+## SQLite Configuration
+
+A SQLite can also be used, but it is slower an not as well tested.  However, it
+is faster to set up and could also be useful when a database is not available.
+I have also created a repository to create the [SQLite database file] using the
+[SQLite instructions] and repository.
+
+The following additional configuration in the `--config` file is also
+necessary:
+```ini
+[import]
+sections = list: mimic_sqlite_res_imp
+
+[mimic_sqlite_res_imp]
+type = import
+config_file = resource(zensols.mednlp): resources/sqlite.conf
+
+[mimic_sqlite_conn_manager]
+db_file = path: <some directory>/mimic3.sqlite3
+```
 
 
 ## Changelog
@@ -70,3 +90,5 @@ Copyright (c) 2022 Paul Landes
 
 [SQLite instructions]: https://github.com/MIT-LCP/mimic-code/tree/main/mimic-iii/buildmimic/sqlite
 [Postgres instructions]: https://github.com/MIT-LCP/mimic-code/blob/main/mimic-iii/buildmimic/postgres/README.md
+[Postgres Docker image]: https://github.com/plandes/mimicdb
+[SQLite database file]: https://github.com/plandes/mimicdbsqlite

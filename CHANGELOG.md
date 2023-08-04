@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - A cleaner CLI for MIMIC note access.
 
 ### Added
+- SQLite support for the MIMIC-III database.
 - Feature to clear cached notes from the `Corpus` class.
 - CLI actions to write an admission to disk an to get random `hadm_ids`.
 
