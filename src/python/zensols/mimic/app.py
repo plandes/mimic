@@ -191,7 +191,11 @@ class Application(object):
 
         """
         if logger.isEnabledFor(logging.INFO):
-            logger.info(f'preemting notes from {input_file} ' +
+            if input_file is None:
+                from_str: str = 'all note anontations'
+            else:
+                from_str: str = str(input_file)
+            logger.info(f'preempting notes from {from_str} ' +
                         f'for {workers} workers')
         try:
             with open(input_file) as f:
