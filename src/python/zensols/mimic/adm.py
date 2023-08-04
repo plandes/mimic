@@ -3,9 +3,10 @@
 """
 __author__ = 'Paul Landes'
 
-from typing import Tuple, Dict, Iterable, List, Set, Callable, ClassVar
+from typing import Tuple, Dict, Iterable, List, Set, Callable, ClassVar, Any
 from dataclasses import dataclass, field
 import sys
+import os
 import logging
 from functools import reduce
 import collections
@@ -18,7 +19,7 @@ from zensols.persist import (
     ReadOnlyStash, FactoryStash, DirectoryStash, KeySubsetStash,
 )
 from zensols.config import Dictable, ConfigFactory, Settings
-from zensols.multi import MultiProcessFactoryStash
+from zensols.multi import MultiProcessStash
 from zensols.db import BeanStash
 from . import (
     Admission, Patient, Diagnosis, Procedure, NoteEvent,
@@ -383,70 +384,19 @@ class HospitalAdmissionDbStash(ReadOnlyStash):
 
 
 @dataclass
-class NoteDocumentPreemptiveStash(MultiProcessFactoryStash):
-    """Contains the stash that caches feature docs and some delegate of
-    :class:`.NoteDocumentStash`, same as that in :class:`.NoteEventPersister`.
-    It also processes many note events at a time using sub processes using
-    :meth:`process_keys`.
-
-    """
-    def process_keys(self, hadm_ids: Iterable[str]):
-        """Invoke the multi-processing system to preemptively parse and store
-        all hospital admissions and subordinate note events for the IDs
-        provided.
-
-        :param hadm_ids: the admission IDs to parse and cache
-
-        """
-        self._hadm_ids = set(map(str, hadm_ids))
-        if logger.isEnabledFor(logging.DEBUG):
-            logger.debug(f'processing {len(hadm_ids)} admissions')
-        self.prime()
-
-    def _create_data(self) -> Iterable[HospitalAdmission]:
-        assert isinstance(self.delegate, DirectoryStash)
-        dir_keys: Set[str] = set(self.delegate.keys())
-        keys: Set[str] = self._hadm_ids - dir_keys
-        if logger.isEnabledFor(logging.DEBUG):
-            logger.debug(f'directory keys: {len(dir_keys)}')
-            logger.debug(f'keys to process: {len(keys)}')
-        return keys
-
-
-@dataclass
 class HospitalAdmissionDbFactoryStash(FactoryStash):
-    """A factory stash that adds back the :obj:`doc_stash` for
-    :class:`.NoteEvent` instances so they can parse the MIMIC-III English text
-    as :class:`.FeatureDocument` instances.
+    """A factory stash that configures :class:`.NoteEvent` instances so they can
+    parse the MIMIC-III English text as :class:`.FeatureDocument` instances.
 
     """
     doc_stash: Stash = field(default=None)
     """Contains the document that map to :obj:`row_id`."""
-
-    preempt_stash: NoteDocumentPreemptiveStash = field(default=None)
-    """A stash that processes many note events at a time."""
 
     mimic_note_context: Settings = field(default=None)
     """Contains resources needed by new and re-hydrated notes, such as the
     document stash.
 
     """
-    def process_keys(self, hadm_ids: Iterable[str]):
-        """Invoke the multi-processing system to preemptively parse and store
-        all hospital admissions and subordinate note events for the IDs
-        provided.
-
-        :param hadm_ids: the admission IDs to parse and cache
-
-        :see: :class:`.NoteDocumentPreemptiveStash`
-
-        """
-        row_ids = set()
-        for hadm_id in hadm_ids:
-            adm: HospitalAdmission = self[hadm_id]
-            row_ids.update(map(lambda n: n.row_id, adm.notes))
-        self.preempt_stash.process_keys(tuple(row_ids))
-
     def load(self, hadm_id: str) -> HospitalAdmission:
         if logger.isEnabledFor(logging.DEBUG):
             logger.debug(f'loading hospital admission: {hadm_id}')
@@ -465,3 +415,73 @@ class HospitalAdmissionDbFactoryStash(FactoryStash):
         if include_notes:
             self.doc_stash.clear()
             self.preempt_stash.clear()
+
+
+@dataclass
+class NoteDocumentPreemptiveStash(MultiProcessStash):
+    """Contains the stash that preemptively creates :class:`.Admission`,
+    :class:`.Note` and :class:`~zensols.nlp.container.FeatureDocument` cache
+    files.  This class is not useful for returning any data (see
+    :class:`.HospitalAdmissionDbFactoryStash).
+
+    """
+    note_event_persister: NoteEventPersister = field()
+    """The persister for the ``noteevents`` table."""
+
+    adm_factory_stash: HospitalAdmissionDbFactoryStash = field()
+    """The factory to create the admission instances."""
+
+    def __post_init__(self):
+        super().__post_init__()
+        self._row_ids: Tuple[str] = None
+
+    def _create_data(self) -> Iterable[HospitalAdmission]:
+        # only process notes we han't yet seen
+        assert isinstance(self.delegate, DirectoryStash)
+        dir_keys: Set[str] = set(self.delegate.keys())
+        keys: Set[str] = self._row_ids - dir_keys
+        if logger.isEnabledFor(logging.DEBUG):
+            logger.debug(f'directory keys: {len(dir_keys)}')
+            logger.debug(f'keys to process: {len(keys)}')
+        return keys
+
+    def _process(self, chunk: List[Any]) -> Iterable[Tuple[str, Any]]:
+        np: NoteEventPersister = self.note_event_persister
+        # for each row ID get the note throught the admission so sections are
+        # created per the implementation specified in the configuration
+        row_id: str
+        for row_id in chunk:
+            if logger.isEnabledFor(logging.DEBUG):
+                pid = os.getpid()
+                self._debug(f'processing key {row_id} in {pid}')
+            hadm_id: int = np.get_hadm_id(int(row_id))
+            adm: HospitalAdmission = self.adm_factory_stash[hadm_id]
+            note: Note = adm[row_id]
+            # it doesn't matter what we return becuase it won't be used, so
+            # return the note's debugging string
+            yield (row_id, str(note))
+
+    def prime(self):
+        if logger.isEnabledFor(logging.INFO):
+            logger.info('priming')
+        np: NoteEventPersister = self.note_event_persister
+        hadm_ids: Set[int] = set(np.get_hadm_ids(self._row_ids))
+        # first create the admissions to processes overwrite, only then can
+        # notes be dervied from admissions and written across procs
+        hadm_id: int
+        for hadm_id in hadm_ids:
+            adm: HospitalAdmission = self.adm_factory_stash[hadm_id]
+            assert isinstance(adm, HospitalAdmission)
+        super().prime()
+
+    def process_keys(self, row_ids: Iterable[str]):
+        """Invoke the multi-processing system to preemptively parse and store
+        note events for the IDs provided.
+
+        :param row_ids: the admission IDs to parse and cache
+
+        """
+        self._row_ids = set(map(str, row_ids))
+        if logger.isEnabledFor(logging.DEBUG):
+            logger.debug(f'processing {len(row_ids)} notes')
+        self.prime()

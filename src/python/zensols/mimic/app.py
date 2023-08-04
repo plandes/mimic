@@ -185,21 +185,21 @@ class Application(object):
     def preempt_notes(self, input_file: Path, workers: int = 0):
         """Preemptively document parse notes across multiple threads.
 
-        :param input_file: a file of ``hadm_id``s for each admission's notes
+        :param input_file: a file of ``row_id``s for each admission's notes
 
         :param workers: the number of processes to use to parse notes
 
         """
         if logger.isEnabledFor(logging.INFO):
-            logger.info(f'preemting admissions from {input_file} ' +
+            logger.info(f'preemting notes from {input_file} ' +
                         f'for {workers} workers')
         try:
             with open(input_file) as f:
-                hadm_ids = tuple(map(str.strip, f.readlines()))
+                row_ids = tuple(map(str.strip, f.readlines()))
         except OSError as e:
             raise ApplicationError(
                 f'Could not preempt notes from file {input_file}: {e}') from e
-        self.adm_fac_stash.process_keys(hadm_ids)
+        self.adm_fac_stash.process_keys(row_ids)
 
     def _get_temporary_results_dir(self) -> Path:
         return Path(self.config_factory.config.get_option(
