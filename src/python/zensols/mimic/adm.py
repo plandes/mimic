@@ -22,7 +22,7 @@ from zensols.config import Dictable, ConfigFactory, Settings
 from zensols.multi import MultiProcessStash
 from zensols.db import BeanStash
 from . import (
-    Admission, Patient, Diagnosis, Procedure, NoteEvent,
+    RecordNotFoundError, Admission, Patient, Diagnosis, Procedure, NoteEvent,
     DiagnosisPersister, ProcedurePersister, PatientPersister,
     NoteEventPersister, AdmissionPersister, Note, NoteFactory,
 )
@@ -436,12 +436,8 @@ class NoteDocumentPreemptiveStash(MultiProcessStash):
         self._row_ids: Tuple[str] = None
 
     def _create_data(self) -> Iterable[HospitalAdmission]:
-        # only process notes we han't yet seen
-        assert isinstance(self.delegate, DirectoryStash)
-        dir_keys: Set[str] = set(self.delegate.keys())
-        keys: Set[str] = self._row_ids - dir_keys
+        keys: Set[str] = self._row_ids
         if logger.isEnabledFor(logging.DEBUG):
-            logger.debug(f'directory keys: {len(dir_keys)}')
             logger.debug(f'keys to process: {len(keys)}')
         return keys
 
@@ -457,6 +453,8 @@ class NoteDocumentPreemptiveStash(MultiProcessStash):
             hadm_id: int = np.get_hadm_id(int(row_id))
             adm: HospitalAdmission = self.adm_factory_stash[hadm_id]
             note: Note = adm[row_id]
+            # force document parse
+            note.doc
             # it doesn't matter what we return becuase it won't be used, so
             # return the note's debugging string
             yield (row_id, str(note))
@@ -465,7 +463,12 @@ class NoteDocumentPreemptiveStash(MultiProcessStash):
         if logger.isEnabledFor(logging.INFO):
             logger.info('priming')
         np: NoteEventPersister = self.note_event_persister
-        hadm_ids: Set[int] = set(np.get_hadm_ids(self._row_ids))
+        hadm_ids: Set[int] = set()
+        for row_id in self._row_ids:
+            hadm_id: int = np.get_hadm_id(row_id)
+            if hadm_id is None:
+                raise RecordNotFoundError(self, 'row_id', row_id)
+            hadm_ids.add(hadm_id)
         # first create the admissions to processes overwrite, only then can
         # notes be dervied from admissions and written across procs
         hadm_id: int
@@ -481,7 +484,7 @@ class NoteDocumentPreemptiveStash(MultiProcessStash):
         :param row_ids: the admission IDs to parse and cache
 
         """
-        self._row_ids = set(map(str, row_ids))
+        self._row_ids = set(row_ids)
         if logger.isEnabledFor(logging.DEBUG):
             logger.debug(f'processing {len(row_ids)} notes')
         self.prime()
