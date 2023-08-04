@@ -35,6 +35,7 @@ class Application(object):
     """The contains assets to access the MIMIC-III corpus via database."""
 
     adm_fac_stash: HospitalAdmissionDbFactoryStash = field()
+    """A multi-processing stash used to preemptively parse notes."""
 
     def write_features(self, sent: str, out_file: Path = None):
         """Parse a sentence as MIMIC data and write features to CSV.
