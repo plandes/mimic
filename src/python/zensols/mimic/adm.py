@@ -474,13 +474,25 @@ class NoteDocumentPreemptiveStash(MultiProcessStash):
             assert isinstance(adm, HospitalAdmission)
         super().prime()
 
-    def process_keys(self, row_ids: Iterable[str]):
+    def process_keys(self, row_ids: Iterable[str], workers: int = None,
+                     chunk_size: int = None):
         """Invoke the multi-processing system to preemptively parse and store
         note events for the IDs provided.
 
         :param row_ids: the admission IDs to parse and cache
 
+        :param workers: the number of processes spawned to accomplish the work
+
+        :param chunk_size: the size of each group of data sent to the child
+                           process to be handled
+
+        :see: :class:`~zensols.persist.multi.stash.MultiProcessStash`
+
         """
+        if workers is not None:
+            self.workers = workers
+        if chunk_size is not None:
+            self.chunk_size = chunk_size
         self._row_ids = set(row_ids)
         if logger.isEnabledFor(logging.DEBUG):
             logger.debug(f'processing {len(row_ids)} notes')

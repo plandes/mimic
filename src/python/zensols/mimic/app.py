@@ -182,7 +182,7 @@ class Application(object):
         print(hadm_id)
         return hadm_id
 
-    def preempt_notes(self, input_file: Path, workers: int = 0):
+    def preempt_notes(self, input_file: Path, workers: int = None):
         """Preemptively document parse notes across multiple threads.
 
         :param input_file: a file of notes' unique ``row_id`` IDs
@@ -203,7 +203,7 @@ class Application(object):
         except OSError as e:
             raise ApplicationError(
                 f'Could not preempt notes from file {input_file}: {e}') from e
-        self.preempt_stash.process_keys(row_ids)
+        self.preempt_stash.process_keys(row_ids, workers)
 
     def _get_temporary_results_dir(self) -> Path:
         return Path(self.config_factory.config.get_option(
