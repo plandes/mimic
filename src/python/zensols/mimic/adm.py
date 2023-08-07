@@ -405,16 +405,13 @@ class HospitalAdmissionDbFactoryStash(FactoryStash):
         adm._init(db_stash._create_note_stash(adm))
         return adm
 
-    def clear_all(self, include_admissions: bool = True,
-                  include_notes: bool = True):
-        """Clear the admission and/or the notes cached data.
-
-        """
-        if include_admissions:
-            self.clear()
-        if include_notes:
-            self.doc_stash.clear()
-            self.preempt_stash.clear()
+    def clear(self,):
+        # admission cached (i.e. data/adm)
+        super().clear()
+        # parsed docs (i.e. data/note-doc)
+        self.doc_stash.clear()
+        # note containers with sections (i.e. data/note-cont)
+        self.factory.note_stash.delegate.clear()
 
 
 @dataclass

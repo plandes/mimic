@@ -66,8 +66,9 @@ class Corpus(Dictable):
         self.hospital_adm_stash.clear()
         if include_notes:
             # the note event cache stash used by :meth:`clear` to remove cached
-            # parsed files; nested factory stash is :class:`.NoteDocumentStash`
+            # parsed files
             self.config_factory('mimic_note_event_persister_stash').clear()
+            self.config_factory('mimic_hospital_adm_factory_stash').clear()
 
     def get_hospital_adm_by_id(self, hadm_id: int) -> HospitalAdmission:
         """Return a hospital admission by its unique identifier."""
