@@ -24,7 +24,7 @@ class MimicTokenizerComponent(Component):
     """
     def init(self, model: Language):
         inf = list(model.Defaults.infixes)
-        SCHARS = ':;/=@#%+.-'
+        SCHARS = ',:;/=@#%+.-'
         # split on newlines; handle newline as an infix token
         inf.insert(0, r'\n')
         # split on special characters before
