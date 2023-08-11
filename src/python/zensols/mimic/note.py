@@ -20,7 +20,7 @@ from io import TextIOBase
 from frozendict import frozendict
 import pandas as pd
 from zensols.config import Dictable, ConfigFactory
-from zensols.persist import PersistableContainer, persisted
+from zensols.persist import PersistableContainer, persisted, Primeable
 from zensols.nlp import LexicalSpan, FeatureToken, FeatureDocument
 from zensols.nlp.dataframe import FeatureDataFrameFactory
 from . import NoteEvent
@@ -678,9 +678,12 @@ class Note(NoteEvent, SectionContainer):
             include_note_divider=include_note_divider,
             include_section_divider=include_section_divider)
 
+    def write(self, depth: int = 0, writer: TextIOBase = sys.stdout):
+        SectionContainer.write(self, depth, writer)
+
 
 @dataclass
-class NoteFactory(object):
+class NoteFactory(Primeable):
     """Creates an instance of :class:`.Note` from :class:`.NoteEvent`.
 
     """
@@ -746,6 +749,11 @@ class NoteFactory(object):
 
         """
         return self._create_from_note_event(note_event, section)
+
+    def prime(self):
+        """The MedSecId project primes by installing the model files."""
+        if logger.isEnabledFor(logging.INFO):
+            logger.info('priming...')
 
     def __call__(self, note_event: NoteEvent, section: str = None) -> Note:
         """See :meth:`.create`."""

@@ -15,8 +15,8 @@ from frozendict import frozendict
 from io import TextIOBase
 import pandas as pd
 from zensols.persist import (
-    PersistableContainer, persisted, Stash,
-    ReadOnlyStash, FactoryStash, DirectoryStash, KeySubsetStash,
+    PersistableContainer, persisted, Primeable, Stash,
+    ReadOnlyStash, FactoryStash, KeySubsetStash,
 )
 from zensols.config import Dictable, ConfigFactory, Settings
 from zensols.multi import MultiProcessStash
@@ -275,7 +275,9 @@ class HospitalAdmission(PersistableContainer, Dictable):
 
 @dataclass
 class _NoteBeanStash(BeanStash):
-    """
+    """Adapts the :class:`.NoteEventPersister` to a
+    :class:`~zensols.persist.domain.Stash`.
+
     """
     mimic_note_factory: NoteFactory = field()
     """The factory that creates :class:`.Note` for hopsital admissions."""
@@ -289,6 +291,9 @@ class _NoteBeanStash(BeanStash):
 
 @dataclass
 class _NoteFactoryStash(FactoryStash):
+    """Creates instances of :class:`.Note`.
+
+    """
     mimic_note_context: Settings = field(default=None)
     """Contains resources needed by new and re-hydrated notes, such as the
     document stash.
@@ -305,7 +310,7 @@ class _NoteFactoryStash(FactoryStash):
 
 
 @dataclass
-class HospitalAdmissionDbStash(ReadOnlyStash):
+class HospitalAdmissionDbStash(ReadOnlyStash, Primeable):
     """A stash that creates :class:`.HospitalAdmission` instances.  This
     instance is used by caching stashes per the default resource library
     configuration for this package.
@@ -382,9 +387,15 @@ class HospitalAdmissionDbStash(ReadOnlyStash):
     def exists(self, hadm_id: str) -> bool:
         return self.admission_persister.exists(int(hadm_id))
 
+    def prime(self):
+        if logger.isEnabledFor(logging.INFO):
+            logger.info(f'priming {type(self)}...')
+        self.mimic_note_factory.prime()
+        super().prime()
+
 
 @dataclass
-class HospitalAdmissionDbFactoryStash(FactoryStash):
+class HospitalAdmissionDbFactoryStash(FactoryStash, Primeable):
     """A factory stash that configures :class:`.NoteEvent` instances so they can
     parse the MIMIC-III English text as :class:`.FeatureDocument` instances.
 
@@ -412,6 +423,12 @@ class HospitalAdmissionDbFactoryStash(FactoryStash):
         self.doc_stash.clear()
         # note containers with sections (i.e. data/note-cont)
         self.factory.note_stash.delegate.clear()
+
+    def prime(self):
+        if logger.isEnabledFor(logging.INFO):
+            logger.info(f'priming {type(self)}...')
+        self.factory.prime()
+        super().prime()
 
 
 @dataclass
@@ -458,7 +475,8 @@ class NoteDocumentPreemptiveStash(MultiProcessStash):
 
     def prime(self):
         if logger.isEnabledFor(logging.INFO):
-            logger.info('priming')
+            logger.info(f'priming {type(self)}...')
+        self.adm_factory_stash.prime()
         np: NoteEventPersister = self.note_event_persister
         hadm_ids: Set[int] = set()
         for row_id in self._row_ids:
@@ -468,6 +486,8 @@ class NoteDocumentPreemptiveStash(MultiProcessStash):
             hadm_ids.add(hadm_id)
         # first create the admissions to processes overwrite, only then can
         # notes be dervied from admissions and written across procs
+        if logger.isEnabledFor(logging.INFO):
+            logger.info('creating cached admissions')
         hadm_id: int
         for hadm_id in hadm_ids:
             adm: HospitalAdmission = self.adm_factory_stash[hadm_id]
