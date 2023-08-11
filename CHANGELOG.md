@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changes
 - A cleaner CLI for MIMIC note access.
+- Default to section based `Note.write`.
 
 ### Added
 - SQLite support for the MIMIC-III database.
