@@ -473,13 +473,34 @@ class NoteDocumentPreemptiveStash(MultiProcessStash):
             # return the note's debugging string
             yield (row_id, str(note))
 
+    def _get_existing_note_row_ids(self) -> Set[str]:
+        """Return the note row_ids that both have container and feature doc
+        cached ID files.
+
+        """
+        existing_note_cont_ids: Set[str] = set(
+            self.adm_factory_stash.factory.note_stash.delegate.keys())
+        existing_doc_ids: Set[str] = set(
+            self.adm_factory_stash.doc_stash.delegate.keys())
+        if logger.isEnabledFor(logging.INFO):
+            logger.info(f'already cached: doc={len(existing_doc_ids)}, ' +
+                        f'container={len(existing_note_cont_ids)}')
+        return existing_note_cont_ids & existing_doc_ids
+
     def prime(self):
         if logger.isEnabledFor(logging.INFO):
             logger.info(f'priming {type(self)}...')
         self.adm_factory_stash.prime()
         np: NoteEventPersister = self.note_event_persister
+        # get the IDs we already have create previously
+        existing_row_ids: Set[str] = self._get_existing_note_row_ids()
+        # create a list of those row IDs we still need to create
+        to_create_row_ids: Set[str] = self._row_ids - existing_row_ids
         hadm_ids: Set[int] = set()
-        for row_id in self._row_ids:
+        if logger.isEnabledFor(logging.INFO):
+            logger.info(f'creating: doc={len(to_create_row_ids)}')
+        row_id: str
+        for row_id in to_create_row_ids:
             hadm_id: int = np.get_hadm_id(row_id)
             if hadm_id is None:
                 raise RecordNotFoundError(self, 'row_id', row_id)
@@ -487,7 +508,7 @@ class NoteDocumentPreemptiveStash(MultiProcessStash):
         # first create the admissions to processes overwrite, only then can
         # notes be dervied from admissions and written across procs
         if logger.isEnabledFor(logging.INFO):
-            logger.info('creating cached admissions')
+            logger.info(f'creating {len(hadm_ids)} cached admissions')
         hadm_id: int
         for hadm_id in hadm_ids:
             adm: HospitalAdmission = self.adm_factory_stash[hadm_id]
