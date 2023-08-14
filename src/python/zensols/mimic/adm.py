@@ -496,6 +496,7 @@ class NoteDocumentPreemptiveStash(MultiProcessStash):
         existing_row_ids: Set[str] = self._get_existing_note_row_ids()
         # create a list of those row IDs we still need to create
         to_create_row_ids: Set[str] = self._row_ids - existing_row_ids
+        # populate admissions that have at least one missing note
         hadm_ids: Set[int] = set()
         if logger.isEnabledFor(logging.INFO):
             logger.info(f'creating: doc={len(to_create_row_ids)}')
