@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Changes
 - A cleaner CLI for MIMIC note access.
 - Default to section based `Note.write`.
+- `NoteStash` is now primed by upstream stashes for [zensols.mimicsid] MedSecId
+  model install.
+- Tokenzier separates on commas to find more MIMIC-III masks.
+- More MIMIC-III mask tags created and others regular expressions fixed.
 
 ### Added
 - SQLite support for the MIMIC-III database.
@@ -91,3 +95,4 @@ Significant feature release.
 [0.0.1]: https://github.com/plandes/mimic/compare/v0.0.0...v0.0.1
 
 [zensols.mednlp]: https://github.com/plandes/mednlp
+[zensols.mimicsid]: https://github.com/plandes/mimicsid
