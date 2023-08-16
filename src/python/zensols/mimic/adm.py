@@ -490,6 +490,8 @@ class NoteDocumentPreemptiveStash(MultiProcessStash):
     def prime(self):
         if logger.isEnabledFor(logging.INFO):
             logger.info(f'priming {type(self)}...')
+        # this leads to priming the stash that installs the MedSecId in the
+        # mimicsid package
         self.adm_factory_stash.prime()
         np: NoteEventPersister = self.note_event_persister
         # get the IDs we already have create previously
@@ -498,8 +500,10 @@ class NoteDocumentPreemptiveStash(MultiProcessStash):
         to_create_row_ids: Set[str] = self._row_ids - existing_row_ids
         # populate admissions that have at least one missing note
         hadm_ids: Set[int] = set()
-        if logger.isEnabledFor(logging.INFO):
-            logger.info(f'creating: doc={len(to_create_row_ids)}')
+        if logger.isEnabledFor(logging.DEBUG):
+            logger.debug(f'need: {self._row_ids}, ' +
+                         f'existing: {existing_row_ids}, ' +
+                         f'create: {to_create_row_ids}')
         row_id: str
         for row_id in to_create_row_ids:
             hadm_id: int = np.get_hadm_id(row_id)
@@ -514,7 +518,14 @@ class NoteDocumentPreemptiveStash(MultiProcessStash):
         for hadm_id in hadm_ids:
             adm: HospitalAdmission = self.adm_factory_stash[hadm_id]
             assert isinstance(adm, HospitalAdmission)
-        super().prime()
+        # don't fork processes only to find the work is already complete
+        if len(hadm_ids) == 0:
+            if logger.isEnabledFor(logging.INFO):
+                logger.info('no note docs to create')
+        else:
+            if logger.isEnabledFor(logging.INFO):
+                logger.info(f'creating {len(to_create_row_ids)} note docs')
+            super().prime()
 
     def process_keys(self, row_ids: Iterable[str], workers: int = None,
                      chunk_size: int = None):
