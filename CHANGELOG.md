@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 
 
+## [1.4.0] - 2023-08-16
+Downstream moderate risk update release.
+
 ### Changes
 - A cleaner CLI for MIMIC note access.
 - Default to section based `Note.write`.
@@ -15,6 +18,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
   model install.
 - Tokenzier separates on commas to find more MIMIC-III masks.
 - More MIMIC-III mask tags created and others regular expressions fixed.
+- Update to [zensols.mednlp] 1.4.0.
 
 ### Added
 - SQLite support for the MIMIC-III database.
@@ -84,7 +88,8 @@ Significant feature release.
 
 
 <!-- links -->
-[Unreleased]: https://github.com/plandes/mimic/compare/v1.3.1...HEAD
+[Unreleased]: https://github.com/plandes/mimic/compare/v1.4.0...HEAD
+[1.4.0]: https://github.com/plandes/mimic/compare/v1.3.1...v1.4.0
 [1.3.1]: https://github.com/plandes/mimic/compare/v1.3.0...v1.3.1
 [1.3.0]: https://github.com/plandes/mimic/compare/v1.2.0...v1.3.0
 [1.2.0]: https://github.com/plandes/mimic/compare/v1.1.0...v1.2.0
