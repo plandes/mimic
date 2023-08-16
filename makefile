@@ -24,6 +24,12 @@ modeldeps:
 			$(PIP_BIN) install $(PIP_ARGS) \
 				-r $(PY_SRC)/requirements-model.txt --no-deps
 
+.PHONY:			postgresqldeps
+postgresqldeps:
+			$(PIP_BIN) install $(PIP_ARGS) \
+				-r $(PY_SRC)/requirements-postgresql.txt --no-deps
+
+
 .PHONY:			example-clean
 example-clean:
 			example/shownote.py clean

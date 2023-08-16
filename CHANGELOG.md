@@ -8,6 +8,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 
 
+### Changed
+- PostreSQL is now optional, and to use it, it the [zensols.dbsql] needs to be
+  installed (see the [README](README.md)].
+
+
 ## [1.4.0] - 2023-08-16
 Downstream moderate risk update release.
 
@@ -101,3 +106,4 @@ Significant feature release.
 
 [zensols.mednlp]: https://github.com/plandes/mednlp
 [zensols.mimicsid]: https://github.com/plandes/mimicsid
+[zensols.dbsql]: https://github.com/plandes/dbutilpg
