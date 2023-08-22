@@ -19,7 +19,7 @@ from zensols.persist import (
     ReadOnlyStash, FactoryStash, KeySubsetStash,
 )
 from zensols.config import Dictable, ConfigFactory, Settings
-from zensols.multi import MultiProcessStash
+from zensols.multi import MultiProcessDefaultStash
 from zensols.db import BeanStash
 from . import (
     RecordNotFoundError, Admission, Patient, Diagnosis, Procedure, NoteEvent,
@@ -432,17 +432,17 @@ class HospitalAdmissionDbFactoryStash(FactoryStash, Primeable):
 
 
 @dataclass
-class NoteDocumentPreemptiveStash(MultiProcessStash):
+class NoteDocumentPreemptiveStash(MultiProcessDefaultStash):
     """Contains the stash that preemptively creates :class:`.Admission`,
     :class:`.Note` and :class:`~zensols.nlp.container.FeatureDocument` cache
     files.  This class is not useful for returning any data (see
     :class:`.HospitalAdmissionDbFactoryStash).
 
     """
-    note_event_persister: NoteEventPersister = field()
+    note_event_persister: NoteEventPersister = field(default=None)
     """The persister for the ``noteevents`` table."""
 
-    adm_factory_stash: HospitalAdmissionDbFactoryStash = field()
+    adm_factory_stash: HospitalAdmissionDbFactoryStash = field(default=None)
     """The factory to create the admission instances."""
 
     def __post_init__(self):
