@@ -8,9 +8,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 
 
+## [1.4.1] - 2023-08-25
 ### Changed
 - PostreSQL is now optional, and to use it, it the [zensols.dbsql] needs to be
   installed (see the [README](README.md)].
+- Switch to `MultiProcessDefaultStash`, which allows for swapping in other
+  multiprocessing implementations.
 
 
 ## [1.4.0] - 2023-08-16
@@ -93,7 +96,8 @@ Significant feature release.
 
 
 <!-- links -->
-[Unreleased]: https://github.com/plandes/mimic/compare/v1.4.0...HEAD
+[Unreleased]: https://github.com/plandes/mimic/compare/v1.4.1...HEAD
+[1.4.1]: https://github.com/plandes/mimic/compare/v1.4.0...v1.4.1
 [1.4.0]: https://github.com/plandes/mimic/compare/v1.3.1...v1.4.0
 [1.3.1]: https://github.com/plandes/mimic/compare/v1.3.0...v1.3.1
 [1.3.0]: https://github.com/plandes/mimic/compare/v1.2.0...v1.3.0
