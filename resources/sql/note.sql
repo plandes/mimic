@@ -31,6 +31,9 @@ select hadm_id, row_id, category from noteevents where hadm_id in %s;
 -- name=select_hadm_id_by_row_id
 select hadm_id from noteevents where row_id = %s;
 
+-- name=select_hadm_id_by_row_ids
+select distinct(hadm_id) from noteevents where row_id in %s;
+
 -- name=select_keys
 select row_id from noteevents;
 

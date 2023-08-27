@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+### Changed
+- Faster note to admission ID resolution in database for faster preemptive note
+  parsing.
+
 
 ## [1.4.1] - 2023-08-25
 ### Changed

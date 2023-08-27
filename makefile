@@ -34,6 +34,11 @@ postgresqldeps:
 example-clean:
 			example/shownote.py clean
 
+# test the MIMIC-III database (unavilable database in GitHub workflows)
+.PHONY:			testdb
+testdb:
+			make PY_SRC_TEST=test/db test
+
 .PHONY:			testall
 testall:		test
 			make PY_CLI_ARGS="$(ADM_DIR) 100581 --format raw" pycli

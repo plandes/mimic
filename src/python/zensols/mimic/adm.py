@@ -498,24 +498,23 @@ class NoteDocumentPreemptiveStash(MultiProcessDefaultStash):
         existing_row_ids: Set[str] = self._get_existing_note_row_ids()
         # create a list of those row IDs we still need to create
         to_create_row_ids: Set[str] = self._row_ids - existing_row_ids
-        # populate admissions that have at least one missing note
-        hadm_ids: Set[int] = set()
+        if logger.isEnabledFor(logging.INFO):
+            logger.info(f'need: {len(self._row_ids)}, ' +
+                        f'existing: {len(existing_row_ids)}, ' +
+                        f'create: {len(to_create_row_ids)}')
         if logger.isEnabledFor(logging.DEBUG):
             logger.debug(f'need: {self._row_ids}, ' +
                          f'existing: {existing_row_ids}, ' +
                          f'create: {to_create_row_ids}')
-        row_id: str
-        for row_id in to_create_row_ids:
-            hadm_id: int = np.get_hadm_id(row_id)
-            if hadm_id is None:
-                raise RecordNotFoundError(self, 'row_id', row_id)
-            hadm_ids.add(hadm_id)
+        # populate admissions that have at least one missing note
+        hadm_ids: Tuple[int] = tuple(np.get_hadm_ids(to_create_row_ids))
         # first create the admissions to processes overwrite, only then can
         # notes be dervied from admissions and written across procs
         if logger.isEnabledFor(logging.INFO):
             logger.info(f'creating {len(hadm_ids)} cached admissions')
         hadm_id: int
         for hadm_id in hadm_ids:
+            # force creation of the admission to cache the file
             adm: HospitalAdmission = self.adm_factory_stash[hadm_id]
             assert isinstance(adm, HospitalAdmission)
         # don't fork processes only to find the work is already complete

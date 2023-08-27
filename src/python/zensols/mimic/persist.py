@@ -3,14 +3,16 @@
 """
 __author__ = 'Paul Landes'
 
-from typing import Tuple, Iterable, Optional, List
+from typing import Tuple, Iterable, Optional, List, Callable
 from dataclasses import dataclass, field
 import logging
 import sys
 from itertools import chain
 from zensols.config import Settings
-from zensols.persist import persisted, ReadOnlyStash
-from zensols.db import DbPersister, DataClassDbPersister
+from zensols.persist import persisted, ReadOnlyStash, chunks
+from zensols.db import (
+    DbPersister, DataClassDbPersister, SqliteConnectionManager
+)
 from zensols.nlp import FeatureDocument, FeatureDocumentParser
 from . import (
     MimicError, RecordNotFoundError,
@@ -170,6 +172,11 @@ class NoteEventPersister(DataClassDbPersister):
     document stash.
 
     """
+    hadm_row_chunk_size: int = field(default=None)
+    """The number of note IDs for each round trip to the DB in
+    :meth:`get_hadm_ids`.
+
+    """
     def __post_init__(self):
         self.bean_class = NoteEvent
         super().__post_init__()
@@ -246,7 +253,20 @@ class NoteEventPersister(DataClassDbPersister):
         :return: the hospital admission admissions unique ID ``hadm_id``
 
         """
-        return map(self.get_hadm_id, row_ids)
+        def map_chunk(ids: List[int]) -> Tuple[int]:
+            return self.execute_by_name(
+                sql_name, params=(tuple(ids),), row_factory=lambda x: x)
+
+        def map_chunk_sqlite(ids: List[int]) -> Tuple[int]:
+            sql: str = self.sql_entries[sql_name]
+            sql = sql.replace('?', f"({','.join(map(str, ids))})")
+            return self.execute(sql, row_factory=lambda x: x)
+
+        sql_name: str = 'select_hadm_id_by_row_ids'
+        is_sqlite: bool = isinstance(self.conn_manager, SqliteConnectionManager)
+        chunk_fn: Callable = map_chunk_sqlite if is_sqlite else map_chunk
+        id_lsts: Iterable[List[int]] = chunks(row_ids, self.hadm_row_chunk_size)
+        return chain.from_iterable(map(chunk_fn, id_lsts))
 
     def get_notes_by_category(self, category: str,
                               limit: int = sys.maxsize) -> Tuple[NoteEvent]:
