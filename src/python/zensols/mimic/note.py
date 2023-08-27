@@ -728,6 +728,13 @@ class NoteFactory(Primeable):
 
         **Important**: do not override this method.
 
+        :param note_event: the source data
+
+        :param section: the configuration section to use to create the new note,
+                        which is one of the regular expression based sections or
+                        :obj:`mimic_default_note_section` for a :class:`.Note`
+
+
         """
         if logger.isEnabledFor(logging.DEBUG):
             logger.debug(f'create note from event: {note_event}')
@@ -737,18 +744,26 @@ class NoteFactory(Primeable):
             section = self.mimic_default_note_section
         return self._event_to_note(note_event, section)
 
-    def create(self, note_event: NoteEvent, section: str = None) -> Note:
+    def create(self, note_event: NoteEvent) -> Note:
         """Create a new factory based instance of a :class:`.Note` from a
         :class:`.NoteEvent`.
 
         :param note_event: the source data
 
-        :param section: the configuration section to use to create the new note,
-                        which is one of the regular expression based sections or
-                        :obj:`mimic_default_note_section` for a :class:`.Note`
+        """
+        return self._create_from_note_event(note_event, None)
+
+    def create_default(self, note_event: NoteEvent) -> Note:
+        """Like :meth:`.create` but always create the default (:class:`.Note`)
+        note.
+
+        :param note_event: the source data
+
+        :return: always an instance of :class:`.Note`
 
         """
-        return self._create_from_note_event(note_event, section)
+        return self._create_from_note_event(
+            note_event, self.mimic_default_note_section)
 
     def prime(self):
         """The MedSecId project primes by installing the model files."""

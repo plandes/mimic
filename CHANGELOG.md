@@ -7,9 +7,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+
+### Removed
+- `NoteFactor`'s `section` parameter has been removed in favor of creating
+  default notes with `create_default`.
+
 ### Changed
 - Faster note to admission ID resolution in database for faster preemptive note
   parsing.
+- `NoteFactory.create_default` to create new default/no-section notes.
 
 
 ## [1.4.1] - 2023-08-25
