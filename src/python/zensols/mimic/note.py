@@ -773,3 +773,14 @@ class NoteFactory(Primeable):
     def __call__(self, note_event: NoteEvent, section: str = None) -> Note:
         """See :meth:`.create`."""
         return self.create(note_event, section)
+
+
+@dataclass
+class DefaultNoteFactory(NoteFactory):
+    """A note factory that creates only default notes.
+
+    :see: :meth:`.NoteFactory.create_default`
+
+    """
+    def create(self, note_event: NoteEvent) -> Note:
+        return self.create_default(note_event)
