@@ -73,6 +73,11 @@ select hadm_id, count(hadm_id) as cnt
     group by hadm_id
     order by cnt desc;
 
+-- name=select_note_hadm_ids
+select distinct(hadm_id)
+    from noteevents
+    where hadm_id is not null;
+
 -- name=note_count
 select count(*) from noteevents;
 

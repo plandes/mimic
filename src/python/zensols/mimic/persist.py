@@ -268,6 +268,14 @@ class NoteEventPersister(DataClassDbPersister):
         id_lsts: Iterable[List[int]] = chunks(row_ids, self.hadm_row_chunk_size)
         return chain.from_iterable(map(chunk_fn, id_lsts))
 
+    def get_hadm_ids_all(self) -> Iterable[int]:
+        """Get all hospital admission IDs that have at least one associated
+        note.
+
+        """
+        ids = self.execute_by_name('select_note_hadm_ids', row_factory='tuple')
+        return map(lambda x: x[0], ids)
+
     def get_notes_by_category(self, category: str,
                               limit: int = sys.maxsize) -> Tuple[NoteEvent]:
         """Return notes by what the category to which they belong.
