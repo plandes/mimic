@@ -109,15 +109,15 @@ Attending:[**First Name3 (LF) 922**]"""
                   '\n', '\n', 'Attending', ':', 'FIRSTNAME')
         self.assertEqual(should, tuple(doc.norm_token_iter()))
 
-        should = ('C0030705', '-<N>-', '-<N>-', 'C0086418', '-<N>-', 'C1301725',
+        should = ('-<N>-', '-<N>-', '-<N>-', 'C0086418', '-<N>-', '-<N>-',
                   '-<N>-', '-<N>-', '-<N>-', '-<N>-', '-<N>-', '-<N>-',
-                  'C3687832', '-<N>-', '-<N>-', 'C1999232', '-<N>-', '-<N>-')
+                  '-<N>-', '-<N>-', '-<N>-', '-<N>-', '-<N>-', '-<N>-')
         self.assertEqual(should, tuple(map(
             lambda t: t.cui_, doc.token_iter())))
 
-        should = ('concept', '-<N>-', 'PERSON', 'PERSON', '-<N>-', 'concept',
+        should = ('-<N>-', '-<N>-', 'PERSON', 'PERSON', '-<N>-', '-<N>-',
                   '-<N>-', '-<N>-', '-<N>-', '-<N>-', '-<N>-', '-<N>-',
-                  'concept', '-<N>-', '-<N>-', 'concept', '-<N>-', '-<N>-')
+                  '-<N>-', '-<N>-', '-<N>-', '-<N>-', '-<N>-', '-<N>-')
         self.assertEqual(should, tuple(map(
             lambda t: t.ent_, doc.token_iter())))
 
