@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 
 
-## [1.4.2] - 2023-09-08
+## [1.4.3] - 2023-09-08
 ### Removed
 - `NoteFactor`'s `section` parameter has been removed in favor of creating
   default notes with `create_default`.  This is a lower risk change given how
@@ -23,15 +23,18 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - `NoteFactory.create_default` to create new default/no-section notes.
 
 
-## [1.4.1] - 2023-08-25
-### Changed
-- PostreSQL is now optional, and to use it, it the [zensols.dbsql] needs to be
-  installed (see the [README](README.md)].
+## [1.4.2] - 2023-08-25
 - Switch to `MultiProcessDefaultStash`, which allows for swapping in other
   multiprocessing implementations.
 
 
-## [1.4.0] - 2023-08-16
+## [1.4.1] - 2023-08-16
+### Changed
+- PostreSQL is now optional, and to use it, it the [zensols.dbsql] needs to be
+  installed (see the [README](README.md)].
+
+
+## [1.4.0] - 2023-08-15
 Downstream moderate risk update release.
 
 ### Changes
