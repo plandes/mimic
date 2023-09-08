@@ -75,7 +75,7 @@ An extensive changelog is available [here](CHANGELOG.md).
 
 [MIT License](LICENSE.md)
 
-Copyright (c) 2023 Paul Landes
+Copyright (c) 2022 - 2023 Paul Landes
 
 
 <!-- links -->
