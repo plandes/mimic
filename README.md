@@ -3,6 +3,7 @@
 [![PyPI][pypi-badge]][pypi-link]
 [![Python 3.9][python39-badge]][python39-link]
 [![Python 3.10][python310-badge]][python310-link]
+[![Build Status][build-badge]][build-link]
 
 A utility library for parsing the [MIMIC-III] corpus.  This uses [spaCy] and
 extends the [zensols.mednlp] to parse the [MIMIC-III] medical note dataset,
@@ -74,7 +75,7 @@ An extensive changelog is available [here](CHANGELOG.md).
 
 [MIT License](LICENSE.md)
 
-Copyright (c) 2022 Paul Landes
+Copyright (c) 2023 Paul Landes
 
 
 <!-- links -->
@@ -85,6 +86,8 @@ Copyright (c) 2022 Paul Landes
 [python39-link]: https://www.python.org/downloads/release/python-390
 [python310-badge]: https://img.shields.io/badge/python-3.10-blue.svg
 [python310-link]: https://www.python.org/downloads/release/python-3100
+[build-badge]: https://github.com/plandes/mimic/workflows/CI/badge.svg
+[build-link]: https://github.com/plandes/mimic/actions
 
 [MIMIC-III]: https://physionet.org/content/mimiciii-demo/1.4/
 [spaCy]: https://spacy.io

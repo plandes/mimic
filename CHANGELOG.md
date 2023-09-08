@@ -8,9 +8,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 
 
+## [1.4.2] - 2023-09-08
 ### Removed
 - `NoteFactor`'s `section` parameter has been removed in favor of creating
-  default notes with `create_default`.
+  default notes with `create_default`.  This is a lower risk change given how
+  deep in the framework this class is used.
 
 ### Added
 - A new `DefaultNoteFactory` that always creates default/no-section notes.
@@ -109,7 +111,8 @@ Significant feature release.
 
 
 <!-- links -->
-[Unreleased]: https://github.com/plandes/mimic/compare/v1.4.1...HEAD
+[Unreleased]: https://github.com/plandes/mimic/compare/v1.4.2...HEAD
+[1.4.2]: https://github.com/plandes/mimic/compare/v1.4.1...v1.4.2
 [1.4.1]: https://github.com/plandes/mimic/compare/v1.4.0...v1.4.1
 [1.4.0]: https://github.com/plandes/mimic/compare/v1.3.1...v1.4.0
 [1.3.1]: https://github.com/plandes/mimic/compare/v1.3.0...v1.3.1
