@@ -80,7 +80,7 @@ class Application(object):
         self.corpus.write()
 
     def uniform_sample_hadm_ids(self, limit: int = 1):
-        """Print a uniform random sample of admission hadm_ids.x
+        """Print a uniform random sample of admission hadm_ids.
 
         :param limit: the number to fetch
 
