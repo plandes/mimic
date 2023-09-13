@@ -192,6 +192,10 @@ class NoteEventPersister(DataClassDbPersister):
         cats = self.execute_by_name('categories', row_factory='tuple')
         return tuple(map(lambda x: x[0], cats))
 
+    @property
+    def _is_sqlite(self) -> bool:
+        return isinstance(self.conn_manager, SqliteConnectionManager)
+
     def get_note_count(self, hadm_id: int) -> int:
         """Return the count of notes for a hospital admission.
 
@@ -214,12 +218,21 @@ class NoteEventPersister(DataClassDbPersister):
             'select_note_count_by_subject_id', params=(subject_id,),
             row_factory='tuple')
 
+    def get_row_ids_with_admissions(self) -> Iterable[int]:
+        return map(int, tuple(chain.from_iterable(
+            self.execute_by_name(
+                'select_keys_with_adms',
+                row_factory='identity'))))
+
     def get_row_ids_by_hadm_id(self, hadm_id: int) -> Tuple[int]:
         """Return all note row IDs for a admission ID."""
-        return tuple(chain.from_iterable(
+        hadm_ids = tuple(chain.from_iterable(
             self.execute_by_name(
                 'select_row_ids_by_hadm_id', params=(hadm_id,),
                 row_factory='identity')))
+        if self._is_sqlite:
+            hadm_ids = tuple(map(int, hadm_ids))
+        return hadm_ids
 
     def get_notes_by_hadm_id(self, hadm_id: int) -> Tuple[NoteEvent]:
         """Return notes by hospital admission ID.
@@ -227,8 +240,11 @@ class NoteEventPersister(DataClassDbPersister):
         :param hadm_id: the hospital admission ID
 
         """
-        return self.execute_by_name(
+        hadm_ids = self.execute_by_name(
             'select_notes_by_hadm_id', params=(hadm_id,))
+        if self._is_sqlite:
+            hadm_ids = tuple(map(int, hadm_ids))
+        return hadm_ids
 
     def get_hadm_id(self, row_id: int) -> Optional[int]:
         """Return the hospital admission for a note.
@@ -239,10 +255,12 @@ class NoteEventPersister(DataClassDbPersister):
                  in the database
 
         """
-        maybe_row: List[int] = self.execute_by_name(
+        maybe_row: Tuple[int] = self.execute_by_name(
             'select_hadm_id_by_row_id', params=(row_id,),
             row_factory=lambda x: x)
         if len(maybe_row) > 0:
+            if self._is_sqlite:
+                maybe_row[0] = int(maybe_row[0])
             return maybe_row[0]
 
     def get_hadm_ids(self, row_ids: Iterable[int]) -> Iterable[int]:
@@ -263,8 +281,7 @@ class NoteEventPersister(DataClassDbPersister):
             return self.execute(sql, row_factory=lambda x: x)
 
         sql_name: str = 'select_hadm_id_by_row_ids'
-        is_sqlite: bool = isinstance(self.conn_manager, SqliteConnectionManager)
-        chunk_fn: Callable = map_chunk_sqlite if is_sqlite else map_chunk
+        chunk_fn: Callable = map_chunk_sqlite if self._is_sqlite else map_chunk
         id_lsts: Iterable[List[int]] = chunks(row_ids, self.hadm_row_chunk_size)
         return chain.from_iterable(map(chunk_fn, id_lsts))
 

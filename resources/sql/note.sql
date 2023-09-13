@@ -37,6 +37,9 @@ select distinct(hadm_id) from noteevents where row_id in %s;
 -- name=select_keys
 select row_id from noteevents;
 
+-- name=select_keys_with_adms
+select row_id from noteevents where hadm_id is not null;
+
 -- name=select_hadm_row_id_category
 select hadm_id, row_id, category from noteevents;
 

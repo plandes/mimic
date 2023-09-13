@@ -233,3 +233,8 @@ class Application(object):
                 print('norm:')
                 print(norm)
             print('_' * 120)
+
+    def proto(self):
+        #print(len(tuple(self.corpus.note_event_persister.get_keys())))
+        ids = tuple(self.corpus.note_event_persister.get_row_ids_with_admissions())
+        print(type(ids[0]), ids[:5], len(ids))
