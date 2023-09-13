@@ -219,6 +219,7 @@ class NoteEventPersister(DataClassDbPersister):
             row_factory='tuple')
 
     def get_row_ids_with_admissions(self) -> Iterable[int]:
+        """Get note IDs associate with at least one admission."""
         return map(int, tuple(chain.from_iterable(
             self.execute_by_name(
                 'select_keys_with_adms',
