@@ -395,7 +395,8 @@ class SectionContainer(Dictable, metaclass=ABCMeta):
         cols = 'name body headers body_begin body_end'.split()
         sec: Section
         for sec in self.sections.values():
-            rows.append((sec.name, sec.body, sec.header_spans,
+            rows.append((sec.name, sec.body,
+                         tuple(map(lambda s: s.astuple, sec.header_spans)),
                          sec.body_span.begin, sec.body_span.end))
         return pd.DataFrame(rows, columns=cols)
 
