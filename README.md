@@ -112,6 +112,14 @@ See the [application example], which gives a fine grain way of configuring the
 API.
 
 
+## Medical Note Segmentation
+
+This package uses regular expressions to segment notes.  However, the
+[zensols.mimicsid] uses annotations and a model trained by clinical informatics
+physicians.  Using this package gives this enhanced segmentation without any
+API changes.
+
+
 ## Changelog
 
 An extensive changelog is available [here](CHANGELOG.md).
@@ -146,3 +154,4 @@ Copyright (c) 2022 - 2023 Paul Landes
 [SQLite database file]: https://github.com/plandes/mimicdbsqlite
 [Corpus]: https://plandes.github.io/mimic/api/zensols.mimic.html#zensols.mimic.corpus.Corpus
 [application example]: https://github.com/plandes/mimic/blob/master/example/shownote.py
+[zensols.mimicsid]: https://github.com/plandes/mimicsid
