@@ -22,7 +22,7 @@ def main():
     # print the headers and body of the section
     print('headers:', sec.headers)
     print('section body:')
-    print(sec.headers)
+    print(sec.body)
 
 
 if (__name__ == '__main__'):
