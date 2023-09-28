@@ -108,8 +108,8 @@ The patient is a ...
 15        history  C0455527  history~of~hypertension  concept   NN
 ```
 
-See the [application example] to use as an application, which gives a
-fine grain way of configuring the API.
+See the [application example], which gives a fine grain way of configuring the
+API.
 
 
 ## Changelog
