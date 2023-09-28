@@ -103,7 +103,9 @@ The patient is a ...
 >>> df = ds.feature_dataframe
 
 # get only medical features (CUI, entity, NER and POS tag) for the HPI section
-df[(df['section'] == 'history-of-present-illness') & (df['cui_'] != '-<N>-')]['norm cui_ detected_name_ ent_ tag_'.split()]
+>>> df[(df['section'] == 'history-of-present-illness') & (df['cui_'] != '-<N>-')]['norm cui_ detected_name_ ent_ tag_'.split()]
+             norm      cui_           detected_name_     ent_ tag_
+15        history  C0455527  history~of~hypertension  concept   NN
 ```
 
 See the [application example] to use as an application, which gives a
