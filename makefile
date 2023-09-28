@@ -30,9 +30,17 @@ postgresqldeps:
 				-r $(PY_SRC)/requirements-postgresql.txt --no-deps
 
 
+.PHONY:			example-run
+example-run:
+			( cd example ; PYTHONPATH=$$PYTHONPATH:../src/python ./shownote.py parse )
+
+.PHONY:			example-api-run
+example-api-run:
+			( cd example ; PYTHONPATH=$$PYTHONPATH:../src/python ./api.py )
+
 .PHONY:			example-clean
 example-clean:
-			example/shownote.py clean
+			PYTHONPATH=src/python example/shownote.py clean
 
 # test the MIMIC-III database (unavilable database in GitHub workflows)
 .PHONY:			testdb
