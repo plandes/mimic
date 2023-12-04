@@ -7,7 +7,6 @@ PROJ_TYPE =		python
 PROJ_MODULES =		git python-resources python-cli python-doc python-doc-deploy
 
 # build config
-PIP_ARGS +=		--use-deprecated=legacy-resolver
 PY_DEP_POST_DEPS +=	modeldeps
 ADD_CLEAN +=		feature.csv data
 CLEAN_DEPS +=		example-clean
