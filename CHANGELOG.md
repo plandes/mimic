@@ -8,6 +8,17 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 
 
+## [1.5.0] - 2023-12-05
+### Changed
+- Upgrade to [zensols.util] version 1.14.
+
+### Added
+- Support for Python 3.11.
+
+### Removed
+- Support for Python 3.9.
+
+
 ## [1.4.3] - 2023-09-08
 ### Removed
 - `NoteFactor`'s `section` parameter has been removed in favor of creating
@@ -24,6 +35,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 
 ## [1.4.2] - 2023-08-25
+### Changed
 - Switch to `MultiProcessDefaultStash`, which allows for swapping in other
   multiprocessing implementations.
 
@@ -114,7 +126,9 @@ Significant feature release.
 
 
 <!-- links -->
-[Unreleased]: https://github.com/plandes/mimic/compare/v1.4.2...HEAD
+[Unreleased]: https://github.com/plandes/mimic/compare/v1.5.0...HEAD
+[1.5.0]: https://github.com/plandes/mimic/compare/v1.4.3...v1.5.0
+[1.4.3]: https://github.com/plandes/mimic/compare/v1.4.2...v1.4.3
 [1.4.2]: https://github.com/plandes/mimic/compare/v1.4.1...v1.4.2
 [1.4.1]: https://github.com/plandes/mimic/compare/v1.4.0...v1.4.1
 [1.4.0]: https://github.com/plandes/mimic/compare/v1.3.1...v1.4.0
