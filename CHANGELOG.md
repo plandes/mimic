@@ -10,7 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.5.0] - 2023-12-05
 ### Changed
-- Upgrade to [zensols.util] version 1.14.
+- Upgrade to [zensols.mednlp] version 1.5.0.
 - Fix SQLite admission ID types.
 
 ### Added
