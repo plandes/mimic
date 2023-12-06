@@ -11,9 +11,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.5.0] - 2023-12-05
 ### Changed
 - Upgrade to [zensols.util] version 1.14.
+- Fix SQLite admission ID types.
 
 ### Added
 - Support for Python 3.11.
+- Added note ID access for admissions.
 
 ### Removed
 - Support for Python 3.9.
