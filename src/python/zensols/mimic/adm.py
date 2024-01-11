@@ -126,7 +126,6 @@ class HospitalAdmission(PersistableContainer, Dictable):
                 return False
 
         notes: Tuple[Note] = self.notes
-        nid: Dict[int, Note] = self.notes_by_id
         dups: Set[str] = reduce(lambda x, y: x | y, dup_sets)
         # initialize with the notes not in any duplicate group, which are
         # non-duplicates
@@ -142,7 +141,7 @@ class HospitalAdmission(PersistableContainer, Dictable):
                 note = maybe_an[0]
             else:
                 # if there is no preference (all filtered) pick a random
-                note = nid[next(iter(ds))]
+                note = self[next(iter(ds))]
             non_dups.append((note, True))
         return tuple(non_dups)
 
@@ -259,7 +258,7 @@ class HospitalAdmission(PersistableContainer, Dictable):
         return self._note_stash[str(row_id)]
 
     def __contains__(self, row_id: int):
-        return str(row_id) in self.notes_by_id
+        return str(row_id) in self._note_stash
 
     def __iter__(self) -> Iterable[Note]:
         return iter(self._note_stash.values())
