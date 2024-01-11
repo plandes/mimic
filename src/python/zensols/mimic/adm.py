@@ -22,7 +22,7 @@ from zensols.config import Dictable, ConfigFactory, Settings
 from zensols.multi import MultiProcessDefaultStash
 from zensols.db import BeanStash
 from . import (
-    RecordNotFoundError, Admission, Patient, Diagnosis, Procedure, NoteEvent,
+    Admission, Patient, Diagnosis, Procedure, NoteEvent,
     DiagnosisPersister, ProcedurePersister, PatientPersister,
     NoteEventPersister, AdmissionPersister, Note, NoteFactory,
 )
