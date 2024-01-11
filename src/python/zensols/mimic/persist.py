@@ -10,9 +10,9 @@ import sys
 from itertools import chain
 from zensols.config import Settings
 from zensols.persist import persisted, ReadOnlyStash, chunks
-from zensols.db import (
-    DbPersister, DataClassDbPersister, SqliteConnectionManager
-)
+from zensols.db import DbPersister
+from zensols.db.dataclass import DataClassDbPersister
+from zensols.db.sqlite import SqliteConnectionManager
 from zensols.nlp import FeatureDocument, FeatureDocumentParser
 from . import (
     MimicError, RecordNotFoundError,
