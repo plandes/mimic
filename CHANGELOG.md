@@ -8,6 +8,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 
 
+## [1.5.1] - 2024-01-17
+### Changed
+- Fix "missing `zensols.dbpg` package error" by pinning requirements to
+  PostgreSQL db package as there is no clean way of separating the DB access
+  logic without a large overhaul.
+
+
 ## [1.5.0] - 2023-12-05
 ### Changed
 - Upgrade to [zensols.mednlp] version 1.5.0.
@@ -128,7 +135,8 @@ Significant feature release.
 
 
 <!-- links -->
-[Unreleased]: https://github.com/plandes/mimic/compare/v1.5.0...HEAD
+[Unreleased]: https://github.com/plandes/mimic/compare/v1.5.1...HEAD
+[1.5.1]: https://github.com/plandes/mimic/compare/v1.5.0...v1.5.1
 [1.5.0]: https://github.com/plandes/mimic/compare/v1.4.3...v1.5.0
 [1.4.3]: https://github.com/plandes/mimic/compare/v1.4.2...v1.4.3
 [1.4.2]: https://github.com/plandes/mimic/compare/v1.4.1...v1.4.2

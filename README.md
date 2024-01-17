@@ -43,6 +43,13 @@ Binaries are also available on [pypi].
 2. Install the database (either PostgreSQL or SQLite).
 
 
+### MedCAT Models
+
+The dependency [zensols.mednlp] package uses the [default MedCAT
+model](https://github.com/plandes/mednlp#medcat-models).
+
+
+
 ### PostgreSQL
 
 For PostgreSQL, load MIMIC-III by following the [PostgreSQL instructions] or
