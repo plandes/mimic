@@ -46,8 +46,16 @@ example-clean:
 testdb:
 			make PY_SRC_TEST=test/db test
 
+.PHONY:			testadmexport
+testadmexport:
+			$(eval cor=363)
+			make PY_CLI_ARGS="adm 100581 --format raw" pycli
+			@cat $(ADM_DIR)/100581/4468--discharge-summary--report.txt | \
+			  wc -l | xargs -i{} bash -c \
+			  "if [ '{}' != '$(cor)' ] ; then echo {} != $(cor) ; exit 1 ; fi"
+			@echo "success: line count output: $(cor)"
+			rm -r $(ADM_DIR)
+
+# todo: 
 .PHONY:			testall
-testall:		test
-			make PY_CLI_ARGS="$(ADM_DIR) 100581 --format raw" pycli
-			@echo "should be 363 lines"
-			cat $(ADM_DIR)/100581/4468--discharge-summary--report.txt | wc -l
+testall:		test testadmexport
