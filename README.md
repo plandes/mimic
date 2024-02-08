@@ -31,7 +31,7 @@ available.
 
 The easiest way to install the command line program is via the `pip` installer:
 ```bash
-pip3 install --use-deprecated=legacy-resolver zensols.mimic
+pip3 install zensols.mimic
 ```
 
 Binaries are also available on [pypi].
@@ -50,32 +50,45 @@ model](https://github.com/plandes/mednlp#medcat-models).
 
 
 
-### PostgreSQL
-
-For PostgreSQL, load MIMIC-III by following the [PostgreSQL instructions] or
-consider the [PostgreSQL Docker image].  The Python PostgreSQL client package
-is also needed, which can be installed with `pip3 install zensols.dbpg`.
-
-
 ### SQLite Configuration
 
-A SQLite can also be used, but it is slower an not as well tested.  However, it
-is faster to set up and could also be useful when a database is not available.
-I have also created a repository to create the [SQLite database file] using the
-[SQLite instructions] and repository.
+SQLite is the default database used for MIMIC-III access, but, it is slower and
+not as well tested compared to the [PostgreSQL](PostgreSQL) driver.  See the
+[SQLite database file] using the [SQLite instructions] to create the SQLite
+file from MIMIC-III if you need database access.
 
-The following additional configuration in the `--config` file is also
-necessary (or in `~/.mimicrc`):
+Once you create the file, configure it with the API using the following
+additional configuration in the `--config` file is also necessary (or in
+`~/.mimicrc`):
 ```ini
-[import]
-sections = list: mimic_sqlite_res_imp
-
-[mimic_sqlite_res_imp]
-type = import
-config_file = resource(zensols.mednlp): resources/sqlite.conf
-
 [mimic_sqlite_conn_manager]
 db_file = path: <some directory>/mimic3.sqlite3
+```
+
+### PostgreSQL
+
+PostgreSQL is the preferred way to access MIMIC-II for this API.  The MIMIC-III
+database can be loaded by following the [PostgreSQL instructions], or consider
+the [PostgreSQL Docker image].  Then configure the database by adding the
+following to `~/.mimicrc`:
+```ini
+[mimic_default]
+resources_dir = resource(zensols.mimic): resources
+sql_resources = ${resources_dir}/postgres
+conn_manager = mimic_postgres_conn_manager
+
+[mimic_db]
+database = <needs a value>
+host = <needs a value>
+port = <needs a value>
+user = <needs a value>
+password = <needs a value>
+```
+
+
+The Python PostgreSQL client package is also needed, which can be installed with:
+```bash
+pip3 install zensols.dbpg
 ```
 
 
