@@ -181,7 +181,7 @@ Contributions as pull requests, feedback and any input is welcome.
 
 [MIT License](LICENSE.md)
 
-Copyright (c) 2022 - 2023 Paul Landes
+Copyright (c) 2022 - 2024 Paul Landes
 
 
 <!-- links -->
