@@ -23,6 +23,11 @@ modeldeps:
 			$(PIP_BIN) install $(PIP_ARGS) \
 				-r $(PY_SRC)/requirements-model.txt --no-deps
 
+.PHONY:			postgresdeps
+postgresdeps:
+			$(PIP_BIN) install $(PIP_ARGS) \
+				-r $(PY_SRC)/requirements-postgres.txt --no-deps
+
 .PHONY:			postgresqldeps
 postgresqldeps:
 			$(PIP_BIN) install $(PIP_ARGS) \

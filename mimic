@@ -8,7 +8,8 @@ if (__name__ == '__main__'):
         src_dir_name='src/python',
         app_factory_class='zensols.mimic.ApplicationFactory',
         # prototyping arguments
-        proto_args='proto',
+        #proto_args='proto',
+        proto_args='note 130992',
         proto_factory_kwargs={'reload_pattern': r'^zensols.mimic.(?:app)'},
     )
     harness.run()

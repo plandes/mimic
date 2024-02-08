@@ -8,6 +8,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 
 
+## [1.5.2] - 2024-02-08
+### Removed
+- The [zensols.dbpg] dependency for PostgreSQL MIMIC-III DB access.
+
+### Changed
+- SQLite is now the default database for MIMIC-III DB access.  This removes
+  this package [zensols.mimicsid] from needing the PostgreSQL driver from being
+  install.
+
+
 ## [1.5.1] - 2024-01-17
 ### Changed
 - Fix "missing `zensols.dbpg` package error" by pinning requirements to
@@ -51,7 +61,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.4.1] - 2023-08-16
 ### Changed
-- PostreSQL is now optional, and to use it, it the [zensols.dbsql] needs to be
+- PostreSQL is now optional, and to use it, the [zensols.dbpg] needs to be
   installed (see the [README](README.md)].
 
 
@@ -135,7 +145,8 @@ Significant feature release.
 
 
 <!-- links -->
-[Unreleased]: https://github.com/plandes/mimic/compare/v1.5.1...HEAD
+[Unreleased]: https://github.com/plandes/mimic/compare/v1.5.2...HEAD
+[1.5.2]: https://github.com/plandes/mimic/compare/v1.5.1...v1.5.2
 [1.5.1]: https://github.com/plandes/mimic/compare/v1.5.0...v1.5.1
 [1.5.0]: https://github.com/plandes/mimic/compare/v1.4.3...v1.5.0
 [1.4.3]: https://github.com/plandes/mimic/compare/v1.4.2...v1.4.3
@@ -153,4 +164,4 @@ Significant feature release.
 
 [zensols.mednlp]: https://github.com/plandes/mednlp
 [zensols.mimicsid]: https://github.com/plandes/mimicsid
-[zensols.dbsql]: https://github.com/plandes/dbutilpg
+[zensols.dbpg]: https://github.com/plandes/dbutilpg
