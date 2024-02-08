@@ -261,6 +261,7 @@ class NoteEventPersister(DataClassDbPersister):
             row_factory=lambda x: x)
         if len(maybe_row) > 0:
             if self._is_sqlite:
+                maybe_row = list(maybe_row)
                 maybe_row[0] = int(maybe_row[0])
             return maybe_row[0]
 
