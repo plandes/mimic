@@ -230,7 +230,7 @@ class Section(PersistableContainer, Dictable):
     @property
     def is_empty(self) -> bool:
         """Whether the content of the section is empty."""
-        return len(self.body) == 0
+        return len(self.header_spans) == 0 and len(self.body.strip()) == 0
 
     def _copy_resources(self, target: Section):
         for attr in self._PERSITABLE_TRANSIENT_ATTRIBUTES:
@@ -311,7 +311,7 @@ class Section(PersistableContainer, Dictable):
                              depth, writer)
         if include_body_span:
             self._write_line(f'body span: {self.body_span}', depth, writer)
-        if not self.is_empty:
+        if not len(self.body) > 0:
             if body_line_limit > 0:
                 self._write_line('body:', depth, writer)
                 self._write_block(self.body, depth + 1, writer,
@@ -585,6 +585,9 @@ class GapSectionContainer(SectionContainer):
     delegate: Note = field()
     """The note with the sections to be filled."""
 
+    filter_empty: bool = field()
+    """Whether to filter empty sections."""
+
     def _get_doc(self) -> FeatureDocument:
         return self.delegate._get_doc()
 
@@ -599,6 +602,7 @@ class GapSectionContainer(SectionContainer):
             ref_sec: Section = sections[0]
             sec_cont: SectionContainer = ref_sec.container
             gap_secs: List[Section] = []
+            gs: LexicalSpan
             for gs in gaps:
                 gsec = Section(
                     id=-1,
@@ -606,6 +610,8 @@ class GapSectionContainer(SectionContainer):
                     container=sec_cont,
                     header_spans=(),
                     body_span=gs)
+                if self.filter_empty and gsec.is_empty:
+                    continue
                 ref_sec._copy_resources(gsec)
                 gap_secs.append(gsec)
             sections.extend(gap_secs)
@@ -699,8 +705,8 @@ class NoteFactory(Primeable):
 
     """
     mimic_default_note_section: str = field()
-    """The section name holding the configuration of the class to create when there
-    is no mapping in :obj:`category_to_note`.
+    """The section name holding the configuration of the class to create when
+    there is no mapping in :obj:`category_to_note`.
 
     """
     def _event_to_note(self, note_event: NoteEvent, section: str,
