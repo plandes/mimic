@@ -74,30 +74,13 @@ class SectionAnnotatorType(Enum):
 
 
 @dataclass
-class ParagraphFactory(object):
+class ParagraphFactory(object, metaclass=ABCMeta):
     """Splits a document in to constituent paragraphs.
 
     """
-    _PARA_REGEX: ClassVar[re.Pattern] = re.compile(r'\n[\s.]*\n')
-
-    def __call__(self, sec: Section) -> List[FeatureDocument]:
-        par_spans: List[LexicalSpan] = []
-        paras: List[FeatureDocument] = []
-        bspan: LexicalSpan = sec.body_span
-        bdoc: LexicalSpan = sec.body_doc
-        marks: List[int] = [bspan.begin]
-        for i in self._PARA_REGEX.finditer(sec.body):
-            marks.extend((i.start() + bspan.begin, i.end() + bspan.begin))
-        marks.append(bspan.end)
-        mi = iter(marks)
-        for beg in mi:
-            par_spans.append(LexicalSpan(beg, next(mi)))
-        ps: LexicalSpan
-        for ps in par_spans:
-            para: FeatureDocument = bdoc.get_overlapping_document(ps)
-            para.text = ' '.join(map(lambda s: s.text.strip(), para))
-            paras.append(para)
-        return paras
+    @abstractmethod
+    def create(self, sec: Section) -> Iterable[FeatureDocument]:
+        pass
 
 
 @dataclass
@@ -225,7 +208,7 @@ class Section(PersistableContainer, Dictable):
         section's body text.
 
         """
-        return tuple(self._paragraph_factory(self))
+        return tuple(self._paragraph_factory.create(self))
 
     @property
     def is_empty(self) -> bool:
