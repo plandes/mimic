@@ -57,7 +57,7 @@ class Corpus(Dictable):
         # stashes on to the HospitalAdmissionDbStash such as `process_keys`
         self.hospital_adm_stash.delegate_attr = True
 
-    def clear(self, include_notes: bool = False):
+    def clear(self, include_notes: bool = True):
         """Clear the all cached admission and note parses.
 
         :param include_notes: whether to also clear the parsed notes cache
