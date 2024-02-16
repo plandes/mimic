@@ -121,6 +121,7 @@ class ChunkingParagraphFactory(ParagraphFactory):
         if doc.token_len > 0:
             doc.text = parent.text[doc.lexspan.begin:doc.lexspan.end]
         if doc.token_len > 0:
+            doc.reindex()
             return doc
 
     def create(self, sec: Section) -> Iterable[FeatureDocument]:
