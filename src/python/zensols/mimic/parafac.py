@@ -60,6 +60,12 @@ class ChunkingParagraphFactory(ParagraphFactory):
     version of the section.
 
     """
+    max_sent_list_len: int = field()
+    """The maximum lenght a sentence can be to keep it chunked as a list.
+    Otherwise very long sentences form from what appear to be front list
+    syntax.
+
+    """
     include_section_headers: bool = field()
     """Whether to include section headers in the output."""
 
