@@ -8,6 +8,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 
 
+## [1.6.0] - 2024-02-27
+### Added
+- Better MIMIC paragraph chunker using additional features from [zensols.nlp].
+- CLI action to remove cached files.
+
+### Changed
+- Upgrade to [zensols.mednlp] 1.6.0.
+
+
 ## [1.5.2] - 2024-02-08
 ### Removed
 - The [zensols.dbpg] dependency for PostgreSQL MIMIC-III DB access.
@@ -145,7 +154,8 @@ Significant feature release.
 
 
 <!-- links -->
-[Unreleased]: https://github.com/plandes/mimic/compare/v1.5.2...HEAD
+[Unreleased]: https://github.com/plandes/mimic/compare/v1.6.0...HEAD
+[1.6.0]: https://github.com/plandes/mimic/compare/v1.5.2...v1.6.0
 [1.5.2]: https://github.com/plandes/mimic/compare/v1.5.1...v1.5.2
 [1.5.1]: https://github.com/plandes/mimic/compare/v1.5.0...v1.5.1
 [1.5.0]: https://github.com/plandes/mimic/compare/v1.4.3...v1.5.0
@@ -165,3 +175,4 @@ Significant feature release.
 [zensols.mednlp]: https://github.com/plandes/mednlp
 [zensols.mimicsid]: https://github.com/plandes/mimicsid
 [zensols.dbpg]: https://github.com/plandes/dbutilpg
+[zensols.nlp]:  https://github.com/plandes/nlparse
