@@ -102,7 +102,8 @@ class ChunkingParagraphFactory(ParagraphFactory):
 
         """
         def filter_toks(t: FeatureToken) -> bool:
-            return t.mimic_ != MimicTokenDecorator.SEPARATOR_TOKEN_FEATURE and \
+            feat = t.mimic_ if hasattr(t, 'mimic_') else None
+            return feat != MimicTokenDecorator.SEPARATOR_TOKEN_FEATURE and \
                 len(t.norm.strip()) > 0
 
         def filter_sents(s: FeatureSentence) -> bool:
