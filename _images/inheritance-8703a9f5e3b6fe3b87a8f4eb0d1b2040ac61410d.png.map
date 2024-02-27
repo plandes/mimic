@@ -1,0 +1,7 @@
+<map id="inheritance35cd2c329a" name="inheritance35cd2c329a">
+<area shape="rect" id="node1" title="Helper class that provides a standard way to create an ABC using" alt="" coords="75,5,147,36"/>
+<area shape="rect" id="node3" title="Implementations can add, remove or modify features on a token." alt="" coords="5,84,216,115"/>
+<area shape="rect" id="node2" title="A pipeline component to be added to the spaCy model." alt="" coords="394,5,510,36"/>
+<area shape="rect" id="node5" href="#zensols.mimic.tokenizer.MimicTokenizerComponent" target="_top" title="Modifies the spacCy tokenizer to split on colons (``:``) to capture more" alt="" coords="331,84,573,115"/>
+<area shape="rect" id="node4" href="#zensols.mimic.tokenizer.MimicTokenDecorator" target="_top" title="Contains the MIMIC&#45;III regular expressions and other patterns to annotate" alt="" coords="11,163,210,193"/>
+</map>
