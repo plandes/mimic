@@ -45,13 +45,15 @@ Binaries are also available on [pypi].
 
 ## Configuration
 
-After a database is installed it must be configured in the file `~/.mimic`.
-This file also specifies where to cache data:
+After a database is installed it must be configured in a new file `~/.mimicrc`
+that you create.  This INI formatted file also specifies where to cache data:
 ```ini
 [default]
 # the directory where cached data is stored
 data_dir = ~/directory/to/cached/data
 ```
+If this file doesn't exist, it must be specified with the `--config` option.
+
 
 ### SQLite
 
@@ -61,7 +63,7 @@ not as well tested compared to the [PostgreSQL](PostgreSQL) driver.  See the
 file from MIMIC-III if you need database access.
 
 Once you create the file, configure it with the API using the following
-additional configuration in the `--config` file is also necessary (or in
+additional configuration in the `--config` specified file is also necessary (or in
 `~/.mimicrc`):
 ```ini
 [mimic_sqlite_conn_manager]
