@@ -43,12 +43,15 @@ Binaries are also available on [pypi].
 2. Install the database (either PostgreSQL or SQLite).
 
 
-### MedCAT Models
+## Configuration
 
-The dependency [zensols.mednlp] package uses the [default MedCAT
-model](https://github.com/plandes/mednlp#medcat-models).
-
-
+After a database is installed it must be configured in the file `~/.mimic`.
+This file also specifies where to cache data:
+```ini
+[default]
+# the directory where cached data is stored
+data_dir = ~/directory/to/cached/data
+```
 
 ### SQLite Configuration
 
@@ -86,7 +89,8 @@ password = <needs a value>
 ```
 
 
-The Python PostgreSQL client package is also needed, which can be installed with:
+The Python PostgreSQL client package is also needed (not needed for the
+[SQLite](#sqlite-configuration) installs), which can be installed with:
 ```bash
 pip3 install zensols.dbpg
 ```
