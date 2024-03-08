@@ -53,7 +53,7 @@ This file also specifies where to cache data:
 data_dir = ~/directory/to/cached/data
 ```
 
-### SQLite Configuration
+### SQLite
 
 SQLite is the default database used for MIMIC-III access, but, it is slower and
 not as well tested compared to the [PostgreSQL](PostgreSQL) driver.  See the
