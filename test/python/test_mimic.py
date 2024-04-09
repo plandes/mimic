@@ -85,7 +85,7 @@ Attending:[**First Name3 (LF) 922**]"""
             lambda t: t.mimic_, doc.token_iter())))
 
     def test_decorated_combining_medical_parser(self):
-        self._doc_parser_name = 'mednlp_combine_doc_parser'
+        self._doc_parser_name = 'mednlp_combine_medcat_doc_parser'
         parser = self._get_parser('add-decorator')
         text = """\
 Patient (John Smith) recorded as having no known Allergies to Drugs
