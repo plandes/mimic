@@ -18,6 +18,8 @@ Features include:
   admissions and medical notes.
 * Interfaces MIMIC-III data as a relational database (either PostgreSQL or
   SQLite).
+* Paragraph chunking using the most common syntax/physician templates provided
+  in the MIMIC-III dataset.
 
 
 ## Documentation
