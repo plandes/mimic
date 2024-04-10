@@ -112,7 +112,7 @@ class Section(PersistableContainer, Dictable):
     container: SectionContainer = field(repr=False)
     """The container that has this section."""
 
-    header_spans: Tuple[LexicalSpan] = field()
+    header_spans: Tuple[LexicalSpan, ...] = field()
     """The character offsets of the section headers.  The first is usually the
     :obj:`name` of the section.  If there are no headers, this is an 0-length
     tuple.
@@ -139,7 +139,7 @@ class Section(PersistableContainer, Dictable):
 
     @property
     @persisted('_headers', transient=True)
-    def headers(self) -> Tuple[str]:
+    def headers(self) -> Tuple[str, ...]:
         """The section text."""
         text = self.note_text
         return tuple(map(lambda s: text[s.begin:s.end], self.header_spans))
@@ -203,7 +203,7 @@ class Section(PersistableContainer, Dictable):
 
     @property
     @persisted('_paragraphs', transient=True)
-    def paragraphs(self) -> Tuple[FeatureDocument]:
+    def paragraphs(self) -> Tuple[FeatureDocument, ...]:
         """The list of paragraphs, each as as a feature document, of this
         section's body text.
 
@@ -230,7 +230,7 @@ class Section(PersistableContainer, Dictable):
         """Write all parsed sentences of the section with respective entities.
 
         """
-        def map_ent(tp: Tuple[FeatureToken]):
+        def map_ent(tp: Tuple[FeatureToken, ...]):
             """Map a feature token to a readable string."""
             if tp[0].ent_ == 'concept':
                 desc = f' ({tp[0].cui_})'
@@ -351,14 +351,14 @@ class SectionContainer(Dictable, metaclass=ABCMeta):
 
     @property
     @persisted('_sections_ordered', transient=True)
-    def sections_ordered(self) -> Tuple[Section]:
+    def sections_ordered(self) -> Tuple[Section, ...]:
         """Sections returned in order as they appear in the note."""
         return tuple(map(lambda t: t[1], sorted(
             self.sections.items(), key=lambda t: t[0])))
 
     @property
     @persisted('_by_name', transient=True)
-    def sections_by_name(self) -> Dict[str, Tuple[Section]]:
+    def sections_by_name(self) -> Dict[str, Tuple[Section, ...]]:
         """A map from the name of a section (i.e. *history of present illness*
         in discharge notes) to a note section.
 
