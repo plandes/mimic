@@ -8,6 +8,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 
 
+## [1.7.0] - 2024-04-14
+### Changed
+- Upgrade to [zensols.mednlp] 1.7.0.
+
+
 ## [1.6.0] - 2024-02-27
 ### Added
 - Better MIMIC paragraph chunker using additional features from [zensols.nlp].
@@ -154,7 +159,8 @@ Significant feature release.
 
 
 <!-- links -->
-[Unreleased]: https://github.com/plandes/mimic/compare/v1.6.0...HEAD
+[Unreleased]: https://github.com/plandes/mimic/compare/v1.7.0...HEAD
+[1.7.0]: https://github.com/plandes/mimic/compare/v1.6.0...v1.7.0
 [1.6.0]: https://github.com/plandes/mimic/compare/v1.5.2...v1.6.0
 [1.5.2]: https://github.com/plandes/mimic/compare/v1.5.1...v1.5.2
 [1.5.1]: https://github.com/plandes/mimic/compare/v1.5.0...v1.5.1
