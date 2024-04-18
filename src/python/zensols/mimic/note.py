@@ -100,6 +100,9 @@ class Section(PersistableContainer, Dictable):
     ``1. Vancomycin 125 mg``.
 
     """
+    FILTER_ENUMS: ClassVar[bool] = True
+    """Whether to filter enumerated lists as separate sentences."""
+
     id: int = field()
     """The unique ID of the section."""
 
@@ -176,8 +179,10 @@ class Section(PersistableContainer, Dictable):
         return self._narrow_doc(self._get_doc(), self.body_span)
 
     def _narrow_doc(self, doc: FeatureDocument, span: LexicalSpan,
-                    filter_sent: bool = True) -> \
+                    filter_sent: bool = None) -> \
             FeatureDocument:
+        if filter_sent is None:
+            filter_sent = self.FILTER_ENUMS
         # using inclusive=true will very often leave newlines, but keep the last
         # sentence character when the sentence chunker gets confused
         doc = doc.get_overlapping_document(span, inclusive=True)
