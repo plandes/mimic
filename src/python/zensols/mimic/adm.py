@@ -70,7 +70,7 @@ class HospitalAdmission(PersistableContainer, Dictable):
 
     @property
     @persisted('_by_category', transient=True)
-    def notes_by_category(self) -> Dict[str, Tuple[Note]]:
+    def notes_by_category(self) -> Dict[str, Tuple[Note, ...]]:
         """All notes by :obj:`.Note.category` as keys with the list of
         resepctive notes as a list as values.
 
@@ -80,7 +80,8 @@ class HospitalAdmission(PersistableContainer, Dictable):
             notes[note.category].append(note)
         return frozendict({k: tuple(notes[k]) for k in notes.keys()})
 
-    def get_duplicate_notes(self, text_start: int = None) -> Tuple[Set[str]]:
+    def get_duplicate_notes(self, text_start: int = None) -> \
+            Tuple[Set[str], ...]:
         """Notes with the same note text, each in their respective set.
 
         :param text_start: the number of first N characters used to compare
@@ -102,7 +103,7 @@ class HospitalAdmission(PersistableContainer, Dictable):
 
     def get_non_duplicate_notes(self, dup_sets: Tuple[Set[str]],
                                 filter_fn: Callable = None) -> \
-            Tuple[Tuple[Note, bool]]:
+            Tuple[Tuple[Note, bool], ...]:
         """Return non-duplicated notes.
 
         :param dup_sets: the duplicate sets generated from
@@ -125,7 +126,7 @@ class HospitalAdmission(PersistableContainer, Dictable):
             else:
                 return False
 
-        notes: Tuple[Note] = self.notes
+        notes: Tuple[Note, ...] = self.notes
         dups: Set[str] = reduce(lambda x, y: x | y, dup_sets)
         # initialize with the notes not in any duplicate group, which are
         # non-duplicates
@@ -351,7 +352,7 @@ class HospitalAdmissionDbStash(ReadOnlyStash, Primeable):
 
     def _create_note_stash(self, adm: Admission):
         np: NoteEventPersister = self.note_event_persister
-        row_ids: Tuple[int] = np.get_row_ids_by_hadm_id(adm.hadm_id)
+        row_ids: Tuple[int, ...] = np.get_row_ids_by_hadm_id(adm.hadm_id)
         return KeySubsetStash(
             delegate=self.note_stash,
             key_subset=set(map(str, row_ids)),
@@ -371,8 +372,8 @@ class HospitalAdmissionDbStash(ReadOnlyStash, Primeable):
         pp: ProcedurePersister = self.procedure_persister
         adm: Admission = self.admission_persister.get_by_hadm_id(hadm_id)
         pat: Patient = self.patient_persister.get_by_subject_id(adm.subject_id)
-        diag: Tuple[Diagnosis] = dp.get_by_hadm_id(hadm_id)
-        procds: Tuple[Procedure] = pp.get_by_hadm_id(hadm_id)
+        diag: Tuple[Diagnosis, ...] = dp.get_by_hadm_id(hadm_id)
+        procds: Tuple[Procedure, ...] = pp.get_by_hadm_id(hadm_id)
         note_stash: Stash = self._create_note_stash(adm)
         adm: HospitalAdmission = self.config_factory.new_instance(
             self.hospital_adm_name, adm, pat, diag, procds)
@@ -446,7 +447,7 @@ class NoteDocumentPreemptiveStash(MultiProcessDefaultStash):
 
     def __post_init__(self):
         super().__post_init__()
-        self._row_ids: Tuple[str] = None
+        self._row_ids: Tuple[str, ...] = None
 
     def _create_data(self) -> Iterable[HospitalAdmission]:
         keys: Set[str] = self._row_ids
@@ -506,7 +507,7 @@ class NoteDocumentPreemptiveStash(MultiProcessDefaultStash):
                          f'existing: {existing_row_ids}, ' +
                          f'create: {to_create_row_ids}')
         # populate admissions that have at least one missing note
-        hadm_ids: Tuple[int] = tuple(np.get_hadm_ids(to_create_row_ids))
+        hadm_ids: Tuple[int, ...] = tuple(np.get_hadm_ids(to_create_row_ids))
         # first create the admissions to processes overwrite, only then can
         # notes be dervied from admissions and written across procs
         if logger.isEnabledFor(logging.INFO):
