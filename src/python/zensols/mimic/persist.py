@@ -3,11 +3,12 @@
 """
 __author__ = 'Paul Landes'
 
-from typing import Tuple, Iterable, Optional, List, Callable
+from typing import Tuple, List, Dict, Iterable, Optional, Callable
 from dataclasses import dataclass, field
 import logging
 import sys
 from itertools import chain
+from collections import defaultdict
 from zensols.config import Settings
 from zensols.persist import persisted, ReadOnlyStash, chunks
 from zensols.db import DbPersister
@@ -48,13 +49,13 @@ class AdmissionPersister(DataClassDbPersister):
             row_factory='tuple')
         return map(lambda x: x[0], ids)
 
-    def get_by_subject_id(self, subject_id: int) -> Tuple[Admission]:
+    def get_by_subject_id(self, subject_id: int) -> Tuple[Admission, ...]:
         """Get an admissions by patient ID."""
         return self.execute_by_name(
             'select_admission_by_subject_id', params=(subject_id,))
 
     def get_admission_counts(self, limit: int = sys.maxsize) -> \
-            Tuple[Tuple[int, int]]:
+            Tuple[Tuple[int, int], ...]:
         """Return the counts of subjects for each hospital admission.
 
         :param limit: the limit on the return admission counts
@@ -106,7 +107,7 @@ class DiagnosisPersister(DataClassDbPersister):
         return self.execute_by_name(
             'select_diagnosis_by_hadm_id', params=(hadm_id,))
 
-    def get_heart_failure_hadm_ids(self) -> Tuple[int]:
+    def get_heart_failure_hadm_ids(self) -> Tuple[int, ...]:
         """Return hospital admission IDs that are heart failure related.
 
         """
@@ -191,7 +192,7 @@ class NoteEventPersister(DataClassDbPersister):
 
     @property
     @persisted('_categories', cache_global=True)
-    def categories(self) -> Tuple[str]:
+    def categories(self) -> Tuple[str, ...]:
         """All unique categories."""
         cats = self.execute_by_name('categories', row_factory='tuple')
         return tuple(map(lambda x: x[0], cats))
@@ -210,7 +211,7 @@ class NoteEventPersister(DataClassDbPersister):
             'select_note_count', params=(hadm_id,), row_factory='tuple')[0][0]
 
     def get_note_counts_by_subject_id(self, subject_id: int) -> \
-            Tuple[Tuple[int, int]]:
+            Tuple[Tuple[int, int], ...]:
         """Get counts of notes related to a subject.
 
         :param subject_id: the patient's ID
@@ -229,7 +230,7 @@ class NoteEventPersister(DataClassDbPersister):
                 'select_keys_with_adms',
                 row_factory='identity'))))
 
-    def get_row_ids_by_hadm_id(self, hadm_id: int) -> Tuple[int]:
+    def get_row_ids_by_hadm_id(self, hadm_id: int) -> Tuple[int, ...]:
         """Return all note row IDs for a admission ID."""
         hadm_ids = tuple(chain.from_iterable(
             self.execute_by_name(
@@ -239,7 +240,7 @@ class NoteEventPersister(DataClassDbPersister):
             hadm_ids = tuple(map(int, hadm_ids))
         return hadm_ids
 
-    def get_notes_by_hadm_id(self, hadm_id: int) -> Tuple[NoteEvent]:
+    def get_notes_by_hadm_id(self, hadm_id: int) -> Tuple[NoteEvent, ...]:
         """Return notes by hospital admission ID.
 
         :param hadm_id: the hospital admission ID
@@ -251,6 +252,32 @@ class NoteEventPersister(DataClassDbPersister):
             hadm_ids = tuple(map(int, hadm_ids))
         return hadm_ids
 
+    def get_row_ids_by_category(self, hadm_id: int,
+                                categories: Iterable[str]) -> \
+            Dict[str, List[int]]:
+        query_name: str = 'select_row_ids_by_hadm_id_category'
+        rows: Tuple[Tuple[int, str], ...]
+        by_cat: Dict[str, List[int]] = defaultdict(list)
+        cats: Tuple[str, ...] = tuple(categories)
+        if self._is_sqlite:
+            sql: str = self.sql_entries[query_name]
+            sql = sql.format(cats=','.join(['?'] * len(categories)))
+            # Python sqlite does not handle "where in" clauses
+            rows = self.execute(
+                sql,
+                row_factory='tuple',
+                params=(hadm_id, *cats))
+        else:
+            rows = self.execute_by_name(
+                query_name,
+                row_factory='tuple',
+                params=(hadm_id, cats))
+        row_id: int
+        cat: str
+        for row_id, cat in rows:
+            by_cat[cat].append(row_id)
+        return dict(by_cat.items())
+
     def get_hadm_id(self, row_id: int) -> Optional[int]:
         """Return the hospital admission for a note.
 
@@ -260,7 +287,7 @@ class NoteEventPersister(DataClassDbPersister):
                  in the database
 
         """
-        maybe_row: Tuple[int] = self.execute_by_name(
+        maybe_row: Tuple[int, ...] = self.execute_by_name(
             'select_hadm_id_by_row_id', params=(row_id,),
             row_factory=lambda x: x)
         if len(maybe_row) > 0:
@@ -277,11 +304,11 @@ class NoteEventPersister(DataClassDbPersister):
         :return: the hospital admission admissions unique ID ``hadm_id``
 
         """
-        def map_chunk(ids: List[int]) -> Tuple[int]:
+        def map_chunk(ids: List[int]) -> Tuple[int, ...]:
             return self.execute_by_name(
                 sql_name, params=(tuple(ids),), row_factory=lambda x: x)
 
-        def map_chunk_sqlite(ids: List[int]) -> Tuple[int]:
+        def map_chunk_sqlite(ids: List[int]) -> Tuple[int, ...]:
             sql: str = self.sql_entries[sql_name]
             sql = sql.replace('?', f"({','.join(map(str, ids))})")
             return self.execute(sql, row_factory=lambda x: x)
@@ -299,8 +326,8 @@ class NoteEventPersister(DataClassDbPersister):
         ids = self.execute_by_name('select_note_hadm_ids', row_factory='tuple')
         return map(lambda x: x[0], ids)
 
-    def get_notes_by_category(self, category: str,
-                              limit: int = sys.maxsize) -> Tuple[NoteEvent]:
+    def get_notes_by_category(self, category: str, limit: int = sys.maxsize) \
+            -> Tuple[NoteEvent, ...]:
         """Return notes by what the category to which they belong.
 
         :param category: the category of the note (i.e. ``Radiology``)
