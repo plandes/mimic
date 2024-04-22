@@ -46,10 +46,10 @@ class HospitalAdmission(PersistableContainer, Dictable):
     patient: Patient = field()
     """The patient/subject."""
 
-    diagnoses: Tuple[Diagnosis] = field()
+    diagnoses: Tuple[Diagnosis, ...] = field()
     """The ICD-9 diagnoses of the hospital admission."""
 
-    procedures: Tuple[Procedure] = field()
+    procedures: Tuple[Procedure, ...] = field()
     """The ICD-9 procedures of the hospital admission."""
 
     def __post_init__(self):
