@@ -210,6 +210,10 @@ class NoteEventPersister(DataClassDbPersister):
         return self.execute_by_name(
             'select_note_count', params=(hadm_id,), row_factory='tuple')[0][0]
 
+    def get_note_counts(self) -> Tuple[int, ...]:
+        """Return the count of notes for all hospital admissions."""
+        return self.execute_by_name('select_note_counts', row_factory='tuple')
+
     def get_note_counts_by_subject_id(self, subject_id: int) -> \
             Tuple[Tuple[int, int], ...]:
         """Get counts of notes related to a subject.
