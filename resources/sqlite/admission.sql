@@ -33,7 +33,7 @@ select subject_id, count(subject_id) as cnt from admissions
 select hadm_id from admissions;
 
 -- name=select_hadm_id_exists
-select count(*) from admissions where hadm_id = ?;
+select count(*) > 0 from admissions where hadm_id = ?;
 
 -- get all noteevent IDs for heart patients
 select n.row_id, a.hadm_id, a.subject_id
