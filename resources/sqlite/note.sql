@@ -29,7 +29,9 @@ select row_id from noteevents where hadm_id = ?;
 select hadm_id, row_id, category from noteevents where hadm_id in ?;
 
 -- name=select_row_ids_by_hadm_id_category
-select row_id, category from noteevents where hadm_id = ? and category in ({cats});
+select row_id, category from noteevents
+    where hadm_id = ? and category in ({cats})
+    order by chartdate desc;
 
 -- name=select_hadm_id_by_row_id
 select hadm_id from noteevents where row_id = ?;
