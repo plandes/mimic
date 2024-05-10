@@ -220,6 +220,20 @@ class Section(PersistableContainer, Dictable):
         """Whether the content of the section is empty."""
         return len(self.header_spans) == 0 and len(self.body.strip()) == 0
 
+    @staticmethod
+    def header_to_name(s: str) -> str:
+        """Convert a section header text to a section name."""
+        return s.replace(' ', '-').lower()
+
+    @staticmethod
+    def name_to_header(s: str) -> str:
+        """Convert a section name to a section header text.  Note that this uses
+        a heuristic method that might generate a string that does not match the
+        original header text.
+
+        """
+        return s.replace('-', ' ').capitalize()
+
     def _copy_resources(self, target: Section):
         for attr in self._PERSITABLE_TRANSIENT_ATTRIBUTES:
             setattr(target, attr, getattr(self, attr))
@@ -344,6 +358,22 @@ class SectionContainer(Dictable, metaclass=ABCMeta):
 
         """
         pass
+
+    @staticmethod
+    def category_to_id(s: str) -> str:
+        """Convert a category string (i.e. ``Discharge summary``) to a category
+        ID (i.e. ``discharge-summary``).
+
+        """
+        return Section.header_to_name(s)
+
+    @staticmethod
+    def id_to_category(s: str) -> str:
+        """Convert a category ID (i.e. ``discharge-summary``) to a category
+        string (i.e. ``Discharge summary``).
+
+        """
+        return Section.name_to_header(s)
 
     @property
     @persisted('_sections')
