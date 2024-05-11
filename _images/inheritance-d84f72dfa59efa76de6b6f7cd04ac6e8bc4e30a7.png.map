@@ -1,0 +1,6 @@
+<map id="inheritance3a4f99841a" name="inheritance3a4f99841a">
+<area shape="rect" id="node1" title="Helper class that provides a standard way to create an ABC using" alt="" coords="13,5,85,36"/>
+<area shape="rect" id="node4" title="An interface for classes that have multi&#45;line debuging capability." alt="" coords="5,84,93,115"/>
+<area shape="rect" id="node2" href="#zensols.mimic.corpus.Corpus" target="_top" title="A container class provided access to the MIMIC&#45;III dataset using a" alt="" coords="9,241,89,272"/>
+<area shape="rect" id="node3" title="A class that that generates a dictionary recursively from data classes" alt="" coords="6,163,93,193"/>
+</map>

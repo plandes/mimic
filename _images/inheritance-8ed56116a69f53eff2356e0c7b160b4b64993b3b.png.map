@@ -1,0 +1,22 @@
+<map id="inheritance6246c219aa" name="inheritance6246c219aa">
+<area shape="rect" id="node1" title="Helper class that provides a standard way to create an ABC using" alt="" coords="377,5,449,36"/>
+<area shape="rect" id="node3" title="A dictionary&#45;like pure virtual class for CRUDing data, most of which read" alt="" coords="273,84,345,115"/>
+<area shape="rect" id="node4" title="All subclasses have the ability to deallocate any resources. &#160;This is" alt="" coords="653,84,783,115"/>
+<area shape="rect" id="node7" title="An interface for classes that have multi&#45;line debuging capability." alt="" coords="474,84,562,115"/>
+<area shape="rect" id="node13" title="Any subclass that has the ability (and need) to do preprocessing. &#160;For" alt="" coords="22,163,126,193"/>
+<area shape="rect" id="node2" title="Any stash that has a resource that needs to be closed." alt="" coords="375,163,523,193"/>
+<area shape="rect" id="node5" title="Delegate pattern. &#160;It can also be used as a no&#45;op if no delegate is" alt="" coords="496,241,636,272"/>
+<area shape="rect" id="node15" title="An abstract base class for subclasses that do not support write methods" alt="" coords="201,163,350,193"/>
+<area shape="rect" id="node20" title="Any subclass that has the ability to do processing before any CRUD method" alt="" coords="56,241,207,272"/>
+<area shape="rect" id="node11" title="Classes can extend this that want to persist :class:`.PersistedWork`" alt="" coords="658,163,847,193"/>
+<area shape="rect" id="node9" title="Provide support for preemptively creating data in a stash. &#160;It provides" alt="" coords="390,320,550,351"/>
+<area shape="rect" id="node6" title="A class that that generates a dictionary recursively from data classes" alt="" coords="547,163,633,193"/>
+<area shape="rect" id="node10" href="#zensols.mimic.adm.HospitalAdmission" target="_top" title="Represents data collected by a patient over the course of their hospital" alt="" coords="665,241,835,272"/>
+<area shape="rect" id="node8" title="A stash that defers to creation of new items to another :obj:`factory`" alt="" coords="406,399,534,429"/>
+<area shape="rect" id="node12" href="#zensols.mimic.adm.HospitalAdmissionDbFactoryStash" target="_top" title="A factory stash that configures :class:`.NoteEvent` instances so they can" alt="" coords="5,477,305,508"/>
+<area shape="rect" id="node18" title="A stash that&#39;s primable and preemptive." alt="" coords="150,399,382,429"/>
+<area shape="rect" id="node14" href="#zensols.mimic.adm.HospitalAdmissionDbStash" target="_top" title="A stash that creates :class:`.HospitalAdmission` instances. &#160;This" alt="" coords="231,241,471,272"/>
+<area shape="rect" id="node16" title="Just like :class:`.MultiProcessStash`, but provide defaults as a" alt="" coords="301,556,530,587"/>
+<area shape="rect" id="node19" href="#zensols.mimic.adm.NoteDocumentPreemptiveStash" target="_top" title="Contains the stash that preemptively creates :class:`.Admission`," alt="" coords="275,635,556,665"/>
+<area shape="rect" id="node17" title="A stash that forks processes to process data in a distributed fashion." alt="" coords="329,477,501,508"/>
+</map>

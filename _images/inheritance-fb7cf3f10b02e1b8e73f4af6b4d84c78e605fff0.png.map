@@ -1,0 +1,5 @@
+<map id="inheritance2b0dae7c94" name="inheritance2b0dae7c94">
+<area shape="rect" id="node1" href="#zensols.mimic.parafac.ChunkingParagraphFactory" target="_top" title="A paragraph factory that uses :mod:`zensols.nlp.chunker` chunking to" alt="" coords="5,84,248,115"/>
+<area shape="rect" id="node2" href="#zensols.mimic.note.ParagraphFactory" target="_top" title="Splits a document in to constituent paragraphs." alt="" coords="181,5,347,36"/>
+<area shape="rect" id="node3" href="#zensols.mimic.parafac.WhitespaceParagraphFactory" target="_top" title="A simple paragraph factory that splits on whitespace." alt="" coords="272,84,533,115"/>
+</map>

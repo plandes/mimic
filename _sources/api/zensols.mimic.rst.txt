@@ -1,0 +1,113 @@
+zensols.mimic package
+=====================
+
+Submodules
+----------
+
+zensols.mimic.adm
+-----------------
+.. inheritance-diagram:: zensols.mimic.adm
+   :parts: 1
+
+.. automodule:: zensols.mimic.adm
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+zensols.mimic.app
+-----------------
+.. inheritance-diagram:: zensols.mimic.app
+   :parts: 1
+
+.. automodule:: zensols.mimic.app
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+zensols.mimic.cli
+-----------------
+.. inheritance-diagram:: zensols.mimic.cli
+   :parts: 1
+
+.. automodule:: zensols.mimic.cli
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+zensols.mimic.corpus
+--------------------
+.. inheritance-diagram:: zensols.mimic.corpus
+   :parts: 1
+
+.. automodule:: zensols.mimic.corpus
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+zensols.mimic.domain
+--------------------
+.. inheritance-diagram:: zensols.mimic.domain
+   :parts: 1
+
+.. automodule:: zensols.mimic.domain
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+zensols.mimic.note
+------------------
+.. inheritance-diagram:: zensols.mimic.note
+   :parts: 1
+
+.. automodule:: zensols.mimic.note
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+zensols.mimic.parafac
+---------------------
+.. inheritance-diagram:: zensols.mimic.parafac
+   :parts: 1
+
+.. automodule:: zensols.mimic.parafac
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+zensols.mimic.persist
+---------------------
+.. inheritance-diagram:: zensols.mimic.persist
+   :parts: 1
+
+.. automodule:: zensols.mimic.persist
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+zensols.mimic.regexnote
+-----------------------
+.. inheritance-diagram:: zensols.mimic.regexnote
+   :parts: 1
+
+.. automodule:: zensols.mimic.regexnote
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+zensols.mimic.tokenizer
+-----------------------
+.. inheritance-diagram:: zensols.mimic.tokenizer
+   :parts: 1
+
+.. automodule:: zensols.mimic.tokenizer
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: zensols.mimic
+   :members:
+   :undoc-members:
+   :show-inheritance:
