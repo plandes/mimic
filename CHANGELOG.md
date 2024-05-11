@@ -8,6 +8,17 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 
 
+## [1.7.1] - 2024-05-11
+### Added
+- Database count database methods in persistence layer.
+- Name to ID and ID to name transform methods for notes and sections.
+- Admission listing by note count.
+- Get note IDs by `hadm_id` and category.
+
+### Changes
+- Fix admission existence checks.
+
+
 ## [1.7.0] - 2024-04-14
 ### Changed
 - Upgrade to [zensols.mednlp] 1.7.0.
@@ -159,7 +170,8 @@ Significant feature release.
 
 
 <!-- links -->
-[Unreleased]: https://github.com/plandes/mimic/compare/v1.7.0...HEAD
+[Unreleased]: https://github.com/plandes/mimic/compare/v1.7.1...HEAD
+[1.7.1]: https://github.com/plandes/mimic/compare/v1.7.0...v1.7.1
 [1.7.0]: https://github.com/plandes/mimic/compare/v1.6.0...v1.7.0
 [1.6.0]: https://github.com/plandes/mimic/compare/v1.5.2...v1.6.0
 [1.5.2]: https://github.com/plandes/mimic/compare/v1.5.1...v1.5.2
