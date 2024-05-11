@@ -28,12 +28,6 @@ postgresdeps:
 			$(PIP_BIN) install $(PIP_ARGS) \
 				-r $(PY_SRC)/requirements-postgres.txt --no-deps
 
-.PHONY:			postgresqldeps
-postgresqldeps:
-			$(PIP_BIN) install $(PIP_ARGS) \
-				-r $(PY_SRC)/requirements-postgresql.txt --no-deps
-
-
 .PHONY:			example-run
 example-run:
 			( cd example ; PYTHONPATH=$$PYTHONPATH:../src/python ./shownote.py parse )
