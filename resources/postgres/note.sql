@@ -92,3 +92,10 @@ select count(*) from noteevents where hadm_id is null;
 
 -- name=total_count
 select count(*) from noteevents;
+
+-- name=largest_discharge_summaries
+select hadm_id, row_id, length(text), text
+  from noteevents
+  where category = 'Discharge summary'
+  order by length(text) desc
+  limit %s;
