@@ -292,6 +292,7 @@ class NoteEvent(MimicContainer):
     _PERSITABLE_PROPERTIES: ClassVar[Set[str]] = set()
     _PERSITABLE_TRANSIENT_ATTRIBUTES: ClassVar[Set[str]] = {
         '_trans_context_var'}
+    EXPECT_HADM_ID: ClassVar[bool] = True
 
     subject_id: int = field()
     """Foreign key. Identifies the patient.
@@ -366,7 +367,7 @@ class NoteEvent(MimicContainer):
     """
     def __post_init__(self, context: Settings):
         super().__post_init__()
-        if self.hadm_id is None:
+        if self.EXPECT_HADM_ID and self.hadm_id is None:
             raise MimicError('NoteEvent is missing hadm_id')
         self.category = self.category.strip()
         self.text = self.text.rstrip()
