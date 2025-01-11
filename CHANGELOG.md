@@ -7,12 +7,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+
+## [1.8.0] - 2025-01-11
 ### Removed
 - Support for Python 3.10.
 
 ### Changed
 - Upgraded to [zensols.mednlp] version 1.8.0.
-
 
 
 ## [1.7.1] - 2024-05-11
@@ -177,7 +178,8 @@ Significant feature release.
 
 
 <!-- links -->
-[Unreleased]: https://github.com/plandes/mimic/compare/v1.7.1...HEAD
+[Unreleased]: https://github.com/plandes/mimic/compare/v1.8.0...HEAD
+[1.8.0]: https://github.com/plandes/mimic/compare/v1.7.1...v1.8.0
 [1.7.1]: https://github.com/plandes/mimic/compare/v1.7.0...v1.7.1
 [1.7.0]: https://github.com/plandes/mimic/compare/v1.6.0...v1.7.0
 [1.6.0]: https://github.com/plandes/mimic/compare/v1.5.2...v1.6.0
