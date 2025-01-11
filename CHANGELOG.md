@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+### Removed
+- Support for Python 3.10.
+
+### Changed
+- Upgraded to [zensols.mednlp] version 1.8.0.
+
+
 
 ## [1.7.1] - 2024-05-11
 ### Added
