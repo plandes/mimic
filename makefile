@@ -1,60 +1,63 @@
-## makefile automates the build and deployment for python projects
+#@meta {desc: "Python build configuration", date: "2025-06-23"}
+
 
 ## Build config
 #
 # project definition
 PROJ_TYPE =		python
-PROJ_MODULES =		git python-resources python-cli python-doc python-doc-deploy
-
-# build config
-PY_DEP_POST_DEPS +=	modeldeps
+PROJ_MODULES =		python/test python/doc python/package python/deploy
+PY_TEST_TARGETS =	testcur
+PY_TEST_ALL_TARGETS +=	testadmexport testdb
+PY_CLEAN_DIRS +=	example
 ADD_CLEAN +=		feature.csv data
-CLEAN_DEPS +=		example-clean
+CLEAN_ALL_DEPS +=	example-clean
 ADD_CLEAN_ALL +=	$(ADM_DIR)
 
-# project
+## Project
+#
 ADM_DIR =		adm
 
+
+## Includes
+#
 include ./zenbuild/main.mk
 
 
-.PHONY:			modeldeps
-modeldeps:
-			$(PIP_BIN) install $(PIP_ARGS) \
-				-r $(PY_SRC)/requirements-model.txt --no-deps
-
-.PHONY:			testdeps
-testdeps:
-			$(PIP_BIN) install $(PIP_ARGS) \
-				-r $(PY_SRC)/requirements-test.txt --no-deps
-
+## Targets
+#
+# retrieve, parse and show a note
 .PHONY:			example-run
 example-run:
-			( cd example ; PYTHONPATH=$$PYTHONPATH:../src/python ./shownote.py parse )
+			@$(MAKE) $(PY_MAKE_ARGS) pytestrun \
+				ARG="( cd example ; ./shownote.py parse ) "
 
+# use the mimic library API
 .PHONY:			example-api-run
 example-api-run:
-			( cd example ; PYTHONPATH=$$PYTHONPATH:../src/python ./api.py )
+			@$(MAKE) $(PY_MAKE_ARGS) pytestrun \
+				ARG="( cd example ; ./api.py ) "
 
+# clean the examples directory
 .PHONY:			example-clean
 example-clean:
-			PYTHONPATH=src/python example/shownote.py clean
+			@$(MAKE) $(PY_MAKE_ARGS) pytestrun \
+				ARG="( cd example ; ./shownote.py clean )"
 
 # test the MIMIC-III database (unavilable database in GitHub workflows)
 .PHONY:			testdb
 testdb:
-			make PY_SRC_TEST=test/db test
+			@echo "test db"
+			make PY_TEST_GLOB=db_test_*.py testcur
 
+# export admission notes and check output line length
 .PHONY:			testadmexport
 testadmexport:
+			@echo "testing admission export"
 			$(eval cor=363)
-			make PY_CLI_ARGS="adm 100581 --format raw" pycli
+			@$(MAKE) $(PY_MAKE_ARGS) pytestrun \
+				ARG="./harness.py adm 100581 --format raw" > /dev/null 2>&1
 			@cat $(ADM_DIR)/100581/4468--discharge-summary--report.txt | \
 			  wc -l | xargs -i{} bash -c \
 			  "if [ '{}' != '$(cor)' ] ; then echo {} != $(cor) ; exit 1 ; fi"
-			@echo "success: line count output: $(cor)"
-			rm -r $(ADM_DIR)
-
-# todo: 
-.PHONY:			testall
-testall:		test testadmexport
+			@rm -r $(ADM_DIR)
+			@echo "testing admission export...ok"

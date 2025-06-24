@@ -1,21 +1,21 @@
 import unittest
-import warnings
 from zensols.config import ImportIniConfig, ImportConfigFactory
 from zensols.nlp import FeatureDocument, FeatureToken
 
 FeatureToken.WRITABLE_FEATURE_IDS = tuple(list(FeatureToken.WRITABLE_FEATURE_IDS) + ['mimic_'])
 
 
-with warnings.catch_warnings():
-    warnings.simplefilter('ignore', DeprecationWarning)
-    import gensim.matutils
-    import transformers.image_utils
-
-
 class TestParser(unittest.TestCase):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self._doc_parser_name = 'doc_parser'
+
+    def setUp(self):
+        import warnings
+        warnings.filterwarnings(
+            'ignore',
+            message=r'^Support for class-based `config` is deprecated.*',
+            category=DeprecationWarning)
 
     def _get_parser(self, name: str):
         conf = ImportIniConfig(f'test-resources/{name}.conf')
