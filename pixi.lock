@@ -93,7 +93,7 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/43/e3/7d92a15f894aa0c9c4b49b8ee9ac9850d6e63b03c9c32c0367a13ae62209/mpmath-1.3.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/45/16/a20fa8c32825cc7ae8457fab45670c7a8996d7746ce80ce41cc51e3b2bd7/msgpack-1.1.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl
       - pypi: https://files.pythonhosted.org/packages/9b/5d/f25ac7d4fb77cbd53ddc6d05d833c6bf52b12770a44fa9a447eed470ca9a/msgpack_numpy-0.4.8-py2.py3-none-any.whl
-      - pypi: https://files.pythonhosted.org/packages/8a/72/b2fe2fafa23af0c6123aebe23b4cd23fdad01dfe7009bb85624e4636d0dd/multidict-6.5.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl
+      - pypi: https://files.pythonhosted.org/packages/35/db/e1817dcbaa10b319c412769cf999b1016890849245d38905b73e9c286862/multidict-6.4.4-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl
       - pypi: https://files.pythonhosted.org/packages/50/15/b56e50e8debaf439f44befec5b2af11db85f6e0f344c3113ae0be0593a91/multiprocess-0.70.16-py311-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/e8/09/0e7afce0a422692506c85474a26fb3a03c1971b2b5f7e7745276c4b3de7f/murmurhash-1.0.13-cp311-cp311-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl
       - pypi: https://files.pythonhosted.org/packages/eb/8d/776adee7bbf76365fdd7f2552710282c79a4ead5d2a46408c9043a2b70ba/networkx-3.5-py3-none-any.whl
@@ -159,7 +159,7 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/a2/09/77d55d46fd61b4a135c444fc97158ef34a095e5681d0a6c10b75bf356191/sympy-1.14.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/1a/19/cd73e3b5f22d5d9399f6f2931ab0fb985415f34030dcfead070181866761/thinc-8.2.5-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl
       - pypi: https://files.pythonhosted.org/packages/32/d5/f9a850d79b0851d1d4ef6456097579a9005b31fea68726a4ae5f2d82ddd9/threadpoolctl-3.6.0-py3-none-any.whl
-      - pypi: https://files.pythonhosted.org/packages/8a/63/38be071b0c8e06840bc6046991636bcb30c27f6bb1e670f4f4bc87cf49cc/tokenizers-0.21.1-cp39-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl
+      - pypi: https://files.pythonhosted.org/packages/c5/74/f41a432a0733f61f3d21b288de6dfa78f7acff309c6f0f323b2833e9189f/tokenizers-0.21.2-cp39-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl
       - pypi: https://files.pythonhosted.org/packages/e5/94/34b80bd172d0072c9979708ccd279c2da2f55c3ef318eceec276ab9544a4/torch-2.7.1-cp311-cp311-manylinux_2_28_x86_64.whl
       - pypi: https://files.pythonhosted.org/packages/d0/30/dc54f88dd4a2b5dc8a0279bdd7270e735851848b762aeb1c1184ed1f6b14/tqdm-4.67.1-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/00/c0/8f5d070730d7836adc9c9b6408dec68c6ced86b304a9b26a14df072a6e8c/traitlets-5.14.3-py3-none-any.whl
@@ -179,7 +179,7 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/00/70/8f78a95d6935a70263d46caa3dd18e1f223cf2f2ff2037baa01a22bc5b22/yarl-1.20.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl
       - pypi: https://files.pythonhosted.org/packages/99/f8/c715d4b76e304245fee18b8d4e8d005de75bcb8b3f241e705ecfa55db7a7/zensols.install-1.2.1-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/81/36/04df9df0d5c41c6a7c8838e06eb8563b609e03791a9b4a0d48c9d60ae400/zensols_db-1.4.1-py3-none-any.whl
-      - pypi: https://files.pythonhosted.org/packages/c4/5b/f38ba72e629583d0218d1536a3e5e39957fd5321879a8240f214aad472db/zensols_mednlp-1.9.0-py3-none-any.whl
+      - pypi: https://files.pythonhosted.org/packages/80/bd/e030e3552c24be425328312a258b84d886dfb10624285bbb8ba8486298fa/zensols_mednlp-1.9.1-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/7f/44/2782fcf8c01caf389d470227f6e26fce2cd853bfeca0acfc48dc39e2b7e2/zensols_nlp-1.12.5-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/26/6d/dc7360b6425dbe13c191f674100176544a60921714e869cc110204749b38/zensols_util-1.15.11-py3-none-any.whl
       osx-arm64:
@@ -260,7 +260,7 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/43/e3/7d92a15f894aa0c9c4b49b8ee9ac9850d6e63b03c9c32c0367a13ae62209/mpmath-1.3.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/aa/7f/2eaa388267a78401f6e182662b08a588ef4f3de6f0eab1ec09736a7aaa2b/msgpack-1.1.1-cp311-cp311-macosx_11_0_arm64.whl
       - pypi: https://files.pythonhosted.org/packages/9b/5d/f25ac7d4fb77cbd53ddc6d05d833c6bf52b12770a44fa9a447eed470ca9a/msgpack_numpy-0.4.8-py2.py3-none-any.whl
-      - pypi: https://files.pythonhosted.org/packages/da/cf/bb462d920f26d9e2e0aff8a78aeb06af1225b826e9a5468870c57591910a/multidict-6.5.0-cp311-cp311-macosx_11_0_arm64.whl
+      - pypi: https://files.pythonhosted.org/packages/26/b4/91fead447ccff56247edc7f0535fbf140733ae25187a33621771ee598a18/multidict-6.4.4-cp311-cp311-macosx_11_0_arm64.whl
       - pypi: https://files.pythonhosted.org/packages/50/15/b56e50e8debaf439f44befec5b2af11db85f6e0f344c3113ae0be0593a91/multiprocess-0.70.16-py311-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/14/b0/3ee762e98cf9a8c2df9c8b377c326f3dd4495066d4eace9066fca46eba7a/murmurhash-1.0.13-cp311-cp311-macosx_11_0_arm64.whl
       - pypi: https://files.pythonhosted.org/packages/eb/8d/776adee7bbf76365fdd7f2552710282c79a4ead5d2a46408c9043a2b70ba/networkx-3.5-py3-none-any.whl
@@ -312,7 +312,7 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/a2/09/77d55d46fd61b4a135c444fc97158ef34a095e5681d0a6c10b75bf356191/sympy-1.14.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/e9/eb/753a85875fb0261c83ca87a1a36d41346bde662c3a029ace9d68fe32bc5b/thinc-8.2.5-cp311-cp311-macosx_11_0_arm64.whl
       - pypi: https://files.pythonhosted.org/packages/32/d5/f9a850d79b0851d1d4ef6456097579a9005b31fea68726a4ae5f2d82ddd9/threadpoolctl-3.6.0-py3-none-any.whl
-      - pypi: https://files.pythonhosted.org/packages/ae/1a/4526797f3719b0287853f12c5ad563a9be09d446c44ac784cdd7c50f76ab/tokenizers-0.21.1-cp39-abi3-macosx_11_0_arm64.whl
+      - pypi: https://files.pythonhosted.org/packages/6c/e6/33f41f2cc7861faeba8988e7a77601407bf1d9d28fc79c5903f8f77df587/tokenizers-0.21.2-cp39-abi3-macosx_11_0_arm64.whl
       - pypi: https://files.pythonhosted.org/packages/5b/2b/d36d57c66ff031f93b4fa432e86802f84991477e522adcdffd314454326b/torch-2.7.1-cp311-none-macosx_11_0_arm64.whl
       - pypi: https://files.pythonhosted.org/packages/d0/30/dc54f88dd4a2b5dc8a0279bdd7270e735851848b762aeb1c1184ed1f6b14/tqdm-4.67.1-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/00/c0/8f5d070730d7836adc9c9b6408dec68c6ced86b304a9b26a14df072a6e8c/traitlets-5.14.3-py3-none-any.whl
@@ -331,7 +331,7 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/e3/e3/409bd17b1e42619bf69f60e4f031ce1ccb29bd7380117a55529e76933464/yarl-1.20.1-cp311-cp311-macosx_11_0_arm64.whl
       - pypi: https://files.pythonhosted.org/packages/99/f8/c715d4b76e304245fee18b8d4e8d005de75bcb8b3f241e705ecfa55db7a7/zensols.install-1.2.1-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/81/36/04df9df0d5c41c6a7c8838e06eb8563b609e03791a9b4a0d48c9d60ae400/zensols_db-1.4.1-py3-none-any.whl
-      - pypi: https://files.pythonhosted.org/packages/c4/5b/f38ba72e629583d0218d1536a3e5e39957fd5321879a8240f214aad472db/zensols_mednlp-1.9.0-py3-none-any.whl
+      - pypi: https://files.pythonhosted.org/packages/80/bd/e030e3552c24be425328312a258b84d886dfb10624285bbb8ba8486298fa/zensols_mednlp-1.9.1-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/7f/44/2782fcf8c01caf389d470227f6e26fce2cd853bfeca0acfc48dc39e2b7e2/zensols_nlp-1.12.5-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/26/6d/dc7360b6425dbe13c191f674100176544a60921714e869cc110204749b38/zensols_util-1.15.11-py3-none-any.whl
       win-64:
@@ -413,7 +413,7 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/43/e3/7d92a15f894aa0c9c4b49b8ee9ac9850d6e63b03c9c32c0367a13ae62209/mpmath-1.3.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/48/45/9d1780768d3b249accecc5a38c725eb1e203d44a191f7b7ff1941f7df60c/msgpack-1.1.1-cp311-cp311-win_amd64.whl
       - pypi: https://files.pythonhosted.org/packages/9b/5d/f25ac7d4fb77cbd53ddc6d05d833c6bf52b12770a44fa9a447eed470ca9a/msgpack_numpy-0.4.8-py2.py3-none-any.whl
-      - pypi: https://files.pythonhosted.org/packages/e1/fe/bbd85ae65c96de5c9910c332ee1f4b7be0bf0fb21563895167bcb6502a1f/multidict-6.5.0-cp311-cp311-win_amd64.whl
+      - pypi: https://files.pythonhosted.org/packages/09/66/0bed198ffd590ab86e001f7fa46b740d58cf8ff98c2f254e4a36bf8861ad/multidict-6.4.4-cp311-cp311-win_amd64.whl
       - pypi: https://files.pythonhosted.org/packages/50/15/b56e50e8debaf439f44befec5b2af11db85f6e0f344c3113ae0be0593a91/multiprocess-0.70.16-py311-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/79/17/f2a38558e150a0669d843f75e128afb83c1a67af41885ea2acb940e18e2a/murmurhash-1.0.13-cp311-cp311-win_amd64.whl
       - pypi: https://files.pythonhosted.org/packages/eb/8d/776adee7bbf76365fdd7f2552710282c79a4ead5d2a46408c9043a2b70ba/networkx-3.5-py3-none-any.whl
@@ -464,7 +464,7 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/a2/09/77d55d46fd61b4a135c444fc97158ef34a095e5681d0a6c10b75bf356191/sympy-1.14.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/5e/0e/5e7b24e046e0725eafc37ded0cd9bfaf789efb894101a7aca8a73dba81de/thinc-8.2.5-cp311-cp311-win_amd64.whl
       - pypi: https://files.pythonhosted.org/packages/32/d5/f9a850d79b0851d1d4ef6456097579a9005b31fea68726a4ae5f2d82ddd9/threadpoolctl-3.6.0-py3-none-any.whl
-      - pypi: https://files.pythonhosted.org/packages/e6/b6/072a8e053ae600dcc2ac0da81a23548e3b523301a442a6ca900e92ac35be/tokenizers-0.21.1-cp39-abi3-win_amd64.whl
+      - pypi: https://files.pythonhosted.org/packages/13/c3/cc2755ee10be859c4338c962a35b9a663788c0c0b50c0bdd8078fb6870cf/tokenizers-0.21.2-cp39-abi3-win_amd64.whl
       - pypi: https://files.pythonhosted.org/packages/50/9e/acf04ff375b0b49a45511c55d188bcea5c942da2aaf293096676110086d1/torch-2.7.1-cp311-cp311-win_amd64.whl
       - pypi: https://files.pythonhosted.org/packages/d0/30/dc54f88dd4a2b5dc8a0279bdd7270e735851848b762aeb1c1184ed1f6b14/tqdm-4.67.1-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/00/c0/8f5d070730d7836adc9c9b6408dec68c6ced86b304a9b26a14df072a6e8c/traitlets-5.14.3-py3-none-any.whl
@@ -483,7 +483,7 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/f0/09/d9c7942f8f05c32ec72cd5c8e041c8b29b5807328b68b4801ff2511d4d5e/yarl-1.20.1-cp311-cp311-win_amd64.whl
       - pypi: https://files.pythonhosted.org/packages/99/f8/c715d4b76e304245fee18b8d4e8d005de75bcb8b3f241e705ecfa55db7a7/zensols.install-1.2.1-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/81/36/04df9df0d5c41c6a7c8838e06eb8563b609e03791a9b4a0d48c9d60ae400/zensols_db-1.4.1-py3-none-any.whl
-      - pypi: https://files.pythonhosted.org/packages/c4/5b/f38ba72e629583d0218d1536a3e5e39957fd5321879a8240f214aad472db/zensols_mednlp-1.9.0-py3-none-any.whl
+      - pypi: https://files.pythonhosted.org/packages/80/bd/e030e3552c24be425328312a258b84d886dfb10624285bbb8ba8486298fa/zensols_mednlp-1.9.1-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/7f/44/2782fcf8c01caf389d470227f6e26fce2cd853bfeca0acfc48dc39e2b7e2/zensols_nlp-1.12.5-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/26/6d/dc7360b6425dbe13c191f674100176544a60921714e869cc110204749b38/zensols_util-1.15.11-py3-none-any.whl
   default:
@@ -571,7 +571,7 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/43/e3/7d92a15f894aa0c9c4b49b8ee9ac9850d6e63b03c9c32c0367a13ae62209/mpmath-1.3.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/45/16/a20fa8c32825cc7ae8457fab45670c7a8996d7746ce80ce41cc51e3b2bd7/msgpack-1.1.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl
       - pypi: https://files.pythonhosted.org/packages/9b/5d/f25ac7d4fb77cbd53ddc6d05d833c6bf52b12770a44fa9a447eed470ca9a/msgpack_numpy-0.4.8-py2.py3-none-any.whl
-      - pypi: https://files.pythonhosted.org/packages/8a/72/b2fe2fafa23af0c6123aebe23b4cd23fdad01dfe7009bb85624e4636d0dd/multidict-6.5.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl
+      - pypi: https://files.pythonhosted.org/packages/35/db/e1817dcbaa10b319c412769cf999b1016890849245d38905b73e9c286862/multidict-6.4.4-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl
       - pypi: https://files.pythonhosted.org/packages/50/15/b56e50e8debaf439f44befec5b2af11db85f6e0f344c3113ae0be0593a91/multiprocess-0.70.16-py311-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/e8/09/0e7afce0a422692506c85474a26fb3a03c1971b2b5f7e7745276c4b3de7f/murmurhash-1.0.13-cp311-cp311-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl
       - pypi: https://files.pythonhosted.org/packages/eb/8d/776adee7bbf76365fdd7f2552710282c79a4ead5d2a46408c9043a2b70ba/networkx-3.5-py3-none-any.whl
@@ -637,7 +637,7 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/a2/09/77d55d46fd61b4a135c444fc97158ef34a095e5681d0a6c10b75bf356191/sympy-1.14.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/1a/19/cd73e3b5f22d5d9399f6f2931ab0fb985415f34030dcfead070181866761/thinc-8.2.5-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl
       - pypi: https://files.pythonhosted.org/packages/32/d5/f9a850d79b0851d1d4ef6456097579a9005b31fea68726a4ae5f2d82ddd9/threadpoolctl-3.6.0-py3-none-any.whl
-      - pypi: https://files.pythonhosted.org/packages/8a/63/38be071b0c8e06840bc6046991636bcb30c27f6bb1e670f4f4bc87cf49cc/tokenizers-0.21.1-cp39-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl
+      - pypi: https://files.pythonhosted.org/packages/c5/74/f41a432a0733f61f3d21b288de6dfa78f7acff309c6f0f323b2833e9189f/tokenizers-0.21.2-cp39-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl
       - pypi: https://files.pythonhosted.org/packages/e5/94/34b80bd172d0072c9979708ccd279c2da2f55c3ef318eceec276ab9544a4/torch-2.7.1-cp311-cp311-manylinux_2_28_x86_64.whl
       - pypi: https://files.pythonhosted.org/packages/d0/30/dc54f88dd4a2b5dc8a0279bdd7270e735851848b762aeb1c1184ed1f6b14/tqdm-4.67.1-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/00/c0/8f5d070730d7836adc9c9b6408dec68c6ced86b304a9b26a14df072a6e8c/traitlets-5.14.3-py3-none-any.whl
@@ -657,7 +657,7 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/00/70/8f78a95d6935a70263d46caa3dd18e1f223cf2f2ff2037baa01a22bc5b22/yarl-1.20.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl
       - pypi: https://files.pythonhosted.org/packages/99/f8/c715d4b76e304245fee18b8d4e8d005de75bcb8b3f241e705ecfa55db7a7/zensols.install-1.2.1-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/81/36/04df9df0d5c41c6a7c8838e06eb8563b609e03791a9b4a0d48c9d60ae400/zensols_db-1.4.1-py3-none-any.whl
-      - pypi: https://files.pythonhosted.org/packages/c4/5b/f38ba72e629583d0218d1536a3e5e39957fd5321879a8240f214aad472db/zensols_mednlp-1.9.0-py3-none-any.whl
+      - pypi: https://files.pythonhosted.org/packages/80/bd/e030e3552c24be425328312a258b84d886dfb10624285bbb8ba8486298fa/zensols_mednlp-1.9.1-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/7f/44/2782fcf8c01caf389d470227f6e26fce2cd853bfeca0acfc48dc39e2b7e2/zensols_nlp-1.12.5-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/26/6d/dc7360b6425dbe13c191f674100176544a60921714e869cc110204749b38/zensols_util-1.15.11-py3-none-any.whl
       osx-arm64:
@@ -730,7 +730,7 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/43/e3/7d92a15f894aa0c9c4b49b8ee9ac9850d6e63b03c9c32c0367a13ae62209/mpmath-1.3.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/aa/7f/2eaa388267a78401f6e182662b08a588ef4f3de6f0eab1ec09736a7aaa2b/msgpack-1.1.1-cp311-cp311-macosx_11_0_arm64.whl
       - pypi: https://files.pythonhosted.org/packages/9b/5d/f25ac7d4fb77cbd53ddc6d05d833c6bf52b12770a44fa9a447eed470ca9a/msgpack_numpy-0.4.8-py2.py3-none-any.whl
-      - pypi: https://files.pythonhosted.org/packages/da/cf/bb462d920f26d9e2e0aff8a78aeb06af1225b826e9a5468870c57591910a/multidict-6.5.0-cp311-cp311-macosx_11_0_arm64.whl
+      - pypi: https://files.pythonhosted.org/packages/26/b4/91fead447ccff56247edc7f0535fbf140733ae25187a33621771ee598a18/multidict-6.4.4-cp311-cp311-macosx_11_0_arm64.whl
       - pypi: https://files.pythonhosted.org/packages/50/15/b56e50e8debaf439f44befec5b2af11db85f6e0f344c3113ae0be0593a91/multiprocess-0.70.16-py311-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/14/b0/3ee762e98cf9a8c2df9c8b377c326f3dd4495066d4eace9066fca46eba7a/murmurhash-1.0.13-cp311-cp311-macosx_11_0_arm64.whl
       - pypi: https://files.pythonhosted.org/packages/eb/8d/776adee7bbf76365fdd7f2552710282c79a4ead5d2a46408c9043a2b70ba/networkx-3.5-py3-none-any.whl
@@ -782,7 +782,7 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/a2/09/77d55d46fd61b4a135c444fc97158ef34a095e5681d0a6c10b75bf356191/sympy-1.14.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/e9/eb/753a85875fb0261c83ca87a1a36d41346bde662c3a029ace9d68fe32bc5b/thinc-8.2.5-cp311-cp311-macosx_11_0_arm64.whl
       - pypi: https://files.pythonhosted.org/packages/32/d5/f9a850d79b0851d1d4ef6456097579a9005b31fea68726a4ae5f2d82ddd9/threadpoolctl-3.6.0-py3-none-any.whl
-      - pypi: https://files.pythonhosted.org/packages/ae/1a/4526797f3719b0287853f12c5ad563a9be09d446c44ac784cdd7c50f76ab/tokenizers-0.21.1-cp39-abi3-macosx_11_0_arm64.whl
+      - pypi: https://files.pythonhosted.org/packages/6c/e6/33f41f2cc7861faeba8988e7a77601407bf1d9d28fc79c5903f8f77df587/tokenizers-0.21.2-cp39-abi3-macosx_11_0_arm64.whl
       - pypi: https://files.pythonhosted.org/packages/5b/2b/d36d57c66ff031f93b4fa432e86802f84991477e522adcdffd314454326b/torch-2.7.1-cp311-none-macosx_11_0_arm64.whl
       - pypi: https://files.pythonhosted.org/packages/d0/30/dc54f88dd4a2b5dc8a0279bdd7270e735851848b762aeb1c1184ed1f6b14/tqdm-4.67.1-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/00/c0/8f5d070730d7836adc9c9b6408dec68c6ced86b304a9b26a14df072a6e8c/traitlets-5.14.3-py3-none-any.whl
@@ -801,7 +801,7 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/e3/e3/409bd17b1e42619bf69f60e4f031ce1ccb29bd7380117a55529e76933464/yarl-1.20.1-cp311-cp311-macosx_11_0_arm64.whl
       - pypi: https://files.pythonhosted.org/packages/99/f8/c715d4b76e304245fee18b8d4e8d005de75bcb8b3f241e705ecfa55db7a7/zensols.install-1.2.1-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/81/36/04df9df0d5c41c6a7c8838e06eb8563b609e03791a9b4a0d48c9d60ae400/zensols_db-1.4.1-py3-none-any.whl
-      - pypi: https://files.pythonhosted.org/packages/c4/5b/f38ba72e629583d0218d1536a3e5e39957fd5321879a8240f214aad472db/zensols_mednlp-1.9.0-py3-none-any.whl
+      - pypi: https://files.pythonhosted.org/packages/80/bd/e030e3552c24be425328312a258b84d886dfb10624285bbb8ba8486298fa/zensols_mednlp-1.9.1-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/7f/44/2782fcf8c01caf389d470227f6e26fce2cd853bfeca0acfc48dc39e2b7e2/zensols_nlp-1.12.5-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/26/6d/dc7360b6425dbe13c191f674100176544a60921714e869cc110204749b38/zensols_util-1.15.11-py3-none-any.whl
       win-64:
@@ -875,7 +875,7 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/43/e3/7d92a15f894aa0c9c4b49b8ee9ac9850d6e63b03c9c32c0367a13ae62209/mpmath-1.3.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/48/45/9d1780768d3b249accecc5a38c725eb1e203d44a191f7b7ff1941f7df60c/msgpack-1.1.1-cp311-cp311-win_amd64.whl
       - pypi: https://files.pythonhosted.org/packages/9b/5d/f25ac7d4fb77cbd53ddc6d05d833c6bf52b12770a44fa9a447eed470ca9a/msgpack_numpy-0.4.8-py2.py3-none-any.whl
-      - pypi: https://files.pythonhosted.org/packages/e1/fe/bbd85ae65c96de5c9910c332ee1f4b7be0bf0fb21563895167bcb6502a1f/multidict-6.5.0-cp311-cp311-win_amd64.whl
+      - pypi: https://files.pythonhosted.org/packages/09/66/0bed198ffd590ab86e001f7fa46b740d58cf8ff98c2f254e4a36bf8861ad/multidict-6.4.4-cp311-cp311-win_amd64.whl
       - pypi: https://files.pythonhosted.org/packages/50/15/b56e50e8debaf439f44befec5b2af11db85f6e0f344c3113ae0be0593a91/multiprocess-0.70.16-py311-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/79/17/f2a38558e150a0669d843f75e128afb83c1a67af41885ea2acb940e18e2a/murmurhash-1.0.13-cp311-cp311-win_amd64.whl
       - pypi: https://files.pythonhosted.org/packages/eb/8d/776adee7bbf76365fdd7f2552710282c79a4ead5d2a46408c9043a2b70ba/networkx-3.5-py3-none-any.whl
@@ -926,7 +926,7 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/a2/09/77d55d46fd61b4a135c444fc97158ef34a095e5681d0a6c10b75bf356191/sympy-1.14.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/5e/0e/5e7b24e046e0725eafc37ded0cd9bfaf789efb894101a7aca8a73dba81de/thinc-8.2.5-cp311-cp311-win_amd64.whl
       - pypi: https://files.pythonhosted.org/packages/32/d5/f9a850d79b0851d1d4ef6456097579a9005b31fea68726a4ae5f2d82ddd9/threadpoolctl-3.6.0-py3-none-any.whl
-      - pypi: https://files.pythonhosted.org/packages/e6/b6/072a8e053ae600dcc2ac0da81a23548e3b523301a442a6ca900e92ac35be/tokenizers-0.21.1-cp39-abi3-win_amd64.whl
+      - pypi: https://files.pythonhosted.org/packages/13/c3/cc2755ee10be859c4338c962a35b9a663788c0c0b50c0bdd8078fb6870cf/tokenizers-0.21.2-cp39-abi3-win_amd64.whl
       - pypi: https://files.pythonhosted.org/packages/50/9e/acf04ff375b0b49a45511c55d188bcea5c942da2aaf293096676110086d1/torch-2.7.1-cp311-cp311-win_amd64.whl
       - pypi: https://files.pythonhosted.org/packages/d0/30/dc54f88dd4a2b5dc8a0279bdd7270e735851848b762aeb1c1184ed1f6b14/tqdm-4.67.1-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/00/c0/8f5d070730d7836adc9c9b6408dec68c6ced86b304a9b26a14df072a6e8c/traitlets-5.14.3-py3-none-any.whl
@@ -945,7 +945,7 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/f0/09/d9c7942f8f05c32ec72cd5c8e041c8b29b5807328b68b4801ff2511d4d5e/yarl-1.20.1-cp311-cp311-win_amd64.whl
       - pypi: https://files.pythonhosted.org/packages/99/f8/c715d4b76e304245fee18b8d4e8d005de75bcb8b3f241e705ecfa55db7a7/zensols.install-1.2.1-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/81/36/04df9df0d5c41c6a7c8838e06eb8563b609e03791a9b4a0d48c9d60ae400/zensols_db-1.4.1-py3-none-any.whl
-      - pypi: https://files.pythonhosted.org/packages/c4/5b/f38ba72e629583d0218d1536a3e5e39957fd5321879a8240f214aad472db/zensols_mednlp-1.9.0-py3-none-any.whl
+      - pypi: https://files.pythonhosted.org/packages/80/bd/e030e3552c24be425328312a258b84d886dfb10624285bbb8ba8486298fa/zensols_mednlp-1.9.1-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/7f/44/2782fcf8c01caf389d470227f6e26fce2cd853bfeca0acfc48dc39e2b7e2/zensols_nlp-1.12.5-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/26/6d/dc7360b6425dbe13c191f674100176544a60921714e869cc110204749b38/zensols_util-1.15.11-py3-none-any.whl
   testcur:
@@ -1032,7 +1032,7 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/43/e3/7d92a15f894aa0c9c4b49b8ee9ac9850d6e63b03c9c32c0367a13ae62209/mpmath-1.3.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/45/16/a20fa8c32825cc7ae8457fab45670c7a8996d7746ce80ce41cc51e3b2bd7/msgpack-1.1.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl
       - pypi: https://files.pythonhosted.org/packages/9b/5d/f25ac7d4fb77cbd53ddc6d05d833c6bf52b12770a44fa9a447eed470ca9a/msgpack_numpy-0.4.8-py2.py3-none-any.whl
-      - pypi: https://files.pythonhosted.org/packages/8a/72/b2fe2fafa23af0c6123aebe23b4cd23fdad01dfe7009bb85624e4636d0dd/multidict-6.5.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl
+      - pypi: https://files.pythonhosted.org/packages/35/db/e1817dcbaa10b319c412769cf999b1016890849245d38905b73e9c286862/multidict-6.4.4-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl
       - pypi: https://files.pythonhosted.org/packages/50/15/b56e50e8debaf439f44befec5b2af11db85f6e0f344c3113ae0be0593a91/multiprocess-0.70.16-py311-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/e8/09/0e7afce0a422692506c85474a26fb3a03c1971b2b5f7e7745276c4b3de7f/murmurhash-1.0.13-cp311-cp311-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl
       - pypi: https://files.pythonhosted.org/packages/eb/8d/776adee7bbf76365fdd7f2552710282c79a4ead5d2a46408c9043a2b70ba/networkx-3.5-py3-none-any.whl
@@ -1100,7 +1100,7 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/a2/09/77d55d46fd61b4a135c444fc97158ef34a095e5681d0a6c10b75bf356191/sympy-1.14.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/1a/19/cd73e3b5f22d5d9399f6f2931ab0fb985415f34030dcfead070181866761/thinc-8.2.5-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl
       - pypi: https://files.pythonhosted.org/packages/32/d5/f9a850d79b0851d1d4ef6456097579a9005b31fea68726a4ae5f2d82ddd9/threadpoolctl-3.6.0-py3-none-any.whl
-      - pypi: https://files.pythonhosted.org/packages/8a/63/38be071b0c8e06840bc6046991636bcb30c27f6bb1e670f4f4bc87cf49cc/tokenizers-0.21.1-cp39-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl
+      - pypi: https://files.pythonhosted.org/packages/c5/74/f41a432a0733f61f3d21b288de6dfa78f7acff309c6f0f323b2833e9189f/tokenizers-0.21.2-cp39-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl
       - pypi: https://files.pythonhosted.org/packages/e5/94/34b80bd172d0072c9979708ccd279c2da2f55c3ef318eceec276ab9544a4/torch-2.7.1-cp311-cp311-manylinux_2_28_x86_64.whl
       - pypi: https://files.pythonhosted.org/packages/d0/30/dc54f88dd4a2b5dc8a0279bdd7270e735851848b762aeb1c1184ed1f6b14/tqdm-4.67.1-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/00/c0/8f5d070730d7836adc9c9b6408dec68c6ced86b304a9b26a14df072a6e8c/traitlets-5.14.3-py3-none-any.whl
@@ -1121,7 +1121,7 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/f5/5b/729a9db0b213ac8f2788de2c889f53c75039b7234e32a575967c9778d075/zensols.dbpg-1.4.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/99/f8/c715d4b76e304245fee18b8d4e8d005de75bcb8b3f241e705ecfa55db7a7/zensols.install-1.2.1-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/81/36/04df9df0d5c41c6a7c8838e06eb8563b609e03791a9b4a0d48c9d60ae400/zensols_db-1.4.1-py3-none-any.whl
-      - pypi: https://files.pythonhosted.org/packages/c4/5b/f38ba72e629583d0218d1536a3e5e39957fd5321879a8240f214aad472db/zensols_mednlp-1.9.0-py3-none-any.whl
+      - pypi: https://files.pythonhosted.org/packages/80/bd/e030e3552c24be425328312a258b84d886dfb10624285bbb8ba8486298fa/zensols_mednlp-1.9.1-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/7f/44/2782fcf8c01caf389d470227f6e26fce2cd853bfeca0acfc48dc39e2b7e2/zensols_nlp-1.12.5-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/26/6d/dc7360b6425dbe13c191f674100176544a60921714e869cc110204749b38/zensols_util-1.15.11-py3-none-any.whl
       osx-arm64:
@@ -1193,7 +1193,7 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/43/e3/7d92a15f894aa0c9c4b49b8ee9ac9850d6e63b03c9c32c0367a13ae62209/mpmath-1.3.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/aa/7f/2eaa388267a78401f6e182662b08a588ef4f3de6f0eab1ec09736a7aaa2b/msgpack-1.1.1-cp311-cp311-macosx_11_0_arm64.whl
       - pypi: https://files.pythonhosted.org/packages/9b/5d/f25ac7d4fb77cbd53ddc6d05d833c6bf52b12770a44fa9a447eed470ca9a/msgpack_numpy-0.4.8-py2.py3-none-any.whl
-      - pypi: https://files.pythonhosted.org/packages/da/cf/bb462d920f26d9e2e0aff8a78aeb06af1225b826e9a5468870c57591910a/multidict-6.5.0-cp311-cp311-macosx_11_0_arm64.whl
+      - pypi: https://files.pythonhosted.org/packages/26/b4/91fead447ccff56247edc7f0535fbf140733ae25187a33621771ee598a18/multidict-6.4.4-cp311-cp311-macosx_11_0_arm64.whl
       - pypi: https://files.pythonhosted.org/packages/50/15/b56e50e8debaf439f44befec5b2af11db85f6e0f344c3113ae0be0593a91/multiprocess-0.70.16-py311-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/14/b0/3ee762e98cf9a8c2df9c8b377c326f3dd4495066d4eace9066fca46eba7a/murmurhash-1.0.13-cp311-cp311-macosx_11_0_arm64.whl
       - pypi: https://files.pythonhosted.org/packages/eb/8d/776adee7bbf76365fdd7f2552710282c79a4ead5d2a46408c9043a2b70ba/networkx-3.5-py3-none-any.whl
@@ -1247,7 +1247,7 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/a2/09/77d55d46fd61b4a135c444fc97158ef34a095e5681d0a6c10b75bf356191/sympy-1.14.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/e9/eb/753a85875fb0261c83ca87a1a36d41346bde662c3a029ace9d68fe32bc5b/thinc-8.2.5-cp311-cp311-macosx_11_0_arm64.whl
       - pypi: https://files.pythonhosted.org/packages/32/d5/f9a850d79b0851d1d4ef6456097579a9005b31fea68726a4ae5f2d82ddd9/threadpoolctl-3.6.0-py3-none-any.whl
-      - pypi: https://files.pythonhosted.org/packages/ae/1a/4526797f3719b0287853f12c5ad563a9be09d446c44ac784cdd7c50f76ab/tokenizers-0.21.1-cp39-abi3-macosx_11_0_arm64.whl
+      - pypi: https://files.pythonhosted.org/packages/6c/e6/33f41f2cc7861faeba8988e7a77601407bf1d9d28fc79c5903f8f77df587/tokenizers-0.21.2-cp39-abi3-macosx_11_0_arm64.whl
       - pypi: https://files.pythonhosted.org/packages/5b/2b/d36d57c66ff031f93b4fa432e86802f84991477e522adcdffd314454326b/torch-2.7.1-cp311-none-macosx_11_0_arm64.whl
       - pypi: https://files.pythonhosted.org/packages/d0/30/dc54f88dd4a2b5dc8a0279bdd7270e735851848b762aeb1c1184ed1f6b14/tqdm-4.67.1-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/00/c0/8f5d070730d7836adc9c9b6408dec68c6ced86b304a9b26a14df072a6e8c/traitlets-5.14.3-py3-none-any.whl
@@ -1267,7 +1267,7 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/f5/5b/729a9db0b213ac8f2788de2c889f53c75039b7234e32a575967c9778d075/zensols.dbpg-1.4.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/99/f8/c715d4b76e304245fee18b8d4e8d005de75bcb8b3f241e705ecfa55db7a7/zensols.install-1.2.1-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/81/36/04df9df0d5c41c6a7c8838e06eb8563b609e03791a9b4a0d48c9d60ae400/zensols_db-1.4.1-py3-none-any.whl
-      - pypi: https://files.pythonhosted.org/packages/c4/5b/f38ba72e629583d0218d1536a3e5e39957fd5321879a8240f214aad472db/zensols_mednlp-1.9.0-py3-none-any.whl
+      - pypi: https://files.pythonhosted.org/packages/80/bd/e030e3552c24be425328312a258b84d886dfb10624285bbb8ba8486298fa/zensols_mednlp-1.9.1-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/7f/44/2782fcf8c01caf389d470227f6e26fce2cd853bfeca0acfc48dc39e2b7e2/zensols_nlp-1.12.5-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/26/6d/dc7360b6425dbe13c191f674100176544a60921714e869cc110204749b38/zensols_util-1.15.11-py3-none-any.whl
       win-64:
@@ -1340,7 +1340,7 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/43/e3/7d92a15f894aa0c9c4b49b8ee9ac9850d6e63b03c9c32c0367a13ae62209/mpmath-1.3.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/48/45/9d1780768d3b249accecc5a38c725eb1e203d44a191f7b7ff1941f7df60c/msgpack-1.1.1-cp311-cp311-win_amd64.whl
       - pypi: https://files.pythonhosted.org/packages/9b/5d/f25ac7d4fb77cbd53ddc6d05d833c6bf52b12770a44fa9a447eed470ca9a/msgpack_numpy-0.4.8-py2.py3-none-any.whl
-      - pypi: https://files.pythonhosted.org/packages/e1/fe/bbd85ae65c96de5c9910c332ee1f4b7be0bf0fb21563895167bcb6502a1f/multidict-6.5.0-cp311-cp311-win_amd64.whl
+      - pypi: https://files.pythonhosted.org/packages/09/66/0bed198ffd590ab86e001f7fa46b740d58cf8ff98c2f254e4a36bf8861ad/multidict-6.4.4-cp311-cp311-win_amd64.whl
       - pypi: https://files.pythonhosted.org/packages/50/15/b56e50e8debaf439f44befec5b2af11db85f6e0f344c3113ae0be0593a91/multiprocess-0.70.16-py311-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/79/17/f2a38558e150a0669d843f75e128afb83c1a67af41885ea2acb940e18e2a/murmurhash-1.0.13-cp311-cp311-win_amd64.whl
       - pypi: https://files.pythonhosted.org/packages/eb/8d/776adee7bbf76365fdd7f2552710282c79a4ead5d2a46408c9043a2b70ba/networkx-3.5-py3-none-any.whl
@@ -1393,7 +1393,7 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/a2/09/77d55d46fd61b4a135c444fc97158ef34a095e5681d0a6c10b75bf356191/sympy-1.14.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/5e/0e/5e7b24e046e0725eafc37ded0cd9bfaf789efb894101a7aca8a73dba81de/thinc-8.2.5-cp311-cp311-win_amd64.whl
       - pypi: https://files.pythonhosted.org/packages/32/d5/f9a850d79b0851d1d4ef6456097579a9005b31fea68726a4ae5f2d82ddd9/threadpoolctl-3.6.0-py3-none-any.whl
-      - pypi: https://files.pythonhosted.org/packages/e6/b6/072a8e053ae600dcc2ac0da81a23548e3b523301a442a6ca900e92ac35be/tokenizers-0.21.1-cp39-abi3-win_amd64.whl
+      - pypi: https://files.pythonhosted.org/packages/13/c3/cc2755ee10be859c4338c962a35b9a663788c0c0b50c0bdd8078fb6870cf/tokenizers-0.21.2-cp39-abi3-win_amd64.whl
       - pypi: https://files.pythonhosted.org/packages/50/9e/acf04ff375b0b49a45511c55d188bcea5c942da2aaf293096676110086d1/torch-2.7.1-cp311-cp311-win_amd64.whl
       - pypi: https://files.pythonhosted.org/packages/d0/30/dc54f88dd4a2b5dc8a0279bdd7270e735851848b762aeb1c1184ed1f6b14/tqdm-4.67.1-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/00/c0/8f5d070730d7836adc9c9b6408dec68c6ced86b304a9b26a14df072a6e8c/traitlets-5.14.3-py3-none-any.whl
@@ -1413,7 +1413,7 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/f5/5b/729a9db0b213ac8f2788de2c889f53c75039b7234e32a575967c9778d075/zensols.dbpg-1.4.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/99/f8/c715d4b76e304245fee18b8d4e8d005de75bcb8b3f241e705ecfa55db7a7/zensols.install-1.2.1-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/81/36/04df9df0d5c41c6a7c8838e06eb8563b609e03791a9b4a0d48c9d60ae400/zensols_db-1.4.1-py3-none-any.whl
-      - pypi: https://files.pythonhosted.org/packages/c4/5b/f38ba72e629583d0218d1536a3e5e39957fd5321879a8240f214aad472db/zensols_mednlp-1.9.0-py3-none-any.whl
+      - pypi: https://files.pythonhosted.org/packages/80/bd/e030e3552c24be425328312a258b84d886dfb10624285bbb8ba8486298fa/zensols_mednlp-1.9.1-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/7f/44/2782fcf8c01caf389d470227f6e26fce2cd853bfeca0acfc48dc39e2b7e2/zensols_nlp-1.12.5-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/26/6d/dc7360b6425dbe13c191f674100176544a60921714e869cc110204749b38/zensols_util-1.15.11-py3-none-any.whl
   testprev:
@@ -1500,7 +1500,7 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/43/e3/7d92a15f894aa0c9c4b49b8ee9ac9850d6e63b03c9c32c0367a13ae62209/mpmath-1.3.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/45/16/a20fa8c32825cc7ae8457fab45670c7a8996d7746ce80ce41cc51e3b2bd7/msgpack-1.1.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl
       - pypi: https://files.pythonhosted.org/packages/9b/5d/f25ac7d4fb77cbd53ddc6d05d833c6bf52b12770a44fa9a447eed470ca9a/msgpack_numpy-0.4.8-py2.py3-none-any.whl
-      - pypi: https://files.pythonhosted.org/packages/8a/72/b2fe2fafa23af0c6123aebe23b4cd23fdad01dfe7009bb85624e4636d0dd/multidict-6.5.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl
+      - pypi: https://files.pythonhosted.org/packages/35/db/e1817dcbaa10b319c412769cf999b1016890849245d38905b73e9c286862/multidict-6.4.4-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl
       - pypi: https://files.pythonhosted.org/packages/50/15/b56e50e8debaf439f44befec5b2af11db85f6e0f344c3113ae0be0593a91/multiprocess-0.70.16-py311-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/e8/09/0e7afce0a422692506c85474a26fb3a03c1971b2b5f7e7745276c4b3de7f/murmurhash-1.0.13-cp311-cp311-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl
       - pypi: https://files.pythonhosted.org/packages/eb/8d/776adee7bbf76365fdd7f2552710282c79a4ead5d2a46408c9043a2b70ba/networkx-3.5-py3-none-any.whl
@@ -1567,7 +1567,7 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/a2/09/77d55d46fd61b4a135c444fc97158ef34a095e5681d0a6c10b75bf356191/sympy-1.14.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/1a/19/cd73e3b5f22d5d9399f6f2931ab0fb985415f34030dcfead070181866761/thinc-8.2.5-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl
       - pypi: https://files.pythonhosted.org/packages/32/d5/f9a850d79b0851d1d4ef6456097579a9005b31fea68726a4ae5f2d82ddd9/threadpoolctl-3.6.0-py3-none-any.whl
-      - pypi: https://files.pythonhosted.org/packages/8a/63/38be071b0c8e06840bc6046991636bcb30c27f6bb1e670f4f4bc87cf49cc/tokenizers-0.21.1-cp39-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl
+      - pypi: https://files.pythonhosted.org/packages/c5/74/f41a432a0733f61f3d21b288de6dfa78f7acff309c6f0f323b2833e9189f/tokenizers-0.21.2-cp39-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl
       - pypi: https://files.pythonhosted.org/packages/e5/94/34b80bd172d0072c9979708ccd279c2da2f55c3ef318eceec276ab9544a4/torch-2.7.1-cp311-cp311-manylinux_2_28_x86_64.whl
       - pypi: https://files.pythonhosted.org/packages/d0/30/dc54f88dd4a2b5dc8a0279bdd7270e735851848b762aeb1c1184ed1f6b14/tqdm-4.67.1-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/00/c0/8f5d070730d7836adc9c9b6408dec68c6ced86b304a9b26a14df072a6e8c/traitlets-5.14.3-py3-none-any.whl
@@ -1587,7 +1587,7 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/00/70/8f78a95d6935a70263d46caa3dd18e1f223cf2f2ff2037baa01a22bc5b22/yarl-1.20.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl
       - pypi: https://files.pythonhosted.org/packages/99/f8/c715d4b76e304245fee18b8d4e8d005de75bcb8b3f241e705ecfa55db7a7/zensols.install-1.2.1-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/81/36/04df9df0d5c41c6a7c8838e06eb8563b609e03791a9b4a0d48c9d60ae400/zensols_db-1.4.1-py3-none-any.whl
-      - pypi: https://files.pythonhosted.org/packages/c4/5b/f38ba72e629583d0218d1536a3e5e39957fd5321879a8240f214aad472db/zensols_mednlp-1.9.0-py3-none-any.whl
+      - pypi: https://files.pythonhosted.org/packages/80/bd/e030e3552c24be425328312a258b84d886dfb10624285bbb8ba8486298fa/zensols_mednlp-1.9.1-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/7f/44/2782fcf8c01caf389d470227f6e26fce2cd853bfeca0acfc48dc39e2b7e2/zensols_nlp-1.12.5-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/26/6d/dc7360b6425dbe13c191f674100176544a60921714e869cc110204749b38/zensols_util-1.15.11-py3-none-any.whl
       osx-arm64:
@@ -1659,7 +1659,7 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/43/e3/7d92a15f894aa0c9c4b49b8ee9ac9850d6e63b03c9c32c0367a13ae62209/mpmath-1.3.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/aa/7f/2eaa388267a78401f6e182662b08a588ef4f3de6f0eab1ec09736a7aaa2b/msgpack-1.1.1-cp311-cp311-macosx_11_0_arm64.whl
       - pypi: https://files.pythonhosted.org/packages/9b/5d/f25ac7d4fb77cbd53ddc6d05d833c6bf52b12770a44fa9a447eed470ca9a/msgpack_numpy-0.4.8-py2.py3-none-any.whl
-      - pypi: https://files.pythonhosted.org/packages/da/cf/bb462d920f26d9e2e0aff8a78aeb06af1225b826e9a5468870c57591910a/multidict-6.5.0-cp311-cp311-macosx_11_0_arm64.whl
+      - pypi: https://files.pythonhosted.org/packages/26/b4/91fead447ccff56247edc7f0535fbf140733ae25187a33621771ee598a18/multidict-6.4.4-cp311-cp311-macosx_11_0_arm64.whl
       - pypi: https://files.pythonhosted.org/packages/50/15/b56e50e8debaf439f44befec5b2af11db85f6e0f344c3113ae0be0593a91/multiprocess-0.70.16-py311-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/14/b0/3ee762e98cf9a8c2df9c8b377c326f3dd4495066d4eace9066fca46eba7a/murmurhash-1.0.13-cp311-cp311-macosx_11_0_arm64.whl
       - pypi: https://files.pythonhosted.org/packages/eb/8d/776adee7bbf76365fdd7f2552710282c79a4ead5d2a46408c9043a2b70ba/networkx-3.5-py3-none-any.whl
@@ -1712,7 +1712,7 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/a2/09/77d55d46fd61b4a135c444fc97158ef34a095e5681d0a6c10b75bf356191/sympy-1.14.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/e9/eb/753a85875fb0261c83ca87a1a36d41346bde662c3a029ace9d68fe32bc5b/thinc-8.2.5-cp311-cp311-macosx_11_0_arm64.whl
       - pypi: https://files.pythonhosted.org/packages/32/d5/f9a850d79b0851d1d4ef6456097579a9005b31fea68726a4ae5f2d82ddd9/threadpoolctl-3.6.0-py3-none-any.whl
-      - pypi: https://files.pythonhosted.org/packages/ae/1a/4526797f3719b0287853f12c5ad563a9be09d446c44ac784cdd7c50f76ab/tokenizers-0.21.1-cp39-abi3-macosx_11_0_arm64.whl
+      - pypi: https://files.pythonhosted.org/packages/6c/e6/33f41f2cc7861faeba8988e7a77601407bf1d9d28fc79c5903f8f77df587/tokenizers-0.21.2-cp39-abi3-macosx_11_0_arm64.whl
       - pypi: https://files.pythonhosted.org/packages/5b/2b/d36d57c66ff031f93b4fa432e86802f84991477e522adcdffd314454326b/torch-2.7.1-cp311-none-macosx_11_0_arm64.whl
       - pypi: https://files.pythonhosted.org/packages/d0/30/dc54f88dd4a2b5dc8a0279bdd7270e735851848b762aeb1c1184ed1f6b14/tqdm-4.67.1-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/00/c0/8f5d070730d7836adc9c9b6408dec68c6ced86b304a9b26a14df072a6e8c/traitlets-5.14.3-py3-none-any.whl
@@ -1731,7 +1731,7 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/e3/e3/409bd17b1e42619bf69f60e4f031ce1ccb29bd7380117a55529e76933464/yarl-1.20.1-cp311-cp311-macosx_11_0_arm64.whl
       - pypi: https://files.pythonhosted.org/packages/99/f8/c715d4b76e304245fee18b8d4e8d005de75bcb8b3f241e705ecfa55db7a7/zensols.install-1.2.1-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/81/36/04df9df0d5c41c6a7c8838e06eb8563b609e03791a9b4a0d48c9d60ae400/zensols_db-1.4.1-py3-none-any.whl
-      - pypi: https://files.pythonhosted.org/packages/c4/5b/f38ba72e629583d0218d1536a3e5e39957fd5321879a8240f214aad472db/zensols_mednlp-1.9.0-py3-none-any.whl
+      - pypi: https://files.pythonhosted.org/packages/80/bd/e030e3552c24be425328312a258b84d886dfb10624285bbb8ba8486298fa/zensols_mednlp-1.9.1-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/7f/44/2782fcf8c01caf389d470227f6e26fce2cd853bfeca0acfc48dc39e2b7e2/zensols_nlp-1.12.5-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/26/6d/dc7360b6425dbe13c191f674100176544a60921714e869cc110204749b38/zensols_util-1.15.11-py3-none-any.whl
       win-64:
@@ -1804,7 +1804,7 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/43/e3/7d92a15f894aa0c9c4b49b8ee9ac9850d6e63b03c9c32c0367a13ae62209/mpmath-1.3.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/48/45/9d1780768d3b249accecc5a38c725eb1e203d44a191f7b7ff1941f7df60c/msgpack-1.1.1-cp311-cp311-win_amd64.whl
       - pypi: https://files.pythonhosted.org/packages/9b/5d/f25ac7d4fb77cbd53ddc6d05d833c6bf52b12770a44fa9a447eed470ca9a/msgpack_numpy-0.4.8-py2.py3-none-any.whl
-      - pypi: https://files.pythonhosted.org/packages/e1/fe/bbd85ae65c96de5c9910c332ee1f4b7be0bf0fb21563895167bcb6502a1f/multidict-6.5.0-cp311-cp311-win_amd64.whl
+      - pypi: https://files.pythonhosted.org/packages/09/66/0bed198ffd590ab86e001f7fa46b740d58cf8ff98c2f254e4a36bf8861ad/multidict-6.4.4-cp311-cp311-win_amd64.whl
       - pypi: https://files.pythonhosted.org/packages/50/15/b56e50e8debaf439f44befec5b2af11db85f6e0f344c3113ae0be0593a91/multiprocess-0.70.16-py311-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/79/17/f2a38558e150a0669d843f75e128afb83c1a67af41885ea2acb940e18e2a/murmurhash-1.0.13-cp311-cp311-win_amd64.whl
       - pypi: https://files.pythonhosted.org/packages/eb/8d/776adee7bbf76365fdd7f2552710282c79a4ead5d2a46408c9043a2b70ba/networkx-3.5-py3-none-any.whl
@@ -1856,7 +1856,7 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/a2/09/77d55d46fd61b4a135c444fc97158ef34a095e5681d0a6c10b75bf356191/sympy-1.14.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/5e/0e/5e7b24e046e0725eafc37ded0cd9bfaf789efb894101a7aca8a73dba81de/thinc-8.2.5-cp311-cp311-win_amd64.whl
       - pypi: https://files.pythonhosted.org/packages/32/d5/f9a850d79b0851d1d4ef6456097579a9005b31fea68726a4ae5f2d82ddd9/threadpoolctl-3.6.0-py3-none-any.whl
-      - pypi: https://files.pythonhosted.org/packages/e6/b6/072a8e053ae600dcc2ac0da81a23548e3b523301a442a6ca900e92ac35be/tokenizers-0.21.1-cp39-abi3-win_amd64.whl
+      - pypi: https://files.pythonhosted.org/packages/13/c3/cc2755ee10be859c4338c962a35b9a663788c0c0b50c0bdd8078fb6870cf/tokenizers-0.21.2-cp39-abi3-win_amd64.whl
       - pypi: https://files.pythonhosted.org/packages/50/9e/acf04ff375b0b49a45511c55d188bcea5c942da2aaf293096676110086d1/torch-2.7.1-cp311-cp311-win_amd64.whl
       - pypi: https://files.pythonhosted.org/packages/d0/30/dc54f88dd4a2b5dc8a0279bdd7270e735851848b762aeb1c1184ed1f6b14/tqdm-4.67.1-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/00/c0/8f5d070730d7836adc9c9b6408dec68c6ced86b304a9b26a14df072a6e8c/traitlets-5.14.3-py3-none-any.whl
@@ -1875,7 +1875,7 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/f0/09/d9c7942f8f05c32ec72cd5c8e041c8b29b5807328b68b4801ff2511d4d5e/yarl-1.20.1-cp311-cp311-win_amd64.whl
       - pypi: https://files.pythonhosted.org/packages/99/f8/c715d4b76e304245fee18b8d4e8d005de75bcb8b3f241e705ecfa55db7a7/zensols.install-1.2.1-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/81/36/04df9df0d5c41c6a7c8838e06eb8563b609e03791a9b4a0d48c9d60ae400/zensols_db-1.4.1-py3-none-any.whl
-      - pypi: https://files.pythonhosted.org/packages/c4/5b/f38ba72e629583d0218d1536a3e5e39957fd5321879a8240f214aad472db/zensols_mednlp-1.9.0-py3-none-any.whl
+      - pypi: https://files.pythonhosted.org/packages/80/bd/e030e3552c24be425328312a258b84d886dfb10624285bbb8ba8486298fa/zensols_mednlp-1.9.1-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/7f/44/2782fcf8c01caf389d470227f6e26fce2cd853bfeca0acfc48dc39e2b7e2/zensols_nlp-1.12.5-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/26/6d/dc7360b6425dbe13c191f674100176544a60921714e869cc110204749b38/zensols_util-1.15.11-py3-none-any.whl
 packages:
@@ -3572,24 +3572,24 @@ packages:
   requires_dist:
   - numpy>=1.9.0
   - msgpack>=0.5.2
-- pypi: https://files.pythonhosted.org/packages/8a/72/b2fe2fafa23af0c6123aebe23b4cd23fdad01dfe7009bb85624e4636d0dd/multidict-6.5.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl
+- pypi: https://files.pythonhosted.org/packages/09/66/0bed198ffd590ab86e001f7fa46b740d58cf8ff98c2f254e4a36bf8861ad/multidict-6.4.4-cp311-cp311-win_amd64.whl
   name: multidict
-  version: 6.5.0
-  sha256: 84ca75ad8a39ed75f079a8931435a5b51ee4c45d9b32e1740f99969a5d1cc2ee
+  version: 6.4.4
+  sha256: 73484a94f55359780c0f458bbd3c39cb9cf9c182552177d2136e828269dee529
   requires_dist:
   - typing-extensions>=4.1.0 ; python_full_version < '3.11'
   requires_python: '>=3.9'
-- pypi: https://files.pythonhosted.org/packages/da/cf/bb462d920f26d9e2e0aff8a78aeb06af1225b826e9a5468870c57591910a/multidict-6.5.0-cp311-cp311-macosx_11_0_arm64.whl
+- pypi: https://files.pythonhosted.org/packages/26/b4/91fead447ccff56247edc7f0535fbf140733ae25187a33621771ee598a18/multidict-6.4.4-cp311-cp311-macosx_11_0_arm64.whl
   name: multidict
-  version: 6.5.0
-  sha256: 54f524d73f4d54e87e03c98f6af601af4777e4668a52b1bd2ae0a4d6fc7b392b
+  version: 6.4.4
+  sha256: bb61ffd3ab8310d93427e460f565322c44ef12769f51f77277b4abad7b6f7223
   requires_dist:
   - typing-extensions>=4.1.0 ; python_full_version < '3.11'
   requires_python: '>=3.9'
-- pypi: https://files.pythonhosted.org/packages/e1/fe/bbd85ae65c96de5c9910c332ee1f4b7be0bf0fb21563895167bcb6502a1f/multidict-6.5.0-cp311-cp311-win_amd64.whl
+- pypi: https://files.pythonhosted.org/packages/35/db/e1817dcbaa10b319c412769cf999b1016890849245d38905b73e9c286862/multidict-6.4.4-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl
   name: multidict
-  version: 6.5.0
-  sha256: e2977ef8b7ce27723ee8c610d1bd1765da4f3fbe5a64f9bf1fd3b4770e31fbc0
+  version: 6.4.4
+  sha256: e5f8a146184da7ea12910a4cec51ef85e44f6268467fb489c3caf0cd512f29c2
   requires_dist:
   - typing-extensions>=4.1.0 ; python_full_version < '3.11'
   requires_python: '>=3.9'
@@ -5653,10 +5653,10 @@ packages:
   purls: []
   size: 3466348
   timestamp: 1748388121356
-- pypi: https://files.pythonhosted.org/packages/8a/63/38be071b0c8e06840bc6046991636bcb30c27f6bb1e670f4f4bc87cf49cc/tokenizers-0.21.1-cp39-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl
+- pypi: https://files.pythonhosted.org/packages/13/c3/cc2755ee10be859c4338c962a35b9a663788c0c0b50c0bdd8078fb6870cf/tokenizers-0.21.2-cp39-abi3-win_amd64.whl
   name: tokenizers
-  version: 0.21.1
-  sha256: 2dd9a0061e403546f7377df940e866c3e678d7d4e9643d0461ea442b4f89e61a
+  version: 0.21.2
+  sha256: 58747bb898acdb1007f37a7bbe614346e98dc28708ffb66a3fd50ce169ac6c98
   requires_dist:
   - huggingface-hub>=0.16.4,<1.0
   - pytest ; extra == 'testing'
@@ -5670,10 +5670,10 @@ packages:
   - setuptools-rust ; extra == 'docs'
   - tokenizers[testing] ; extra == 'dev'
   requires_python: '>=3.9'
-- pypi: https://files.pythonhosted.org/packages/ae/1a/4526797f3719b0287853f12c5ad563a9be09d446c44ac784cdd7c50f76ab/tokenizers-0.21.1-cp39-abi3-macosx_11_0_arm64.whl
+- pypi: https://files.pythonhosted.org/packages/6c/e6/33f41f2cc7861faeba8988e7a77601407bf1d9d28fc79c5903f8f77df587/tokenizers-0.21.2-cp39-abi3-macosx_11_0_arm64.whl
   name: tokenizers
-  version: 0.21.1
-  sha256: cd51cd0a91ecc801633829fcd1fda9cf8682ed3477c6243b9a095539de4aecf3
+  version: 0.21.2
+  sha256: 126df3205d6f3a93fea80c7a8a266a78c1bd8dd2fe043386bafdd7736a23e45f
   requires_dist:
   - huggingface-hub>=0.16.4,<1.0
   - pytest ; extra == 'testing'
@@ -5687,10 +5687,10 @@ packages:
   - setuptools-rust ; extra == 'docs'
   - tokenizers[testing] ; extra == 'dev'
   requires_python: '>=3.9'
-- pypi: https://files.pythonhosted.org/packages/e6/b6/072a8e053ae600dcc2ac0da81a23548e3b523301a442a6ca900e92ac35be/tokenizers-0.21.1-cp39-abi3-win_amd64.whl
+- pypi: https://files.pythonhosted.org/packages/c5/74/f41a432a0733f61f3d21b288de6dfa78f7acff309c6f0f323b2833e9189f/tokenizers-0.21.2-cp39-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl
   name: tokenizers
-  version: 0.21.1
-  sha256: 0f0dcbcc9f6e13e675a66d7a5f2f225a736745ce484c1a4e07476a89ccdad382
+  version: 0.21.2
+  sha256: fed9a4d51c395103ad24f8e7eb976811c57fbec2af9f133df471afcd922e5020
   requires_dist:
   - huggingface-hub>=0.16.4,<1.0
   - pytest ; extra == 'testing'
@@ -6441,10 +6441,10 @@ packages:
   - patool>=1.12,<1.13
   - tqdm
   - zensols-util~=1.15.0
-- pypi: https://files.pythonhosted.org/packages/c4/5b/f38ba72e629583d0218d1536a3e5e39957fd5321879a8240f214aad472db/zensols_mednlp-1.9.0-py3-none-any.whl
+- pypi: https://files.pythonhosted.org/packages/80/bd/e030e3552c24be425328312a258b84d886dfb10624285bbb8ba8486298fa/zensols_mednlp-1.9.1-py3-none-any.whl
   name: zensols-mednlp
-  version: 1.9.0
-  sha256: 2595a57e8fde7732ba18f48b32727ef6beaebcc3a1286054e0db1416d8ae5654
+  version: 1.9.1
+  sha256: 15b2d8678cfead4572614ba56207c21467356eb064f542fa5dcdb089cebfbffd
   requires_dist:
   - ctakes-parser~=0.1.0
   - lxml~=4.9.3
