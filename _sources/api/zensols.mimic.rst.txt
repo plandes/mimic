@@ -1,0 +1,93 @@
+zensols.mimic package
+=====================
+
+Submodules
+----------
+
+zensols.mimic.adm module
+------------------------
+
+.. automodule:: zensols.mimic.adm
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+zensols.mimic.app module
+------------------------
+
+.. automodule:: zensols.mimic.app
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+zensols.mimic.cli module
+------------------------
+
+.. automodule:: zensols.mimic.cli
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+zensols.mimic.corpus module
+---------------------------
+
+.. automodule:: zensols.mimic.corpus
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+zensols.mimic.domain module
+---------------------------
+
+.. automodule:: zensols.mimic.domain
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+zensols.mimic.note module
+-------------------------
+
+.. automodule:: zensols.mimic.note
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+zensols.mimic.parafac module
+----------------------------
+
+.. automodule:: zensols.mimic.parafac
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+zensols.mimic.persist module
+----------------------------
+
+.. automodule:: zensols.mimic.persist
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+zensols.mimic.regexnote module
+------------------------------
+
+.. automodule:: zensols.mimic.regexnote
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+zensols.mimic.tokenizer module
+------------------------------
+
+.. automodule:: zensols.mimic.tokenizer
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: zensols.mimic
+   :members:
+   :undoc-members:
+   :show-inheritance:

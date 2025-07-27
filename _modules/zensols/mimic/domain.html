@@ -1,0 +1,805 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../../../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" />
+
+    <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
+        <title>zensols.mimic.domain - MIMIC III Corpus Parsing 1.9.2 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?v=354aac6f" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?v=302659d7" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #eeffcc;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../../top.html"><div class="brand">MIMIC III Corpus Parsing 1.9.2 documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../../top.html">
+  
+  
+  <span class="sidebar-brand-text">MIMIC III Corpus Parsing 1.9.2 documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Overview</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../api.html">API Reference</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of API Reference</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/zensols.mimic.html">zensols.mimic package</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../CONTRIBUTING.html">Contributing</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <h1>Source code for zensols.mimic.domain</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Domain classes for the corpus notes.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="n">__author__</span> <span class="o">=</span> <span class="s1">&#39;Paul Landes&#39;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Type</span><span class="p">,</span> <span class="n">ClassVar</span><span class="p">,</span> <span class="n">Set</span><span class="p">,</span> <span class="n">Callable</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">InitVar</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">io</span><span class="w"> </span><span class="kn">import</span> <span class="n">TextIOBase</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">zensols.util</span><span class="w"> </span><span class="kn">import</span> <span class="n">APIError</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">zensols.config</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dictable</span><span class="p">,</span> <span class="n">Settings</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">zensols.persist</span><span class="w"> </span><span class="kn">import</span> <span class="n">PersistableContainer</span><span class="p">,</span> <span class="n">persisted</span><span class="p">,</span> <span class="n">Stash</span><span class="p">,</span> <span class="n">FileTextUtil</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">zensols.nlp</span><span class="w"> </span><span class="kn">import</span> <span class="n">FeatureDocument</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="MimicError">
+<a class="viewcode-back" href="../../../api/zensols.mimic.html#zensols.mimic.domain.MimicError">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">MimicError</span><span class="p">(</span><span class="n">APIError</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Raised for any application level error.&quot;&quot;&quot;</span>
+    <span class="k">pass</span></div>
+
+
+
+<div class="viewcode-block" id="RecordNotFoundError">
+<a class="viewcode-back" href="../../../api/zensols.mimic.html#zensols.mimic.domain.RecordNotFoundError">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">RecordNotFoundError</span><span class="p">(</span><span class="n">MimicError</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Raised on any domain/container class error.&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="RecordNotFoundError.__init__">
+<a class="viewcode-back" href="../../../api/zensols.mimic.html#zensols.mimic.domain.RecordNotFoundError.__init__">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">actor</span><span class="p">:</span> <span class="n">Type</span><span class="p">,</span> <span class="n">key_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="n">actor</span> <span class="o">=</span> <span class="n">actor</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Actor </span><span class="si">{</span><span class="n">actor</span><span class="si">}</span><span class="s1"> could not find </span><span class="si">{</span><span class="n">key_type</span><span class="si">}</span><span class="s1"> ID </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="MimicParseError">
+<a class="viewcode-back" href="../../../api/zensols.mimic.html#zensols.mimic.domain.MimicParseError">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">MimicParseError</span><span class="p">(</span><span class="n">MimicError</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Raised for MIMIC note parsing errors.&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="MimicParseError.__init__">
+<a class="viewcode-back" href="../../../api/zensols.mimic.html#zensols.mimic.domain.MimicParseError.__init__">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="n">text</span>
+        <span class="n">trunc</span> <span class="o">=</span> <span class="mi">50</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">text</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">trunc</span><span class="p">:</span>
+            <span class="n">text</span> <span class="o">=</span> <span class="n">text</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">trunc</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;...&#39;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Could not parse: &lt;</span><span class="si">{</span><span class="n">text</span><span class="si">}</span><span class="s1">&gt;&#39;</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="MimicContainer">
+<a class="viewcode-back" href="../../../api/zensols.mimic.html#zensols.mimic.domain.MimicContainer">[docs]</a>
+<span class="nd">@dataclass</span><span class="p">(</span><span class="nb">repr</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">MimicContainer</span><span class="p">(</span><span class="n">PersistableContainer</span><span class="p">,</span> <span class="n">Dictable</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Abstract base class for data containers, which are plain old Python</span>
+<span class="sd">    objects that are CRUD&#39;d from DAO persisters.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">row_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">field</span><span class="p">()</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Unique row identifier.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">row_id</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">RecordNotFoundError</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;row id&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">row_id</span><span class="p">)</span>
+
+<div class="viewcode-block" id="MimicContainer.write">
+<a class="viewcode-back" href="../../../api/zensols.mimic.html#zensols.mimic.domain.MimicContainer.write">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">depth</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">writer</span><span class="p">:</span> <span class="n">TextIOBase</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">,</span>
+              <span class="n">dct</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">dct</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">dct</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">asdict</span><span class="p">()</span>
+        <span class="k">del</span> <span class="n">dct</span><span class="p">[</span><span class="s1">&#39;row_id&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_write_line</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;row_id: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">row_id</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">depth</span><span class="p">,</span> <span class="n">writer</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_write_object</span><span class="p">(</span><span class="n">dct</span><span class="p">,</span> <span class="n">depth</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">writer</span><span class="p">)</span></div>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;id: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">row_id</span><span class="si">}</span><span class="s1">&#39;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__str__</span><span class="p">()</span></div>
+
+
+
+<div class="viewcode-block" id="Admission">
+<a class="viewcode-back" href="../../../api/zensols.mimic.html#zensols.mimic.domain.Admission">[docs]</a>
+<span class="nd">@dataclass</span><span class="p">(</span><span class="nb">repr</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Admission</span><span class="p">(</span><span class="n">MimicContainer</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The ADMISSIONS table gives information regarding a patient’s admission to</span>
+<span class="sd">    the hospital. Since each unique hospital visit for a patient is assigned a</span>
+<span class="sd">    unique HADM_ID, the ADMISSIONS table can be considered as a definition</span>
+<span class="sd">    table for HADM_ID. Information available includes timing information for</span>
+<span class="sd">    admission and discharge, demographic information, the source of the</span>
+<span class="sd">    admission, and so on.</span>
+
+<span class="sd">    Table source: Hospital database.</span>
+
+<span class="sd">    Table purpose: Define a patient’s hospital admission, HADM_ID.</span>
+
+<span class="sd">    Number of rows: 58976</span>
+
+<span class="sd">    Links to:</span>
+<span class="sd">      * PATIENTS on SUBJECT_ID</span>
+
+<span class="sd">    :see: `Dictionary &lt;https://mimic.physionet.org/mimictables/admissions/&gt;`_</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">subject_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">field</span><span class="p">()</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Foreign key. Identifies the patient.&quot;&quot;&quot;</span>
+
+    <span class="n">hadm_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">field</span><span class="p">()</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Primary key. Identifies the hospital admission.&quot;&quot;&quot;</span>
+
+    <span class="n">admittime</span><span class="p">:</span> <span class="n">datetime</span> <span class="o">=</span> <span class="n">field</span><span class="p">()</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Time of admission to the hospital.&quot;&quot;&quot;</span>
+
+    <span class="n">dischtime</span><span class="p">:</span> <span class="n">datetime</span> <span class="o">=</span> <span class="n">field</span><span class="p">()</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Time of discharge from the hospital.&quot;&quot;&quot;</span>
+
+    <span class="n">deathtime</span><span class="p">:</span> <span class="n">datetime</span> <span class="o">=</span> <span class="n">field</span><span class="p">()</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Time of death.&quot;&quot;&quot;</span>
+
+    <span class="n">admission_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">field</span><span class="p">()</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Type of admission, for example emergency or elective.&quot;&quot;&quot;</span>
+
+    <span class="n">admission_location</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">field</span><span class="p">()</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Admission location.&quot;&quot;&quot;</span>
+
+    <span class="n">discharge_location</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">field</span><span class="p">()</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Discharge location&quot;&quot;&quot;</span>
+
+    <span class="n">insurance</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">field</span><span class="p">()</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The INSURANCE, LANGUAGE, RELIGION, MARITAL_STATUS, ETHNICITY columns</span>
+<span class="sd">    describe patient demographics. These columns occur in the ADMISSIONS table</span>
+<span class="sd">    as they are originally sourced from the admission, discharge, and transfers</span>
+<span class="sd">    (ADT) data from the hospital database. The values occasionally change</span>
+<span class="sd">    between hospital admissions (HADM_ID) for a single patient</span>
+<span class="sd">    (SUBJECT_ID). This is reasonable for some fields (e.g. MARITAL_STATUS,</span>
+<span class="sd">    RELIGION), but less reasonable for others (e.g. ETHNICITY).</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">language</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">field</span><span class="p">()</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;See :obj:`insurance`.&quot;&quot;&quot;</span>
+
+    <span class="n">religion</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">field</span><span class="p">()</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;See :obj:`insurance`.&quot;&quot;&quot;</span>
+
+    <span class="n">marital_status</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">field</span><span class="p">()</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;See :obj:`insurance`.&quot;&quot;&quot;</span>
+
+    <span class="n">ethnicity</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">field</span><span class="p">()</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;See :obj:`insurance`.&quot;&quot;&quot;</span>
+
+    <span class="n">edregtime</span><span class="p">:</span> <span class="n">datetime</span> <span class="o">=</span> <span class="n">field</span><span class="p">()</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Time that the patient was registered and discharged from the emergency</span>
+<span class="sd">    department.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">edouttime</span><span class="p">:</span> <span class="n">datetime</span> <span class="o">=</span> <span class="n">field</span><span class="p">()</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;See :obj:`edregtime`.&quot;&quot;&quot;</span>
+
+    <span class="n">diagnosis</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">field</span><span class="p">()</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The DIAGNOSIS column provides a preliminary, free text diagnosis for the</span>
+<span class="sd">    patient on hospital admission. The diagnosis is usually assigned by the</span>
+<span class="sd">    admitting clinician and does not use a systematic ontology. As of MIMIC-III</span>
+<span class="sd">    v1.0 there were 15,693 distinct diagnoses for 58,976 admissions. The</span>
+<span class="sd">    diagnoses can be very informative (e.g. chronic kidney failure) or quite</span>
+<span class="sd">    vague (e.g. weakness). Final diagnoses for a patient’s hospital stay are</span>
+<span class="sd">    coded on discharge and can be found in the DIAGNOSES_ICD table. While this</span>
+<span class="sd">    field can provide information about the status of a patient on hospital</span>
+<span class="sd">    admission, it is not recommended to use it to stratify patients.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">hospital_expire_flag</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">field</span><span class="p">()</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;This indicates whether the patient died within the given</span>
+<span class="sd">    hospitalization. 1 indicates death in the hospital, and 0 indicates survival</span>
+<span class="sd">    to hospital discharge.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">has_chartevents_data</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">field</span><span class="p">()</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Hospital admission has at least one observation in the CHARTEVENTS table.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span></div>
+
+
+
+<div class="viewcode-block" id="Patient">
+<a class="viewcode-back" href="../../../api/zensols.mimic.html#zensols.mimic.domain.Patient">[docs]</a>
+<span class="nd">@dataclass</span><span class="p">(</span><span class="nb">repr</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Patient</span><span class="p">(</span><span class="n">MimicContainer</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Table source: CareVue and Metavision ICU databases.</span>
+
+<span class="sd">    Table purpose: Defines each SUBJECT_ID in the database, i.e. defines a</span>
+<span class="sd">    single patient.</span>
+
+<span class="sd">    Number of rows: 46,520</span>
+
+<span class="sd">    Links to:</span>
+<span class="sd">    ADMISSIONS on SUBJECT_ID</span>
+<span class="sd">    ICUSTAYS on SUBJECT_ID</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">row_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">field</span><span class="p">()</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Unique row identifier.&quot;&quot;&quot;</span>
+
+    <span class="n">subject_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">field</span><span class="p">()</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Primary key. Identifies the patient.&quot;&quot;&quot;</span>
+
+    <span class="n">gender</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">field</span><span class="p">()</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Gender (one character: ``M``/``F``).&quot;&quot;&quot;</span>
+
+    <span class="n">dob</span><span class="p">:</span> <span class="n">datetime</span> <span class="o">=</span> <span class="n">field</span><span class="p">()</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Date of birth.&quot;&quot;&quot;</span>
+
+    <span class="n">dod</span><span class="p">:</span> <span class="n">datetime</span> <span class="o">=</span> <span class="n">field</span><span class="p">()</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Date of death. Null if the patient was alive at least 90 days post</span>
+<span class="sd">    hospital discharge.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">dod_hosp</span><span class="p">:</span> <span class="n">datetime</span> <span class="o">=</span> <span class="n">field</span><span class="p">()</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Date of death recorded in the hospital records.&quot;&quot;&quot;</span>
+
+    <span class="n">dod_ssn</span><span class="p">:</span> <span class="n">datetime</span> <span class="o">=</span> <span class="n">field</span><span class="p">()</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Date of death recorded in the social security records.&quot;&quot;&quot;</span>
+
+    <span class="n">expire_flag</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">field</span><span class="p">()</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Flag indicating that the patient has died.&quot;&quot;&quot;</span></div>
+
+
+
+<div class="viewcode-block" id="HospitalAdmissionContainer">
+<a class="viewcode-back" href="../../../api/zensols.mimic.html#zensols.mimic.domain.HospitalAdmissionContainer">[docs]</a>
+<span class="nd">@dataclass</span><span class="p">(</span><span class="nb">repr</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">HospitalAdmissionContainer</span><span class="p">(</span><span class="n">MimicContainer</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Any data container that has a unique identifier with an (inpatient)</span>
+<span class="sd">    non-null identifier.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">hadm_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">field</span><span class="p">()</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Primary key. Identifies the hospital admission.&quot;&quot;&quot;</span></div>
+
+
+
+<div class="viewcode-block" id="ICD9Container">
+<a class="viewcode-back" href="../../../api/zensols.mimic.html#zensols.mimic.domain.ICD9Container">[docs]</a>
+<span class="nd">@dataclass</span><span class="p">(</span><span class="nb">repr</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">ICD9Container</span><span class="p">(</span><span class="n">MimicContainer</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A data container that has ICD-9 codes.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">icd9_code</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">field</span><span class="p">()</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;ICD9 code for the diagnosis or procedure.&quot;&quot;&quot;</span>
+
+    <span class="n">short_title</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">field</span><span class="p">()</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Short title associated with the code.&quot;&quot;&quot;</span>
+
+    <span class="n">long_title</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">field</span><span class="p">()</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Long title associated with the code.&quot;&quot;&quot;</span></div>
+
+
+
+<div class="viewcode-block" id="Diagnosis">
+<a class="viewcode-back" href="../../../api/zensols.mimic.html#zensols.mimic.domain.Diagnosis">[docs]</a>
+<span class="nd">@dataclass</span><span class="p">(</span><span class="nb">repr</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Diagnosis</span><span class="p">(</span><span class="n">ICD9Container</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Table source: Hospital database.</span>
+
+<span class="sd">    Table purpose: Contains ICD diagnoses for patients, most notably ICD-9</span>
+<span class="sd">    diagnoses.</span>
+
+<span class="sd">    Number of rows: 651,047</span>
+
+<span class="sd">    Links to:</span>
+
+<span class="sd">    PATIENTS on SUBJECT_ID</span>
+<span class="sd">    ADMISSIONS on HADM_ID</span>
+<span class="sd">    D_ICD_DIAGNOSES on ICD9_CODE</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">pass</span></div>
+
+
+
+<div class="viewcode-block" id="Procedure">
+<a class="viewcode-back" href="../../../api/zensols.mimic.html#zensols.mimic.domain.Procedure">[docs]</a>
+<span class="nd">@dataclass</span><span class="p">(</span><span class="nb">repr</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Procedure</span><span class="p">(</span><span class="n">ICD9Container</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Table source: Hospital database.</span>
+
+<span class="sd">    Table purpose: Contains ICD procedures for patients, most notably ICD-9</span>
+<span class="sd">    procedures.</span>
+
+<span class="sd">    Number of rows: 240,095</span>
+
+<span class="sd">    Links to:</span>
+
+<span class="sd">    PATIENTS on SUBJECT_ID</span>
+<span class="sd">    ADMISSIONS on HADM_ID</span>
+<span class="sd">    D_ICD_PROCEDURES on ICD9_CODE</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">pass</span></div>
+
+
+
+<div class="viewcode-block" id="NoteEvent">
+<a class="viewcode-back" href="../../../api/zensols.mimic.html#zensols.mimic.domain.NoteEvent">[docs]</a>
+<span class="nd">@dataclass</span><span class="p">(</span><span class="nb">repr</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">NoteEvent</span><span class="p">(</span><span class="n">MimicContainer</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Table source: Hospital database.</span>
+
+<span class="sd">    Table purpose: Contains all notes for patients.</span>
+
+<span class="sd">    Number of rows: 2,083,180</span>
+
+<span class="sd">    Links to:</span>
+<span class="sd">      * PATIENTS on SUBJECT_ID</span>
+<span class="sd">      * ADMISSIONS on HADM_ID</span>
+<span class="sd">      * CAREGIVERS on CGID</span>
+
+<span class="sd">    :see: `Dictionary &lt;https://mimic.physionet.org/mimictables/noteevents/&gt;`_</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_DICTABLE_WRITE_EXCLUDES</span><span class="p">:</span> <span class="n">ClassVar</span><span class="p">[</span><span class="n">Set</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;hadm_id&#39;</span><span class="p">,</span> <span class="s1">&#39;text&#39;</span><span class="p">}</span>
+    <span class="n">_PERSITABLE_PROPERTIES</span><span class="p">:</span> <span class="n">ClassVar</span><span class="p">[</span><span class="n">Set</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="n">_PERSITABLE_TRANSIENT_ATTRIBUTES</span><span class="p">:</span> <span class="n">ClassVar</span><span class="p">[</span><span class="n">Set</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;_trans_context_var&#39;</span><span class="p">}</span>
+    <span class="n">EXPECT_HADM_ID</span><span class="p">:</span> <span class="n">ClassVar</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="n">subject_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">field</span><span class="p">()</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Foreign key. Identifies the patient.</span>
+
+<span class="sd">    Identifiers which specify the patient: SUBJECT_ID is unique to a patient</span>
+<span class="sd">    and HADM_ID is unique to a patient hospital stay.</span>
+
+<span class="sd">    :see :obj:`hadm_id`</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">hadm_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">field</span><span class="p">()</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Foreign key. Identifies the hospital admission.&quot;&quot;&quot;</span>
+
+    <span class="n">chartdate</span><span class="p">:</span> <span class="n">datetime</span> <span class="o">=</span> <span class="n">field</span><span class="p">()</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Date when the note was charted.</span>
+
+<span class="sd">    CHARTDATE records the date at which the note was charted. CHARTDATE will</span>
+<span class="sd">    always have a time value of 00:00:00.</span>
+
+<span class="sd">    CHARTTIME records the date and time at which the note was charted. If both</span>
+<span class="sd">    CHARTDATE and CHARTTIME exist, then the date portions will be</span>
+<span class="sd">    identical. All records have a CHARTDATE. A subset are missing</span>
+<span class="sd">    CHARTTIME. More specifically, notes with a CATEGORY value of ‘Discharge</span>
+<span class="sd">    Summary’, ‘ECG’, and ‘Echo’ never have a CHARTTIME, only CHARTDATE. Other</span>
+<span class="sd">    categories almost always have both CHARTTIME and CHARTDATE, but there is a</span>
+<span class="sd">    small amount of missing data for CHARTTIME (usually less than 0.5% of the</span>
+<span class="sd">    total number of notes for that category).</span>
+
+<span class="sd">    STORETIME records the date and time at which a note was saved into the</span>
+<span class="sd">    system. Notes with a CATEGORY value of ‘Discharge Summary’, ‘ECG’,</span>
+<span class="sd">    ‘Radiology’, and ‘Echo’ never have a STORETIME. All other notes have a</span>
+<span class="sd">    STORETIME.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">charttime</span><span class="p">:</span> <span class="n">datetime</span> <span class="o">=</span> <span class="n">field</span><span class="p">()</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Date and time when the note was charted. Note that some notes</span>
+<span class="sd">    (e.g. discharge summaries) do not have a time associated with them: these</span>
+<span class="sd">    notes have NULL in this column.</span>
+
+<span class="sd">    :see: :obj:`chartdate`</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">storetime</span><span class="p">:</span> <span class="n">datetime</span> <span class="o">=</span> <span class="n">field</span><span class="p">()</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;See :obj:`chartdate`.&quot;&quot;&quot;</span>
+
+    <span class="n">category</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">field</span><span class="p">()</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Category of the note, e.g. Discharge summary.</span>
+
+<span class="sd">    CATEGORY and DESCRIPTION define the type of note recorded. For example, a</span>
+<span class="sd">    CATEGORY of ‘Discharge summary’ indicates that the note is a discharge</span>
+<span class="sd">    summary, and the DESCRIPTION of ‘Report’ indicates a full report while a</span>
+<span class="sd">    DESCRIPTION of ‘Addendum’ indicates an addendum (additional text to be</span>
+<span class="sd">    added to the previous report).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">description</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">field</span><span class="p">()</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A more detailed categorization for the note, sometimes entered by</span>
+<span class="sd">    free-text.&quot;&quot;&quot;</span>
+
+    <span class="n">cgid</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">field</span><span class="p">()</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Foreign key. Identifies the caregiver.&quot;&quot;&quot;</span>
+
+    <span class="n">iserror</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">field</span><span class="p">()</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Flag to highlight an error with the note.&quot;&quot;&quot;</span>
+
+    <span class="n">text</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">field</span><span class="p">()</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Content of the note.&quot;&quot;&quot;</span>
+
+    <span class="n">context</span><span class="p">:</span> <span class="n">InitVar</span><span class="p">[</span><span class="n">Settings</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">()</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Contains resources needed by new and re-hydrated notes, such as the</span>
+<span class="sd">    document stash.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="n">Settings</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">__post_init__</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">EXPECT_HADM_ID</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">hadm_id</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">MimicError</span><span class="p">(</span><span class="s1">&#39;NoteEvent is missing hadm_id&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">category</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">category</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_trans_context</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">asdict</span><span class="p">()</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_trans_context</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_trans_context_var</span>
+
+    <span class="nd">@_trans_context</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_trans_context</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">trans_context</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]):</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_trans_context_var&#39;</span><span class="p">)</span> <span class="ow">and</span> \
+           <span class="bp">self</span><span class="o">.</span><span class="n">_trans_context_var</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_trans_context_var</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">trans_context</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_trans_context_var</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">trans_context</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_trans_context_update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_trans_context</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_trans_context_update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">trans_context</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]):</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_doc_stash</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Stash</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_trans_context</span><span class="p">[</span><span class="s1">&#39;doc_stash&#39;</span><span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="nd">@persisted</span><span class="p">(</span><span class="s1">&#39;_truncated_text&#39;</span><span class="p">,</span> <span class="n">transient</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">truncted_text</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;A beginning substring of the note&#39;s text useful for debugging.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_trunc</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">strip</span><span class="p">(),</span> <span class="mi">70</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+
+    <span class="nd">@property</span>
+    <span class="nd">@persisted</span><span class="p">(</span><span class="s1">&#39;_doc&#39;</span><span class="p">,</span> <span class="n">transient</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">doc</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FeatureDocument</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The parsed document of the :obj:`name` of the section.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_doc</span><span class="p">()</span>
+
+    <span class="nd">@property</span>
+    <span class="nd">@persisted</span><span class="p">(</span><span class="s1">&#39;_id&#39;</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">id</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The unique identifier of this note event.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">FileTextUtil</span><span class="o">.</span><span class="n">normalize_text</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">category</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+
+<div class="viewcode-block" id="NoteEvent.get_normal_name">
+<a class="viewcode-back" href="../../../api/zensols.mimic.html#zensols.mimic.domain.NoteEvent.get_normal_name">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_normal_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">include_desc</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;A normalized name of the note useful as a file name (sans extension).</span>
+
+<span class="sd">        :param include_desc: whether or not to add the note&#39;s desc field, which</span>
+<span class="sd">                             adds an extra dash (``-``) for any subsequent file</span>
+<span class="sd">                             name parsing</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">nfn</span><span class="p">:</span> <span class="n">Callable</span> <span class="o">=</span> <span class="n">FileTextUtil</span><span class="o">.</span><span class="n">normalize_text</span>
+        <span class="k">if</span> <span class="n">include_desc</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">row_id</span><span class="si">}</span><span class="s1">--</span><span class="si">{</span><span class="n">nfn</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">category</span><span class="p">)</span><span class="si">}</span><span class="s1">--&#39;</span> <span class="o">+</span>
+                    <span class="n">nfn</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">description</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">nfn</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">row_id</span><span class="si">}</span><span class="s1">-</span><span class="si">{</span><span class="n">nfn</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">category</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span></div>
+
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">normal_name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;A normalized name of the note useful as a file name (sans extension).</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_normal_name</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_get_doc</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FeatureDocument</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">logger</span><span class="o">.</span><span class="n">isEnabledFor</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">):</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;getting doc for </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">row_id</span><span class="si">}</span><span class="s1"> &#39;</span> <span class="o">+</span>
+                         <span class="sa">f</span><span class="s1">&#39;from </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_doc_stash</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_doc_stash</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">row_id</span><span class="p">)]</span>
+
+<div class="viewcode-block" id="NoteEvent.write">
+<a class="viewcode-back" href="../../../api/zensols.mimic.html#zensols.mimic.domain.NoteEvent.write">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">depth</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">writer</span><span class="p">:</span> <span class="n">TextIOBase</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">,</span>
+              <span class="n">line_limit</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">maxsize</span><span class="p">,</span> <span class="n">write_divider</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+              <span class="n">indent_fields</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">note_indent</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+              <span class="n">include_fields</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Write the note event.</span>
+
+<span class="sd">        :param line_limit: the number of lines to write from the note text</span>
+
+<span class="sd">        :param write_divider: whether to write a divider before the note text</span>
+
+<span class="sd">        :param indent_fields: whether to indent the fields of the note</span>
+
+<span class="sd">        :param note_indent: how many indentation to indent the note fields</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">include_fields</span><span class="p">:</span>
+            <span class="n">dct</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_writable_dict</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">indent_fields</span><span class="p">:</span>
+                <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">depth</span><span class="p">,</span> <span class="n">writer</span><span class="p">,</span> <span class="n">dct</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_write_object</span><span class="p">(</span><span class="n">dct</span><span class="p">,</span> <span class="n">depth</span><span class="p">,</span> <span class="n">writer</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">line_limit</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">line_limit</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">text</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                <span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)))</span>
+            <span class="k">if</span> <span class="n">write_divider</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_write_divider</span><span class="p">(</span><span class="n">depth</span> <span class="o">+</span> <span class="n">note_indent</span><span class="p">,</span> <span class="n">writer</span><span class="p">,</span> <span class="n">char</span><span class="o">=</span><span class="s1">&#39;_&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_write_block</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">depth</span> <span class="o">+</span> <span class="n">note_indent</span><span class="p">,</span> <span class="n">writer</span><span class="p">,</span>
+                              <span class="n">limit</span><span class="o">=</span><span class="n">line_limit</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">write_divider</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_write_divider</span><span class="p">(</span><span class="n">depth</span> <span class="o">+</span> <span class="n">note_indent</span><span class="p">,</span> <span class="n">writer</span><span class="p">,</span> <span class="n">char</span><span class="o">=</span><span class="s1">&#39;_&#39;</span><span class="p">)</span></div>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">row_id</span><span class="si">}</span><span class="s1">: (</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">category</span><span class="si">}</span><span class="s1">): </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">truncted_text</span><span class="si">}</span><span class="s1">&#39;</span></div>
+
+</pre></div>
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2025 Paul Landes
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer no-toc">
+      
+      
+      
+    </aside>
+  </div>
+</div><script src="../../../_static/documentation_options.js?v=574b2d58"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/scripts/furo.js?v=5fa4622c"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    </body>
+</html>

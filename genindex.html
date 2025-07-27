@@ -1,0 +1,1344 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="./">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="#" /><link rel="search" title="Search" href="search.html" />
+
+    <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 --><title>Index - MIMIC III Corpus Parsing 1.9.2 documentation</title>
+<link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=354aac6f" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=302659d7" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #eeffcc;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="top.html"><div class="brand">MIMIC III Corpus Parsing 1.9.2 documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="top.html">
+  
+  
+  <span class="sidebar-brand-text">MIMIC III Corpus Parsing 1.9.2 documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Overview</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="api.html">API Reference</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of API Reference</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/zensols.mimic.html">zensols.mimic package</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="CONTRIBUTING.html">Contributing</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          
+<section class="genindex-section">
+  <h1 id="index">Index</h1>
+  <div class="genindex-jumpbox"><a href="#_"><strong>_</strong></a> | <a href="#A"><strong>A</strong></a> | <a href="#B"><strong>B</strong></a> | <a href="#C"><strong>C</strong></a> | <a href="#D"><strong>D</strong></a> | <a href="#E"><strong>E</strong></a> | <a href="#F"><strong>F</strong></a> | <a href="#G"><strong>G</strong></a> | <a href="#H"><strong>H</strong></a> | <a href="#I"><strong>I</strong></a> | <a href="#J"><strong>J</strong></a> | <a href="#K"><strong>K</strong></a> | <a href="#L"><strong>L</strong></a> | <a href="#M"><strong>M</strong></a> | <a href="#N"><strong>N</strong></a> | <a href="#O"><strong>O</strong></a> | <a href="#P"><strong>P</strong></a> | <a href="#R"><strong>R</strong></a> | <a href="#S"><strong>S</strong></a> | <a href="#T"><strong>T</strong></a> | <a href="#U"><strong>U</strong></a> | <a href="#V"><strong>V</strong></a> | <a href="#W"><strong>W</strong></a> | <a href="#Y"><strong>Y</strong></a> | <a href="#Z"><strong>Z</strong></a></div>
+</section>
+<section id="_" class="genindex-section">
+  <h2>_</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.domain.MimicParseError.__annotations__">__annotations__ (zensols.mimic.domain.MimicParseError attribute)</a>
+
+        <ul>
+          <li><a href="api/zensols.mimic.html#zensols.mimic.domain.RecordNotFoundError.__annotations__">(zensols.mimic.domain.RecordNotFoundError attribute)</a>
+</li>
+        </ul></li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.adm.HospitalAdmission.__init__">__init__() (zensols.mimic.adm.HospitalAdmission method)</a>
+
+        <ul>
+          <li><a href="api/zensols.mimic.html#zensols.mimic.adm.HospitalAdmissionDbFactoryStash.__init__">(zensols.mimic.adm.HospitalAdmissionDbFactoryStash method)</a>
+</li>
+          <li><a href="api/zensols.mimic.html#zensols.mimic.adm.HospitalAdmissionDbStash.__init__">(zensols.mimic.adm.HospitalAdmissionDbStash method)</a>
+</li>
+          <li><a href="api/zensols.mimic.html#zensols.mimic.adm.NoteDocumentPreemptiveStash.__init__">(zensols.mimic.adm.NoteDocumentPreemptiveStash method)</a>
+</li>
+          <li><a href="api/zensols.mimic.html#zensols.mimic.app.Application.__init__">(zensols.mimic.app.Application method)</a>
+</li>
+          <li><a href="api/zensols.mimic.html#zensols.mimic.cli.ApplicationFactory.__init__">(zensols.mimic.cli.ApplicationFactory method)</a>
+</li>
+          <li><a href="api/zensols.mimic.html#zensols.mimic.corpus.Corpus.__init__">(zensols.mimic.corpus.Corpus method)</a>
+</li>
+          <li><a href="api/zensols.mimic.html#zensols.mimic.domain.Admission.__init__">(zensols.mimic.domain.Admission method)</a>
+</li>
+          <li><a href="api/zensols.mimic.html#zensols.mimic.domain.Diagnosis.__init__">(zensols.mimic.domain.Diagnosis method)</a>
+</li>
+          <li><a href="api/zensols.mimic.html#zensols.mimic.domain.HospitalAdmissionContainer.__init__">(zensols.mimic.domain.HospitalAdmissionContainer method)</a>
+</li>
+          <li><a href="api/zensols.mimic.html#zensols.mimic.domain.ICD9Container.__init__">(zensols.mimic.domain.ICD9Container method)</a>
+</li>
+          <li><a href="api/zensols.mimic.html#zensols.mimic.domain.MimicContainer.__init__">(zensols.mimic.domain.MimicContainer method)</a>
+</li>
+          <li><a href="api/zensols.mimic.html#zensols.mimic.domain.MimicParseError.__init__">(zensols.mimic.domain.MimicParseError method)</a>
+</li>
+          <li><a href="api/zensols.mimic.html#zensols.mimic.domain.NoteEvent.__init__">(zensols.mimic.domain.NoteEvent method)</a>
+</li>
+          <li><a href="api/zensols.mimic.html#zensols.mimic.domain.Patient.__init__">(zensols.mimic.domain.Patient method)</a>
+</li>
+          <li><a href="api/zensols.mimic.html#zensols.mimic.domain.Procedure.__init__">(zensols.mimic.domain.Procedure method)</a>
+</li>
+          <li><a href="api/zensols.mimic.html#zensols.mimic.domain.RecordNotFoundError.__init__">(zensols.mimic.domain.RecordNotFoundError method)</a>
+</li>
+          <li><a href="api/zensols.mimic.html#zensols.mimic.note.DefaultNoteFactory.__init__">(zensols.mimic.note.DefaultNoteFactory method)</a>
+</li>
+          <li><a href="api/zensols.mimic.html#zensols.mimic.note.GapSectionContainer.__init__">(zensols.mimic.note.GapSectionContainer method)</a>
+</li>
+          <li><a href="api/zensols.mimic.html#zensols.mimic.note.Note.__init__">(zensols.mimic.note.Note method)</a>
+</li>
+          <li><a href="api/zensols.mimic.html#zensols.mimic.note.NoteFactory.__init__">(zensols.mimic.note.NoteFactory method)</a>
+</li>
+          <li><a href="api/zensols.mimic.html#zensols.mimic.note.ParagraphFactory.__init__">(zensols.mimic.note.ParagraphFactory method)</a>
+</li>
+          <li><a href="api/zensols.mimic.html#zensols.mimic.note.Section.__init__">(zensols.mimic.note.Section method)</a>
+</li>
+          <li><a href="api/zensols.mimic.html#zensols.mimic.note.SectionContainer.__init__">(zensols.mimic.note.SectionContainer method)</a>
+</li>
+          <li><a href="api/zensols.mimic.html#zensols.mimic.parafac.ChunkingParagraphFactory.__init__">(zensols.mimic.parafac.ChunkingParagraphFactory method)</a>
+</li>
+          <li><a href="api/zensols.mimic.html#zensols.mimic.persist.AdmissionPersister.__init__">(zensols.mimic.persist.AdmissionPersister method)</a>
+</li>
+          <li><a href="api/zensols.mimic.html#zensols.mimic.persist.DiagnosisPersister.__init__">(zensols.mimic.persist.DiagnosisPersister method)</a>
+</li>
+          <li><a href="api/zensols.mimic.html#zensols.mimic.persist.NoteDocumentStash.__init__">(zensols.mimic.persist.NoteDocumentStash method)</a>
+</li>
+          <li><a href="api/zensols.mimic.html#zensols.mimic.persist.NoteEventPersister.__init__">(zensols.mimic.persist.NoteEventPersister method)</a>
+</li>
+          <li><a href="api/zensols.mimic.html#zensols.mimic.persist.PatientPersister.__init__">(zensols.mimic.persist.PatientPersister method)</a>
+</li>
+          <li><a href="api/zensols.mimic.html#zensols.mimic.persist.ProcedurePersister.__init__">(zensols.mimic.persist.ProcedurePersister method)</a>
+</li>
+          <li><a href="api/zensols.mimic.html#zensols.mimic.regexnote.ConsultNote.__init__">(zensols.mimic.regexnote.ConsultNote method)</a>
+</li>
+          <li><a href="api/zensols.mimic.html#zensols.mimic.regexnote.DischargeSummaryNote.__init__">(zensols.mimic.regexnote.DischargeSummaryNote method)</a>
+</li>
+          <li><a href="api/zensols.mimic.html#zensols.mimic.regexnote.EchoNote.__init__">(zensols.mimic.regexnote.EchoNote method)</a>
+</li>
+          <li><a href="api/zensols.mimic.html#zensols.mimic.regexnote.NursingOtherNote.__init__">(zensols.mimic.regexnote.NursingOtherNote method)</a>
+</li>
+          <li><a href="api/zensols.mimic.html#zensols.mimic.regexnote.PhysicianNote.__init__">(zensols.mimic.regexnote.PhysicianNote method)</a>
+</li>
+          <li><a href="api/zensols.mimic.html#zensols.mimic.regexnote.RadiologyNote.__init__">(zensols.mimic.regexnote.RadiologyNote method)</a>
+</li>
+          <li><a href="api/zensols.mimic.html#zensols.mimic.regexnote.RegexNote.__init__">(zensols.mimic.regexnote.RegexNote method)</a>
+</li>
+          <li><a href="api/zensols.mimic.html#zensols.mimic.tokenizer.MimicTokenDecorator.__init__">(zensols.mimic.tokenizer.MimicTokenDecorator method)</a>
+</li>
+          <li><a href="api/zensols.mimic.html#zensols.mimic.tokenizer.MimicTokenizerComponent.__init__">(zensols.mimic.tokenizer.MimicTokenizerComponent method)</a>
+</li>
+        </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.domain.MimicError.__module__">__module__ (zensols.mimic.domain.MimicError attribute)</a>
+
+        <ul>
+          <li><a href="api/zensols.mimic.html#zensols.mimic.domain.MimicParseError.__module__">(zensols.mimic.domain.MimicParseError attribute)</a>
+</li>
+          <li><a href="api/zensols.mimic.html#zensols.mimic.domain.RecordNotFoundError.__module__">(zensols.mimic.domain.RecordNotFoundError attribute)</a>
+</li>
+        </ul></li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="A" class="genindex-section">
+  <h2>A</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.adm.NoteDocumentPreemptiveStash.adm_factory_stash">adm_factory_stash (zensols.mimic.adm.NoteDocumentPreemptiveStash attribute)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.domain.Admission">Admission (class in zensols.mimic.domain)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.adm.HospitalAdmission.admission">admission (zensols.mimic.adm.HospitalAdmission attribute)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.domain.Admission.admission_location">admission_location (zensols.mimic.domain.Admission attribute)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.adm.HospitalAdmissionDbStash.admission_persister">admission_persister (zensols.mimic.adm.HospitalAdmissionDbStash attribute)</a>
+
+        <ul>
+          <li><a href="api/zensols.mimic.html#zensols.mimic.corpus.Corpus.admission_persister">(zensols.mimic.corpus.Corpus attribute)</a>
+</li>
+        </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.domain.Admission.admission_type">admission_type (zensols.mimic.domain.Admission attribute)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.persist.AdmissionPersister">AdmissionPersister (class in zensols.mimic.persist)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.domain.Admission.admittime">admittime (zensols.mimic.domain.Admission attribute)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.app.Application">Application (class in zensols.mimic.app)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.cli.ApplicationFactory">ApplicationFactory (class in zensols.mimic.cli)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="B" class="genindex-section">
+  <h2>B</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.note.Section.body">body (zensols.mimic.note.Section property)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.note.Section.body_doc">body_doc (zensols.mimic.note.Section property)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.note.Section.body_span">body_span (zensols.mimic.note.Section attribute)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.note.Section.body_tokens">body_tokens (zensols.mimic.note.Section property)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="C" class="genindex-section">
+  <h2>C</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.persist.NoteEventPersister.categories">categories (zensols.mimic.persist.NoteEventPersister property)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.domain.NoteEvent.category">category (zensols.mimic.domain.NoteEvent attribute)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.regexnote.ConsultNote.CATEGORY">CATEGORY (zensols.mimic.regexnote.ConsultNote attribute)</a>
+
+        <ul>
+          <li><a href="api/zensols.mimic.html#zensols.mimic.regexnote.DischargeSummaryNote.CATEGORY">(zensols.mimic.regexnote.DischargeSummaryNote attribute)</a>
+</li>
+          <li><a href="api/zensols.mimic.html#zensols.mimic.regexnote.EchoNote.CATEGORY">(zensols.mimic.regexnote.EchoNote attribute)</a>
+</li>
+          <li><a href="api/zensols.mimic.html#zensols.mimic.regexnote.NursingOtherNote.CATEGORY">(zensols.mimic.regexnote.NursingOtherNote attribute)</a>
+</li>
+          <li><a href="api/zensols.mimic.html#zensols.mimic.regexnote.PhysicianNote.CATEGORY">(zensols.mimic.regexnote.PhysicianNote attribute)</a>
+</li>
+          <li><a href="api/zensols.mimic.html#zensols.mimic.regexnote.RadiologyNote.CATEGORY">(zensols.mimic.regexnote.RadiologyNote attribute)</a>
+</li>
+        </ul></li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.note.SectionContainer.category_to_id">category_to_id() (zensols.mimic.note.SectionContainer static method)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.note.NoteFactory.category_to_note">category_to_note (zensols.mimic.note.NoteFactory attribute)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.domain.NoteEvent.cgid">cgid (zensols.mimic.domain.NoteEvent attribute)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.domain.NoteEvent.chartdate">chartdate (zensols.mimic.domain.NoteEvent attribute)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.domain.NoteEvent.charttime">charttime (zensols.mimic.domain.NoteEvent attribute)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.parafac.ChunkingParagraphFactory">ChunkingParagraphFactory (class in zensols.mimic.parafac)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.adm.HospitalAdmissionDbFactoryStash.clear">clear() (zensols.mimic.adm.HospitalAdmissionDbFactoryStash method)</a>
+
+        <ul>
+          <li><a href="api/zensols.mimic.html#zensols.mimic.app.Application.clear">(zensols.mimic.app.Application method)</a>
+</li>
+          <li><a href="api/zensols.mimic.html#zensols.mimic.corpus.Corpus.clear">(zensols.mimic.corpus.Corpus method)</a>
+</li>
+        </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.note.Section.clone">clone() (zensols.mimic.note.Section method)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.adm.HospitalAdmissionDbStash.config_factory">config_factory (zensols.mimic.adm.HospitalAdmissionDbStash attribute)</a>
+
+        <ul>
+          <li><a href="api/zensols.mimic.html#zensols.mimic.app.Application.config_factory">(zensols.mimic.app.Application attribute)</a>
+</li>
+          <li><a href="api/zensols.mimic.html#zensols.mimic.corpus.Corpus.config_factory">(zensols.mimic.corpus.Corpus attribute)</a>
+</li>
+          <li><a href="api/zensols.mimic.html#zensols.mimic.note.NoteFactory.config_factory">(zensols.mimic.note.NoteFactory attribute)</a>
+</li>
+        </ul></li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.regexnote.ConsultNote">ConsultNote (class in zensols.mimic.regexnote)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.note.Section.container">container (zensols.mimic.note.Section attribute)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.domain.NoteEvent.context">context (zensols.mimic.domain.NoteEvent attribute)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.corpus.Corpus">Corpus (class in zensols.mimic.corpus)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.app.Application.corpus">corpus (zensols.mimic.app.Application attribute)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.app.Application.corpus_stats">corpus_stats() (zensols.mimic.app.Application method)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.note.DefaultNoteFactory.create">create() (zensols.mimic.note.DefaultNoteFactory method)</a>
+
+        <ul>
+          <li><a href="api/zensols.mimic.html#zensols.mimic.note.NoteFactory.create">(zensols.mimic.note.NoteFactory method)</a>
+</li>
+          <li><a href="api/zensols.mimic.html#zensols.mimic.note.ParagraphFactory.create">(zensols.mimic.note.ParagraphFactory method)</a>
+</li>
+          <li><a href="api/zensols.mimic.html#zensols.mimic.parafac.ChunkingParagraphFactory.create">(zensols.mimic.parafac.ChunkingParagraphFactory method)</a>
+</li>
+          <li><a href="api/zensols.mimic.html#zensols.mimic.parafac.WhitespaceParagraphFactory.create">(zensols.mimic.parafac.WhitespaceParagraphFactory method)</a>
+</li>
+        </ul></li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.note.NoteFactory.create_default">create_default() (zensols.mimic.note.NoteFactory method)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="D" class="genindex-section">
+  <h2>D</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.domain.Admission.deathtime">deathtime (zensols.mimic.domain.Admission attribute)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.tokenizer.MimicTokenDecorator.decorate">decorate() (zensols.mimic.tokenizer.MimicTokenDecorator method)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.note.SectionContainer.DEFAULT_SECTION_NAME">DEFAULT_SECTION_NAME (zensols.mimic.note.SectionContainer attribute)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.note.DefaultNoteFactory">DefaultNoteFactory (class in zensols.mimic.note)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.note.GapSectionContainer.delegate">delegate (zensols.mimic.note.GapSectionContainer attribute)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.domain.NoteEvent.description">description (zensols.mimic.domain.NoteEvent attribute)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.adm.HospitalAdmission.diagnoses">diagnoses (zensols.mimic.adm.HospitalAdmission attribute)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.domain.Diagnosis">Diagnosis (class in zensols.mimic.domain)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.domain.Admission.diagnosis">diagnosis (zensols.mimic.domain.Admission attribute)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.adm.HospitalAdmissionDbStash.diagnosis_persister">diagnosis_persister (zensols.mimic.adm.HospitalAdmissionDbStash attribute)</a>
+
+        <ul>
+          <li><a href="api/zensols.mimic.html#zensols.mimic.corpus.Corpus.diagnosis_persister">(zensols.mimic.corpus.Corpus attribute)</a>
+</li>
+        </ul></li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.persist.DiagnosisPersister">DiagnosisPersister (class in zensols.mimic.persist)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.domain.Admission.discharge_location">discharge_location (zensols.mimic.domain.Admission attribute)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.regexnote.DischargeSummaryNote">DischargeSummaryNote (class in zensols.mimic.regexnote)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.domain.Admission.dischtime">dischtime (zensols.mimic.domain.Admission attribute)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.domain.Patient.dob">dob (zensols.mimic.domain.Patient attribute)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.domain.NoteEvent.doc">doc (zensols.mimic.domain.NoteEvent property)</a>
+
+        <ul>
+          <li><a href="api/zensols.mimic.html#zensols.mimic.note.Section.doc">(zensols.mimic.note.Section property)</a>
+</li>
+        </ul></li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.app.Application.doc_parser">doc_parser (zensols.mimic.app.Application attribute)</a>
+
+        <ul>
+          <li><a href="api/zensols.mimic.html#zensols.mimic.persist.NoteDocumentStash.doc_parser">(zensols.mimic.persist.NoteDocumentStash attribute)</a>
+</li>
+        </ul></li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.adm.HospitalAdmissionDbFactoryStash.doc_stash">doc_stash (zensols.mimic.adm.HospitalAdmissionDbFactoryStash attribute)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.domain.Patient.dod">dod (zensols.mimic.domain.Patient attribute)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.domain.Patient.dod_hosp">dod_hosp (zensols.mimic.domain.Patient attribute)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.domain.Patient.dod_ssn">dod_ssn (zensols.mimic.domain.Patient attribute)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="E" class="genindex-section">
+  <h2>E</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.regexnote.EchoNote">EchoNote (class in zensols.mimic.regexnote)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.domain.Admission.edouttime">edouttime (zensols.mimic.domain.Admission attribute)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.domain.Admission.edregtime">edregtime (zensols.mimic.domain.Admission attribute)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.domain.Admission.ethnicity">ethnicity (zensols.mimic.domain.Admission attribute)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.adm.HospitalAdmissionDbStash.exists">exists() (zensols.mimic.adm.HospitalAdmissionDbStash method)</a>
+
+        <ul>
+          <li><a href="api/zensols.mimic.html#zensols.mimic.persist.NoteDocumentStash.exists">(zensols.mimic.persist.NoteDocumentStash method)</a>
+</li>
+        </ul></li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.domain.NoteEvent.EXPECT_HADM_ID">EXPECT_HADM_ID (zensols.mimic.domain.NoteEvent attribute)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.domain.Patient.expire_flag">expire_flag (zensols.mimic.domain.Patient attribute)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.note.NoteFormat.ext">ext (zensols.mimic.note.NoteFormat property)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="F" class="genindex-section">
+  <h2>F</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.adm.HospitalAdmission.feature_dataframe">feature_dataframe (zensols.mimic.adm.HospitalAdmission property)</a>
+
+        <ul>
+          <li><a href="api/zensols.mimic.html#zensols.mimic.note.SectionContainer.feature_dataframe">(zensols.mimic.note.SectionContainer property)</a>
+</li>
+        </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.note.GapSectionContainer.filter_empty">filter_empty (zensols.mimic.note.GapSectionContainer attribute)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.note.Section.FILTER_ENUMS">FILTER_ENUMS (zensols.mimic.note.Section attribute)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.parafac.ChunkingParagraphFactory.filter_sent_text">filter_sent_text (zensols.mimic.parafac.ChunkingParagraphFactory attribute)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="G" class="genindex-section">
+  <h2>G</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.note.GapSectionContainer">GapSectionContainer (class in zensols.mimic.note)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.domain.Patient.gender">gender (zensols.mimic.domain.Patient attribute)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.persist.AdmissionPersister.get_admission_counts">get_admission_counts() (zensols.mimic.persist.AdmissionPersister method)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.persist.AdmissionPersister.get_by_hadm_id">get_by_hadm_id() (zensols.mimic.persist.AdmissionPersister method)</a>
+
+        <ul>
+          <li><a href="api/zensols.mimic.html#zensols.mimic.persist.DiagnosisPersister.get_by_hadm_id">(zensols.mimic.persist.DiagnosisPersister method)</a>
+</li>
+          <li><a href="api/zensols.mimic.html#zensols.mimic.persist.ProcedurePersister.get_by_hadm_id">(zensols.mimic.persist.ProcedurePersister method)</a>
+</li>
+        </ul></li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.persist.AdmissionPersister.get_by_subject_id">get_by_subject_id() (zensols.mimic.persist.AdmissionPersister method)</a>
+
+        <ul>
+          <li><a href="api/zensols.mimic.html#zensols.mimic.persist.PatientPersister.get_by_subject_id">(zensols.mimic.persist.PatientPersister method)</a>
+</li>
+        </ul></li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.cli.ApplicationFactory.get_corpus">get_corpus() (zensols.mimic.cli.ApplicationFactory class method)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.persist.NoteEventPersister.get_discharge_reports">get_discharge_reports() (zensols.mimic.persist.NoteEventPersister method)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.adm.HospitalAdmission.get_duplicate_notes">get_duplicate_notes() (zensols.mimic.adm.HospitalAdmission method)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.persist.NoteEventPersister.get_hadm_id">get_hadm_id() (zensols.mimic.persist.NoteEventPersister method)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.persist.AdmissionPersister.get_hadm_ids">get_hadm_ids() (zensols.mimic.persist.AdmissionPersister method)</a>
+
+        <ul>
+          <li><a href="api/zensols.mimic.html#zensols.mimic.persist.NoteEventPersister.get_hadm_ids">(zensols.mimic.persist.NoteEventPersister method)</a>
+</li>
+        </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.persist.NoteEventPersister.get_hadm_ids_all">get_hadm_ids_all() (zensols.mimic.persist.NoteEventPersister method)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.persist.DiagnosisPersister.get_heart_failure_hadm_ids">get_heart_failure_hadm_ids() (zensols.mimic.persist.DiagnosisPersister method)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.corpus.Corpus.get_hospital_adm_by_id">get_hospital_adm_by_id() (zensols.mimic.corpus.Corpus method)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.corpus.Corpus.get_hospital_adm_for_note">get_hospital_adm_for_note() (zensols.mimic.corpus.Corpus method)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.adm.HospitalAdmission.get_non_duplicate_notes">get_non_duplicate_notes() (zensols.mimic.adm.HospitalAdmission method)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.domain.NoteEvent.get_normal_name">get_normal_name() (zensols.mimic.domain.NoteEvent method)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.corpus.Corpus.get_note_by_id">get_note_by_id() (zensols.mimic.corpus.Corpus method)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.persist.NoteEventPersister.get_note_count">get_note_count() (zensols.mimic.persist.NoteEventPersister method)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.persist.NoteEventPersister.get_note_counts">get_note_counts() (zensols.mimic.persist.NoteEventPersister method)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.persist.NoteEventPersister.get_note_counts_by_subject_id">get_note_counts_by_subject_id() (zensols.mimic.persist.NoteEventPersister method)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.persist.NoteEventPersister.get_notes_by_category">get_notes_by_category() (zensols.mimic.persist.NoteEventPersister method)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.persist.NoteEventPersister.get_notes_by_hadm_id">get_notes_by_hadm_id() (zensols.mimic.persist.NoteEventPersister method)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.persist.NoteEventPersister.get_row_ids_by_category">get_row_ids_by_category() (zensols.mimic.persist.NoteEventPersister method)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.persist.NoteEventPersister.get_row_ids_by_hadm_id">get_row_ids_by_hadm_id() (zensols.mimic.persist.NoteEventPersister method)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.persist.NoteEventPersister.get_row_ids_with_admissions">get_row_ids_with_admissions() (zensols.mimic.persist.NoteEventPersister method)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="H" class="genindex-section">
+  <h2>H</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.adm.HospitalAdmission.hadm_id">hadm_id (zensols.mimic.adm.HospitalAdmission property)</a>
+
+        <ul>
+          <li><a href="api/zensols.mimic.html#zensols.mimic.domain.Admission.hadm_id">(zensols.mimic.domain.Admission attribute)</a>
+</li>
+          <li><a href="api/zensols.mimic.html#zensols.mimic.domain.HospitalAdmissionContainer.hadm_id">(zensols.mimic.domain.HospitalAdmissionContainer attribute)</a>
+</li>
+          <li><a href="api/zensols.mimic.html#zensols.mimic.domain.NoteEvent.hadm_id">(zensols.mimic.domain.NoteEvent attribute)</a>
+</li>
+        </ul></li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.persist.NoteEventPersister.hadm_row_chunk_size">hadm_row_chunk_size (zensols.mimic.persist.NoteEventPersister attribute)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.domain.Admission.has_chartevents_data">has_chartevents_data (zensols.mimic.domain.Admission attribute)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.note.Section.header_spans">header_spans (zensols.mimic.note.Section attribute)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.note.Section.header_to_name">header_to_name() (zensols.mimic.note.Section static method)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.note.Section.header_tokens">header_tokens (zensols.mimic.note.Section property)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.note.Section.headers">headers (zensols.mimic.note.Section property)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.adm.HospitalAdmissionDbStash.hospital_adm_name">hospital_adm_name (zensols.mimic.adm.HospitalAdmissionDbStash attribute)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.corpus.Corpus.hospital_adm_stash">hospital_adm_stash (zensols.mimic.corpus.Corpus attribute)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.domain.Admission.hospital_expire_flag">hospital_expire_flag (zensols.mimic.domain.Admission attribute)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.adm.HospitalAdmission">HospitalAdmission (class in zensols.mimic.adm)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.domain.HospitalAdmissionContainer">HospitalAdmissionContainer (class in zensols.mimic.domain)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.adm.HospitalAdmissionDbFactoryStash">HospitalAdmissionDbFactoryStash (class in zensols.mimic.adm)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.adm.HospitalAdmissionDbStash">HospitalAdmissionDbStash (class in zensols.mimic.adm)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.note.SectionAnnotatorType.HUMAN">HUMAN (zensols.mimic.note.SectionAnnotatorType attribute)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="I" class="genindex-section">
+  <h2>I</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.domain.ICD9Container.icd9_code">icd9_code (zensols.mimic.domain.ICD9Container attribute)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.domain.ICD9Container">ICD9Container (class in zensols.mimic.domain)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.domain.NoteEvent.id">id (zensols.mimic.domain.NoteEvent property)</a>
+
+        <ul>
+          <li><a href="api/zensols.mimic.html#zensols.mimic.note.Section.id">(zensols.mimic.note.Section attribute)</a>
+</li>
+        </ul></li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.note.SectionContainer.id_to_category">id_to_category() (zensols.mimic.note.SectionContainer static method)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.parafac.ChunkingParagraphFactory.include_section_headers">include_section_headers (zensols.mimic.parafac.ChunkingParagraphFactory attribute)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.tokenizer.MimicTokenizerComponent.init">init() (zensols.mimic.tokenizer.MimicTokenizerComponent method)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.domain.Admission.insurance">insurance (zensols.mimic.domain.Admission attribute)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.note.Section.is_empty">is_empty (zensols.mimic.note.Section property)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.domain.NoteEvent.iserror">iserror (zensols.mimic.domain.NoteEvent attribute)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="J" class="genindex-section">
+  <h2>J</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.note.NoteFormat.json">json (zensols.mimic.note.NoteFormat attribute)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="K" class="genindex-section">
+  <h2>K</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.adm.HospitalAdmission.keys">keys() (zensols.mimic.adm.HospitalAdmission method)</a>
+
+        <ul>
+          <li><a href="api/zensols.mimic.html#zensols.mimic.adm.HospitalAdmissionDbStash.keys">(zensols.mimic.adm.HospitalAdmissionDbStash method)</a>
+</li>
+          <li><a href="api/zensols.mimic.html#zensols.mimic.persist.NoteDocumentStash.keys">(zensols.mimic.persist.NoteDocumentStash method)</a>
+</li>
+        </ul></li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="L" class="genindex-section">
+  <h2>L</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.domain.Admission.language">language (zensols.mimic.domain.Admission attribute)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.note.Section.lexspan">lexspan (zensols.mimic.note.Section property)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.adm.HospitalAdmissionDbFactoryStash.load">load() (zensols.mimic.adm.HospitalAdmissionDbFactoryStash method)</a>
+
+        <ul>
+          <li><a href="api/zensols.mimic.html#zensols.mimic.adm.HospitalAdmissionDbStash.load">(zensols.mimic.adm.HospitalAdmissionDbStash method)</a>
+</li>
+          <li><a href="api/zensols.mimic.html#zensols.mimic.persist.NoteDocumentStash.load">(zensols.mimic.persist.NoteDocumentStash method)</a>
+</li>
+        </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.domain.ICD9Container.long_title">long_title (zensols.mimic.domain.ICD9Container attribute)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="M" class="genindex-section">
+  <h2>M</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.cli.main">main() (in module zensols.mimic.cli)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.domain.Admission.marital_status">marital_status (zensols.mimic.domain.Admission attribute)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.note.NoteFormat.markdown">markdown (zensols.mimic.note.NoteFormat attribute)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.tokenizer.MimicTokenDecorator.MASK_REGEX">MASK_REGEX (zensols.mimic.tokenizer.MimicTokenDecorator attribute)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.tokenizer.MimicTokenDecorator.MASK_TOKEN_FEATURE">MASK_TOKEN_FEATURE (zensols.mimic.tokenizer.MimicTokenDecorator attribute)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.parafac.ChunkingParagraphFactory.max_sent_list_len">max_sent_list_len (zensols.mimic.parafac.ChunkingParagraphFactory attribute)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.note.NoteFactory.mimic_default_note_section">mimic_default_note_section (zensols.mimic.note.NoteFactory attribute)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.adm.HospitalAdmissionDbFactoryStash.mimic_note_context">mimic_note_context (zensols.mimic.adm.HospitalAdmissionDbFactoryStash attribute)</a>
+
+        <ul>
+          <li><a href="api/zensols.mimic.html#zensols.mimic.persist.NoteEventPersister.mimic_note_context">(zensols.mimic.persist.NoteEventPersister attribute)</a>
+</li>
+        </ul></li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.adm.HospitalAdmissionDbStash.mimic_note_factory">mimic_note_factory (zensols.mimic.adm.HospitalAdmissionDbStash attribute)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.parafac.ChunkingParagraphFactory.MIMIC_SPAN_PATTERN">MIMIC_SPAN_PATTERN (zensols.mimic.parafac.ChunkingParagraphFactory attribute)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.domain.MimicContainer">MimicContainer (class in zensols.mimic.domain)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.domain.MimicError">MimicError</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.domain.MimicParseError">MimicParseError</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.tokenizer.MimicTokenDecorator">MimicTokenDecorator (class in zensols.mimic.tokenizer)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.tokenizer.MimicTokenizerComponent">MimicTokenizerComponent (class in zensols.mimic.tokenizer)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.parafac.ChunkingParagraphFactory.min_list_norm_matches">min_list_norm_matches (zensols.mimic.parafac.ChunkingParagraphFactory attribute)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.parafac.ChunkingParagraphFactory.min_sent_len">min_sent_len (zensols.mimic.parafac.ChunkingParagraphFactory attribute)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.note.SectionAnnotatorType.MODEL">MODEL (zensols.mimic.note.SectionAnnotatorType attribute)</a>
+</li>
+        <li>
+    module
+
+        <ul>
+          <li><a href="api/zensols.mimic.html#module-zensols.mimic">zensols.mimic</a>
+</li>
+          <li><a href="api/zensols.mimic.html#module-zensols.mimic.adm">zensols.mimic.adm</a>
+</li>
+          <li><a href="api/zensols.mimic.html#module-zensols.mimic.app">zensols.mimic.app</a>
+</li>
+          <li><a href="api/zensols.mimic.html#module-zensols.mimic.cli">zensols.mimic.cli</a>
+</li>
+          <li><a href="api/zensols.mimic.html#module-zensols.mimic.corpus">zensols.mimic.corpus</a>
+</li>
+          <li><a href="api/zensols.mimic.html#module-zensols.mimic.domain">zensols.mimic.domain</a>
+</li>
+          <li><a href="api/zensols.mimic.html#module-zensols.mimic.note">zensols.mimic.note</a>
+</li>
+          <li><a href="api/zensols.mimic.html#module-zensols.mimic.parafac">zensols.mimic.parafac</a>
+</li>
+          <li><a href="api/zensols.mimic.html#module-zensols.mimic.persist">zensols.mimic.persist</a>
+</li>
+          <li><a href="api/zensols.mimic.html#module-zensols.mimic.regexnote">zensols.mimic.regexnote</a>
+</li>
+          <li><a href="api/zensols.mimic.html#module-zensols.mimic.tokenizer">zensols.mimic.tokenizer</a>
+</li>
+        </ul></li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="N" class="genindex-section">
+  <h2>N</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.note.Section.name">name (zensols.mimic.note.Section attribute)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.note.Section.name_to_header">name_to_header() (zensols.mimic.note.Section static method)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.note.SectionAnnotatorType.NONE">NONE (zensols.mimic.note.SectionAnnotatorType attribute)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.domain.NoteEvent.normal_name">normal_name (zensols.mimic.domain.NoteEvent property)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.note.Note">Note (class in zensols.mimic.note)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.persist.NoteDocumentStash.note_db_persister">note_db_persister (zensols.mimic.persist.NoteDocumentStash attribute)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.adm.HospitalAdmissionDbStash.note_event_persister">note_event_persister (zensols.mimic.adm.HospitalAdmissionDbStash attribute)</a>
+
+        <ul>
+          <li><a href="api/zensols.mimic.html#zensols.mimic.adm.NoteDocumentPreemptiveStash.note_event_persister">(zensols.mimic.adm.NoteDocumentPreemptiveStash attribute)</a>
+</li>
+          <li><a href="api/zensols.mimic.html#zensols.mimic.corpus.Corpus.note_event_persister">(zensols.mimic.corpus.Corpus attribute)</a>
+</li>
+        </ul></li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.adm.HospitalAdmissionDbStash.note_stash">note_stash (zensols.mimic.adm.HospitalAdmissionDbStash attribute)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.note.Section.note_text">note_text (zensols.mimic.note.Section property)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.adm.NoteDocumentPreemptiveStash">NoteDocumentPreemptiveStash (class in zensols.mimic.adm)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.persist.NoteDocumentStash">NoteDocumentStash (class in zensols.mimic.persist)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.domain.NoteEvent">NoteEvent (class in zensols.mimic.domain)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.persist.NoteEventPersister">NoteEventPersister (class in zensols.mimic.persist)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.note.NoteFactory">NoteFactory (class in zensols.mimic.note)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.note.NoteFormat">NoteFormat (class in zensols.mimic.note)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.adm.HospitalAdmission.notes">notes (zensols.mimic.adm.HospitalAdmission property)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.adm.HospitalAdmission.notes_by_category">notes_by_category (zensols.mimic.adm.HospitalAdmission property)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.regexnote.NursingOtherNote">NursingOtherNote (class in zensols.mimic.regexnote)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="O" class="genindex-section">
+  <h2>O</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.tokenizer.MimicTokenDecorator.ONTO_FEATURE_ID">ONTO_FEATURE_ID (zensols.mimic.tokenizer.MimicTokenDecorator attribute)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="P" class="genindex-section">
+  <h2>P</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.note.ParagraphFactory">ParagraphFactory (class in zensols.mimic.note)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.note.Section.paragraphs">paragraphs (zensols.mimic.note.Section property)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.domain.Patient">Patient (class in zensols.mimic.domain)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.adm.HospitalAdmission.patient">patient (zensols.mimic.adm.HospitalAdmission attribute)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.adm.HospitalAdmissionDbStash.patient_persister">patient_persister (zensols.mimic.adm.HospitalAdmissionDbStash attribute)</a>
+
+        <ul>
+          <li><a href="api/zensols.mimic.html#zensols.mimic.corpus.Corpus.patient_persister">(zensols.mimic.corpus.Corpus attribute)</a>
+</li>
+        </ul></li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.persist.PatientPersister">PatientPersister (class in zensols.mimic.persist)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.regexnote.PhysicianNote">PhysicianNote (class in zensols.mimic.regexnote)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.app.Application.preempt_notes">preempt_notes() (zensols.mimic.app.Application method)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.app.Application.preempt_stash">preempt_stash (zensols.mimic.app.Application attribute)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.adm.HospitalAdmissionDbFactoryStash.prime">prime() (zensols.mimic.adm.HospitalAdmissionDbFactoryStash method)</a>
+
+        <ul>
+          <li><a href="api/zensols.mimic.html#zensols.mimic.adm.HospitalAdmissionDbStash.prime">(zensols.mimic.adm.HospitalAdmissionDbStash method)</a>
+</li>
+          <li><a href="api/zensols.mimic.html#zensols.mimic.adm.NoteDocumentPreemptiveStash.prime">(zensols.mimic.adm.NoteDocumentPreemptiveStash method)</a>
+</li>
+          <li><a href="api/zensols.mimic.html#zensols.mimic.note.NoteFactory.prime">(zensols.mimic.note.NoteFactory method)</a>
+</li>
+        </ul></li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.domain.Procedure">Procedure (class in zensols.mimic.domain)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.adm.HospitalAdmissionDbStash.procedure_persister">procedure_persister (zensols.mimic.adm.HospitalAdmissionDbStash attribute)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.persist.ProcedurePersister">ProcedurePersister (class in zensols.mimic.persist)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.adm.HospitalAdmission.procedures">procedures (zensols.mimic.adm.HospitalAdmission attribute)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.adm.NoteDocumentPreemptiveStash.process_keys">process_keys() (zensols.mimic.adm.NoteDocumentPreemptiveStash method)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="R" class="genindex-section">
+  <h2>R</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.regexnote.RadiologyNote">RadiologyNote (class in zensols.mimic.regexnote)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.note.NoteFormat.raw">raw (zensols.mimic.note.NoteFormat attribute)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.domain.RecordNotFoundError">RecordNotFoundError</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.regexnote.RegexNote">RegexNote (class in zensols.mimic.regexnote)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.note.SectionAnnotatorType.REGULAR_EXPRESSION">REGULAR_EXPRESSION (zensols.mimic.note.SectionAnnotatorType attribute)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.domain.Admission.religion">religion (zensols.mimic.domain.Admission attribute)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.domain.MimicContainer.row_id">row_id (zensols.mimic.domain.MimicContainer attribute)</a>
+
+        <ul>
+          <li><a href="api/zensols.mimic.html#zensols.mimic.domain.Patient.row_id">(zensols.mimic.domain.Patient attribute)</a>
+</li>
+        </ul></li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="S" class="genindex-section">
+  <h2>S</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.note.Section">Section (class in zensols.mimic.note)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.note.Note.section_annotator_type">section_annotator_type (zensols.mimic.note.Note property)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.note.SectionContainer.section_dataframe">section_dataframe (zensols.mimic.note.SectionContainer property)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.note.SectionAnnotatorType">SectionAnnotatorType (class in zensols.mimic.note)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.note.SectionContainer">SectionContainer (class in zensols.mimic.note)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.note.SectionContainer.sections">sections (zensols.mimic.note.SectionContainer property)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.note.SectionContainer.sections_by_name">sections_by_name (zensols.mimic.note.SectionContainer property)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.note.SectionContainer.sections_ordered">sections_ordered (zensols.mimic.note.SectionContainer property)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.tokenizer.MimicTokenDecorator.SEP_REGEX">SEP_REGEX (zensols.mimic.tokenizer.MimicTokenDecorator attribute)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.parafac.WhitespaceParagraphFactory.SEPARATOR_REGEX">SEPARATOR_REGEX (zensols.mimic.parafac.WhitespaceParagraphFactory attribute)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.tokenizer.MimicTokenDecorator.SEPARATOR_TOKEN_FEATURE">SEPARATOR_TOKEN_FEATURE (zensols.mimic.tokenizer.MimicTokenDecorator attribute)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.domain.ICD9Container.short_title">short_title (zensols.mimic.domain.ICD9Container attribute)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.app.Application.show">show() (zensols.mimic.app.Application method)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.domain.NoteEvent.storetime">storetime (zensols.mimic.domain.NoteEvent attribute)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.domain.Admission.subject_id">subject_id (zensols.mimic.domain.Admission attribute)</a>
+
+        <ul>
+          <li><a href="api/zensols.mimic.html#zensols.mimic.domain.NoteEvent.subject_id">(zensols.mimic.domain.NoteEvent attribute)</a>
+</li>
+          <li><a href="api/zensols.mimic.html#zensols.mimic.domain.Patient.subject_id">(zensols.mimic.domain.Patient attribute)</a>
+</li>
+        </ul></li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.note.NoteFormat.summary">summary (zensols.mimic.note.NoteFormat attribute)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="T" class="genindex-section">
+  <h2>T</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.corpus.Corpus.temporary_results_dir">temporary_results_dir (zensols.mimic.corpus.Corpus attribute)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.domain.NoteEvent.text">text (zensols.mimic.domain.NoteEvent attribute)</a>
+
+        <ul>
+          <li><a href="api/zensols.mimic.html#zensols.mimic.note.NoteFormat.text">(zensols.mimic.note.NoteFormat attribute)</a>
+</li>
+          <li><a href="api/zensols.mimic.html#zensols.mimic.note.Section.text">(zensols.mimic.note.Section property)</a>
+</li>
+        </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.tokenizer.MimicTokenDecorator.token_entities">token_entities (zensols.mimic.tokenizer.MimicTokenDecorator attribute)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.tokenizer.MimicTokenDecorator.TOKEN_FEATURE_ID">TOKEN_FEATURE_ID (zensols.mimic.tokenizer.MimicTokenDecorator attribute)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.tokenizer.MimicTokenDecorator.token_replacements">token_replacements (zensols.mimic.tokenizer.MimicTokenDecorator attribute)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.domain.NoteEvent.truncted_text">truncted_text (zensols.mimic.domain.NoteEvent property)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="U" class="genindex-section">
+  <h2>U</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.app.Application.uniform_sample_hadm_ids">uniform_sample_hadm_ids() (zensols.mimic.app.Application method)</a>
+
+        <ul>
+          <li><a href="api/zensols.mimic.html#zensols.mimic.persist.AdmissionPersister.uniform_sample_hadm_ids">(zensols.mimic.persist.AdmissionPersister method)</a>
+</li>
+        </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.tokenizer.MimicTokenDecorator.UNKNOWN_ENTITY">UNKNOWN_ENTITY (zensols.mimic.tokenizer.MimicTokenDecorator attribute)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="V" class="genindex-section">
+  <h2>V</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.note.NoteFormat.verbose">verbose (zensols.mimic.note.NoteFormat attribute)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="W" class="genindex-section">
+  <h2>W</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.parafac.WhitespaceParagraphFactory">WhitespaceParagraphFactory (class in zensols.mimic.parafac)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.adm.HospitalAdmission.write">write() (zensols.mimic.adm.HospitalAdmission method)</a>
+
+        <ul>
+          <li><a href="api/zensols.mimic.html#zensols.mimic.corpus.Corpus.write">(zensols.mimic.corpus.Corpus method)</a>
+</li>
+          <li><a href="api/zensols.mimic.html#zensols.mimic.domain.MimicContainer.write">(zensols.mimic.domain.MimicContainer method)</a>
+</li>
+          <li><a href="api/zensols.mimic.html#zensols.mimic.domain.NoteEvent.write">(zensols.mimic.domain.NoteEvent method)</a>
+</li>
+          <li><a href="api/zensols.mimic.html#zensols.mimic.note.Note.write">(zensols.mimic.note.Note method)</a>
+</li>
+          <li><a href="api/zensols.mimic.html#zensols.mimic.note.Section.write">(zensols.mimic.note.Section method)</a>
+</li>
+          <li><a href="api/zensols.mimic.html#zensols.mimic.note.SectionContainer.write">(zensols.mimic.note.SectionContainer method)</a>
+</li>
+        </ul></li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.app.Application.write_admission">write_admission() (zensols.mimic.app.Application method)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.app.Application.write_admission_summary">write_admission_summary() (zensols.mimic.app.Application method)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.note.Section.write_as_item">write_as_item() (zensols.mimic.note.Section method)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.note.SectionContainer.write_by_format">write_by_format() (zensols.mimic.note.SectionContainer method)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.app.Application.write_discharge_reports">write_discharge_reports() (zensols.mimic.app.Application method)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.app.Application.write_features">write_features() (zensols.mimic.app.Application method)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.note.Note.write_fields">write_fields() (zensols.mimic.note.Note method)</a>
+
+        <ul>
+          <li><a href="api/zensols.mimic.html#zensols.mimic.note.SectionContainer.write_fields">(zensols.mimic.note.SectionContainer method)</a>
+</li>
+        </ul></li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.adm.HospitalAdmission.write_full">write_full() (zensols.mimic.adm.HospitalAdmission method)</a>
+
+        <ul>
+          <li><a href="api/zensols.mimic.html#zensols.mimic.note.Note.write_full">(zensols.mimic.note.Note method)</a>
+</li>
+          <li><a href="api/zensols.mimic.html#zensols.mimic.note.SectionContainer.write_full">(zensols.mimic.note.SectionContainer method)</a>
+</li>
+        </ul></li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.app.Application.write_hadm_id_for_note">write_hadm_id_for_note() (zensols.mimic.app.Application method)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.corpus.Corpus.write_hospital_admission">write_hospital_admission() (zensols.mimic.corpus.Corpus method)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.corpus.Corpus.write_hosptial_count_admission">write_hosptial_count_admission() (zensols.mimic.corpus.Corpus method)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.note.SectionContainer.write_human">write_human() (zensols.mimic.note.SectionContainer method)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.note.SectionContainer.write_markdown">write_markdown() (zensols.mimic.note.SectionContainer method)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.app.Application.write_note">write_note() (zensols.mimic.app.Application method)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.corpus.Corpus.write_note_event_counts">write_note_event_counts() (zensols.mimic.corpus.Corpus method)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.adm.HospitalAdmission.write_notes">write_notes() (zensols.mimic.adm.HospitalAdmission method)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.note.SectionContainer.write_sections">write_sections() (zensols.mimic.note.SectionContainer method)</a>
+</li>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.note.Section.write_sentences">write_sentences() (zensols.mimic.note.Section method)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="Y" class="genindex-section">
+  <h2>Y</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/zensols.mimic.html#zensols.mimic.note.NoteFormat.yaml">yaml (zensols.mimic.note.NoteFormat attribute)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="Z" class="genindex-section">
+  <h2>Z</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li>
+    zensols.mimic
+
+        <ul>
+          <li><a href="api/zensols.mimic.html#module-zensols.mimic">module</a>
+</li>
+        </ul></li>
+        <li>
+    zensols.mimic.adm
+
+        <ul>
+          <li><a href="api/zensols.mimic.html#module-zensols.mimic.adm">module</a>
+</li>
+        </ul></li>
+        <li>
+    zensols.mimic.app
+
+        <ul>
+          <li><a href="api/zensols.mimic.html#module-zensols.mimic.app">module</a>
+</li>
+        </ul></li>
+        <li>
+    zensols.mimic.cli
+
+        <ul>
+          <li><a href="api/zensols.mimic.html#module-zensols.mimic.cli">module</a>
+</li>
+        </ul></li>
+        <li>
+    zensols.mimic.corpus
+
+        <ul>
+          <li><a href="api/zensols.mimic.html#module-zensols.mimic.corpus">module</a>
+</li>
+        </ul></li>
+        <li>
+    zensols.mimic.domain
+
+        <ul>
+          <li><a href="api/zensols.mimic.html#module-zensols.mimic.domain">module</a>
+</li>
+        </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li>
+    zensols.mimic.note
+
+        <ul>
+          <li><a href="api/zensols.mimic.html#module-zensols.mimic.note">module</a>
+</li>
+        </ul></li>
+        <li>
+    zensols.mimic.parafac
+
+        <ul>
+          <li><a href="api/zensols.mimic.html#module-zensols.mimic.parafac">module</a>
+</li>
+        </ul></li>
+        <li>
+    zensols.mimic.persist
+
+        <ul>
+          <li><a href="api/zensols.mimic.html#module-zensols.mimic.persist">module</a>
+</li>
+        </ul></li>
+        <li>
+    zensols.mimic.regexnote
+
+        <ul>
+          <li><a href="api/zensols.mimic.html#module-zensols.mimic.regexnote">module</a>
+</li>
+        </ul></li>
+        <li>
+    zensols.mimic.tokenizer
+
+        <ul>
+          <li><a href="api/zensols.mimic.html#module-zensols.mimic.tokenizer">module</a>
+</li>
+        </ul></li>
+    </ul></td>
+  </tr></table>
+</section>
+
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2025 Paul Landes
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer no-toc">
+      
+      
+      
+    </aside>
+  </div>
+</div><script src="_static/documentation_options.js?v=574b2d58"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/scripts/furo.js?v=5fa4622c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    </body>
+</html>
