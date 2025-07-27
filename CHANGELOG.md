@@ -8,14 +8,23 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 
 
+## [1.9.2] - 2025-07-27
+### Added
+- Support for Python 3.12.
+
+### Changed
+- Upgraded [zensols.mednlp] to 1.9.2.
+- Fixed component method signature.
+
+
 ## [1.9.1] - 2025-06-26
 ### Changed
-- Upgraded [zensols.mednlp] to 1.9.1
+- Upgraded [zensols.mednlp] to 1.9.1.
 
 
 ## [1.9.0] - 2025-06-23
 ### Changed
-- Upgraded [zensols.mednlp] to 1.9.0
+- Upgraded [zensols.mednlp] to 1.9.0.
 - Switch build tools to [pixi].
 
 
@@ -190,7 +199,8 @@ Significant feature release.
 
 
 <!-- links -->
-[Unreleased]: https://github.com/plandes/mimic/compare/v1.9.1...HEAD
+[Unreleased]: https://github.com/plandes/mimic/compare/v1.9.2...HEAD
+[1.9.2]: https://github.com/plandes/mimic/compare/v1.9.1...v1.9.2
 [1.9.1]: https://github.com/plandes/mimic/compare/v1.9.0...v1.9.1
 [1.9.0]: https://github.com/plandes/mimic/compare/v1.8.0...v1.9.0
 [1.8.0]: https://github.com/plandes/mimic/compare/v1.7.1...v1.8.0

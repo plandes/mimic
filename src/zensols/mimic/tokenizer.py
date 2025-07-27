@@ -11,7 +11,9 @@ from frozendict import frozendict
 from spacy.language import Language
 from spacy.lang.char_classes import ALPHA
 from spacy.util import compile_infix_regex
-from zensols.nlp import Component, FeatureTokenDecorator, FeatureToken
+from zensols.nlp import (
+    Component, FeatureDocumentParser, FeatureTokenDecorator, FeatureToken
+)
 
 logger = logging.getLogger(__name__)
 
@@ -22,7 +24,7 @@ class MimicTokenizerComponent(Component):
     MIMIC-III mask tokens.
 
     """
-    def init(self, model: Language):
+    def init(self, model: Language, parser: FeatureDocumentParser):
         inf = list(model.Defaults.infixes)
         SCHARS = ',:;/=@#%+.-'
         # split on newlines; handle newline as an infix token
